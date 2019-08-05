@@ -1,29 +1,22 @@
 <div class="container">
-  <h2>gmap</h2>
-<!-- form_withはデフォルトでremote: trueの挙動になります -->
-<%= form_with url:  map_search_path, method: :get do |f|%>
-  <%= f.text_field :address %>
-  <%= f.submit '地図表示' %>
-<% end %>
+  <h2>BandBund</h2>
+  <!-- form_withはデフォルトでremote: true(リクエストがhtml形式ではなくjs形式になる)の挙動になります -->
+  <%= form_with url: map_search_path, method: :get do |f|%>
+    <%= f.text_field :address %>
+    <%= f.submit '地図表示' %>
+  <% end %>
+  <div id='map'></div>
 
-<div id="map">
-</div>
-
-<style>
-#map{
-  height: 800px;
-}
-</style>
-
-<script>
-  let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
-
-  function initMap(){
-    mapInstance = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 35.6628611, lng: 139.6972762},
-    zoom: 13
-    });
-  }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBucemSsqWHgDVSWR5MJG9kEh2Zvl2yOWw&callback=initMap" async defer></script>
+  <script>
+    function initMap(){
+      // ID('map')が＃IDということ
+      mapInstance = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 35.6628611, lng: 139.6972762},
+        zoom: 15,
+        mapTypeControl: false,
+        streetViewControl: false,
+        gestureHandling: 'cooperative'
+      });
+    }
+  </script>
 </div>
