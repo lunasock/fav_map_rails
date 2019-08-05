@@ -20,6 +20,7 @@ class SpotsController < ApplicationController
 
   def search
     results = Geocoder.search(params[:address])
+    # search結果の[0]の緯度経度を代入
     @latlng = results.first.coordinates
     respond_to do |format|
       format.js

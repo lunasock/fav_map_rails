@@ -1,13 +1,15 @@
 <div class="container">
-  <h2>BandBund</h2>
-  <!-- form_withはデフォルトでremote: true(リクエストがhtml形式ではなくjs形式になる)の挙動になります -->
+  
+  <!-- form_withはデフォルトでremote: true(リクエストがhtml形式ではなくjs形式になる) -->
   <%= form_with url: map_search_path, method: :get do |f|%>
     <%= f.text_field :address %>
     <%= f.submit '地図表示' %>
   <% end %>
+
   <div id='map'></div>
 
   <script>
+    let mapInstance
     function initMap(){
       // ID('map')が＃IDということ
       mapInstance = new google.maps.Map(document.getElementById('map'), {
@@ -19,4 +21,5 @@
       });
     }
   </script>
+
 </div>
