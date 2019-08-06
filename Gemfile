@@ -85,3 +85,5 @@ gem "omniauth-rails_csrf_protection"
 gem 'rubocop', '~> 0.74.0', require: false
 
 gem 'paranoia'
+
+gem 'dotenv-rails'

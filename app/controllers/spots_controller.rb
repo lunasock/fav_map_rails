@@ -1,9 +1,9 @@
 class SpotsController < ApplicationController
   
-  def new
-  end
-
   def create
+    @spot = Spot.new(latitude: params['latitude'], longitude: params['longitude'], spot_name: params['spot_name'])
+    @spot.save
+    redirect_to root_path
   end
 
   def edit
@@ -25,11 +25,6 @@ class SpotsController < ApplicationController
     respond_to do |format|
       format.js
     end
-  end
-
-  private
-  def spot_params
-    params.require(:spot).permit(:user_id, :spot_name, :category, :address, :latitude, :longitude, :spot_image, :spot_body)
   end
 
 end
