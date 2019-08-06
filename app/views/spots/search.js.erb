@@ -12,18 +12,19 @@ let pos;
   <%= @latlng[0] %>, //latitude
   <%= @latlng[1] %>  //longitude
   );
+  console.log(<%= @latlng[0] %>);
 
-  console.log(<%= @latlng[0] %>)
-  console.log(pos)
-
+  
   // Map.setCenter()はMapクラスのメソッドです。地図の位置座標をセットすると同時に、表示もその位置に変更されます。
   mapInstance.setCenter(pos)
     marker = new google.maps.Marker({
     map: mapInstance,
-    position: pos
+    position: pos,
+    draggable: true
   });
 
-  $('#latitude').val(<%= @latlng[0] %>)
-  $('#longitude').val(<%= @latlng[1] %>)
+  $('#latitude').val(<%= @latlng[0] %>);
+  $('#longitude').val(<%= @latlng[1] %>);
+  $('#address_field').val(<%== "'#{@address}'" %>);
 
 })()

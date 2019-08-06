@@ -9,11 +9,25 @@
   <div id='map'></div>
 
   <%= form_with url: spots_path, method: :post do |f| %>
+    <h4>住所</h4>
+    <%= f.text_field :address, id: :address_field %>
+    <h4>緯度</h4>
     <%= f.text_field :latitude, id: :latitude %>
+    <h4>経度</h4>
     <%= f.text_field :longitude, id: :longitude %>
+    <h4>場所の名前</h4>
     <%= f.text_field :spot_name %>
+    <h4>場所の説明</h4>
+    <%= f.text_field :spot_body %>
+    <h4>カテゴリー</h4>
+    <%= f.text_field :category %>
+    <h4>ユーザーID</h4>
+    <%= f.text_field :user_id %>
+    <h4>場所の画像</h4>
+    <%# <%= f.attachment_field :spot_image %>
     <%= f.submit '登録' %>
   <% end %>
+
 
   <script>
     // functionの中に入れちゃダメ
@@ -25,10 +39,14 @@
         zoom: 15,
         mapTypeControl: false,
         streetViewControl: false,
-        gestureHandling: 'cooperative'
+        gestureHandling: 'cooperative',
+        draggable: true
       });
     }
   </script>
+  
+
+  <%# application.html.erbに記述すると、redirect時などに表示されなくなる %>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBucemSsqWHgDVSWR5MJG9kEh2Zvl2yOWw&callback=initMap">
   </script>
 
