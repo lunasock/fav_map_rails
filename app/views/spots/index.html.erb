@@ -8,8 +8,16 @@
 
   <div id='map'></div>
 
+  <%= form_with url: spots_path, method: :post do |f| %>
+    <%= f.text_field :latitude, id: :latitude %>
+    <%= f.text_field :longitude, id: :longitude %>
+    <%= f.text_field :spot_name %>
+    <%= f.submit '登録' %>
+  <% end %>
+
   <script>
-    let mapInstance
+    // functionの中に入れちゃダメ
+    let mapInstance;
     function initMap(){
       // ID('map')が＃IDということ
       mapInstance = new google.maps.Map(document.getElementById('map'), {
@@ -20,6 +28,8 @@
         gestureHandling: 'cooperative'
       });
     }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBucemSsqWHgDVSWR5MJG9kEh2Zvl2yOWw&callback=initMap">
   </script>
 
 </div>

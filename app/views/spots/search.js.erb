@@ -3,19 +3,27 @@ index.html.erbのscript内に
 google mapのインスタンス変数である、
 mapという変数があることに留意
 */
-
+let marker;
+let pos;
 (function(){
   // 位置情報をもつ変数posを用意
   // @latlngにはaddressの緯度[0]経度[1]が代入されている
-  let pos = new google.maps.LatLng(
-   <%= @latlng[0] %>, //latitude
-   <%= @latlng[1] %>  //longitude
+  pos = new google.maps.LatLng(
+  <%= @latlng[0] %>, //latitude
+  <%= @latlng[1] %>  //longitude
   );
+
+  console.log(<%= @latlng[0] %>)
+  console.log(pos)
 
   // Map.setCenter()はMapクラスのメソッドです。地図の位置座標をセットすると同時に、表示もその位置に変更されます。
   mapInstance.setCenter(pos)
-  let marker = new google.maps.Marker({
+    marker = new google.maps.Marker({
     map: mapInstance,
     position: pos
   });
+
+  $('#latitude').val(<%= @latlng[0] %>)
+  $('#longitude').val(<%= @latlng[1] %>)
+
 })()
