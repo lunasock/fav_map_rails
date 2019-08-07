@@ -5,6 +5,7 @@ mapという変数があることに留意
 */
 var marker;
 var pos;
+var infoWindow;
 (function(){
   // 位置情報をもつ変数posを用意
   // @latlngにはaddressの緯度[0]経度[1]が代入されている
@@ -20,7 +21,24 @@ var pos;
     marker = new google.maps.Marker({
     map: mapInstance,
     position: pos,
-    draggable: true
+  });
+
+  // 検索時に登録されているspotがピンで表示されるようにする
+  <% @spots.each do |spot| %>
+    var makerJs = new google.maps.Marker({
+      map: mapInstance,
+      position: new google.maps.LatLng(
+        <%= spot.latitude %>, //latitude
+        <%= spot.longitude %>  //longitude
+        )
+    });
+  <% end %>
+
+  infoWindow = new google.maps.InfoWindow({
+    content: '<div class="message">message</div>'
+  });
+  marker.addListener('click', function(){
+    infoWindow.open(map, marker);
   });
 
   $('#latitude').val(<%= @latlng[0] %>);

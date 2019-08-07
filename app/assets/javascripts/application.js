@@ -18,3 +18,4 @@
 //= require gmaps/google
 //= require_tree .
 //= require bootstrap-sprockets
+
