@@ -28,24 +28,22 @@
     <%= f.submit '登録' %>
   <% end %>
 
-  <script>
-    // functionの中に入れちゃダメ
-    let mapInstance;
-    function initMap(){
-      // ID('map')が＃IDということ
-      mapInstance = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 35.6628611, lng: 139.6972762},
-        zoom: 15,
-        mapTypeControl: false,
-        streetViewControl: false,
-        gestureHandling: 'cooperative',
-        draggable: true
-      });
-    }
-  </script>
-  <%# <%= @array_hoges.to_json %> 
-  
-  <%# application.html.erbに記述すると、redirect時などに表示されなくなる %>
+<script>
+// functionの中に入れちゃダメ
+var mapInstance;
+function initMap(){
+  // ID('map')が＃mapということ
+  mapInstance = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 35.6628611, lng: 139.6972762},
+    zoom: 15,
+    mapTypeControl: false,
+    streetViewControl: false,
+    gestureHandling: 'cooperative',
+  });
+}
+</script>
+
+ <%# application.html.erbに記述すると、redirect時などに表示されなくなる %>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBucemSsqWHgDVSWR5MJG9kEh2Zvl2yOWw&callback=initMap">
   </script>
 
