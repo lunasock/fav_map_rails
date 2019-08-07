@@ -28,7 +28,6 @@
     <%= f.submit '登録' %>
   <% end %>
 
-
   <script>
     // functionの中に入れちゃダメ
     let mapInstance;
@@ -44,8 +43,8 @@
       });
     }
   </script>
+  <%# <%= @array_hoges.to_json %> 
   
-
   <%# application.html.erbに記述すると、redirect時などに表示されなくなる %>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBucemSsqWHgDVSWR5MJG9kEh2Zvl2yOWw&callback=initMap">
   </script>

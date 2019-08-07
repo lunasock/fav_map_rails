@@ -13,6 +13,16 @@ class SpotsController < ApplicationController
   end
 
   def index
+    @array_spots= []
+    @spots = Spot.all
+    @spots.each do |spot|
+      @array_spots << spot
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @array_spots }
+    end
   end
 
   def show
@@ -22,6 +32,7 @@ class SpotsController < ApplicationController
     results = Geocoder.search(params[:address])
     # search結果の[0]の緯度経度を代入
     @latlng = results.first.coordinates
+    # 検索フォームの値をそのまま代入
     @address = params[:address]
     respond_to do |format|
       format.js
