@@ -20,9 +20,9 @@ var infoWindow;
   console.log(<%= @latlng[0] %>);
 
   // Map.setCenter()はMapクラスのメソッドです。地図の位置座標をセットすると同時に、表示もその位置に変更されます。
-  mapInstance.setCenter(pos)
+  map.setCenter(pos)
     marker = new google.maps.Marker({
-    map: mapInstance,
+    map: map,
     position: pos,
   });
 
