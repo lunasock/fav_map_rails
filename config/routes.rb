@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   root 'spots#index'
   get '/search', to: 'spots#search', as: 'map_search'
   resources :spots, only: [:create, :edit, :update, :index, :show]
-
+  get '/livehouses/search', to: 'livehouses#search', as: 'livehouse_search'
+  resources :livehouses
 end

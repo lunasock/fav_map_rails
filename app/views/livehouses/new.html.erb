@@ -1,0 +1,48 @@
+<div class="container">
+
+  <%= form_with url: livehouse_search_path, method: :get do |f| %>
+    <%= f.text_field :address %>
+    <%= f.submit '検索' %>
+  <% end %>
+
+  <div id='map'></div>
+
+  <%= form_with url: livehouses_path, method: :post do |f| %>
+    <h4>ライブハウス名</h4>
+    <%= f.text_field :livehouse_name %>
+    <h4>住所</h4>
+    <%= f.text_field :address, id: :address_field %>
+    <h4>緯度</h4>
+    <%= f.text_field :latitude, id: :latitude %>
+    <h4>経度</h4>
+    <%= f.text_field :longitude, id: :longitude %>
+    <%= f.submit '登録' %>
+  <% end %>
+
+<script>
+  var mapInstance;
+  var markerJs;
+  function initMap(){
+      mapInstance = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 35.6628611, lng: 139.6972762},
+          zoom: 15,
+          mapTypeControl: false,
+          streetViewControl: false,
+          gestureHandling: 'cooperative',
+      })
+      <% @spots.each do |spot| %>
+        makerJs = new google.maps.Marker({
+          map: mapInstance,
+          position: new google.maps.LatLng(
+            <%= spot.latitude %>, //latitude
+            <%= spot.longitude %>  //longitude
+            )
+      });
+      <% end %>
+      }
+</script>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBucemSsqWHgDVSWR5MJG9kEh2Zvl2yOWw&callback=initMap">
+  </script>
+
+</div>

@@ -31,14 +31,34 @@
 <script>
 // functionの中に入れちゃダメ
 var mapInstance;
+var makerJs;
+var infoWindow;
 function initMap(){
-  // ID('map')が＃mapということ
   mapInstance = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 35.6628611, lng: 139.6972762},
     zoom: 15,
     mapTypeControl: false,
     streetViewControl: false,
     gestureHandling: 'cooperative',
+  });
+
+ // 登録されているspotがピンで表示されるようにする
+ <% @spots.each do |spot| %>
+  makerJs = new google.maps.Marker({
+    map: mapInstance,
+    position: new google.maps.LatLng(
+      <%= spot.latitude %>, //latitude
+      <%= spot.longitude %>  //longitude
+      )
+ });
+ <% end %>
+
+  var contentString = '<div id="message">message</div>'
+  infoWindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+  markerJs.addListener('click', function(){
+    infoWindow.open(mapInstance, markerJs);
   });
 }
 </script>
