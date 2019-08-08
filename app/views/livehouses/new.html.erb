@@ -6,10 +6,7 @@
   <% end %>
 
   <div id='map'></div>
-  <ul>
-    
-  </ul>
-
+  
   <%= form_with url: livehouses_path, method: :post do |f| %>
     <h4>ライブハウス名</h4>
     <%= f.text_field :livehouse_name %>
@@ -22,58 +19,82 @@
     <%= f.submit '登録' %>
   <% end %>
 
-<script>
-var map;
-function initMap() {
+  <script>
+  var map;
+  function initMap() {
 
-      // マップの初期化
-        map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 35.6628611, lng: 139.6972762},
-        zoom: 15,
-        mapTypeControl: false,
-        streetViewControl: false,
-        gestureHandling: 'cooperative'
+    // マップの初期化
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 35.6628611, lng: 139.6972762},
+      zoom: 15,
+      mapTypeControl: false,
+      streetViewControl: false,
+      gestureHandling: 'cooperative'
+    });
+
+    // クリックイベントを追加
+    map.addListener('click', function(e) {
+      // クリック地点にピンを描画
+      getClickLatLng(e.latLng, map);
+      // 逆ジオコーディング
+      reverse(e.latLng);
+    });
+    
+    // 登録済みのspotを表示
+    <% @spots.each do |spot| %>
+      var makerJs = new google.maps.Marker({
+        map: map,
+        position: new google.maps.LatLng(
+          <%= spot.latitude %>, //latitude
+          <%= spot.longitude %>  //longitude
+        )
       });
+    <% end %>
+  }
 
-      // クリックイベントを追加
-      map.addListener('click', function(e) {
-        getClickLatLng(e.latLng, map);
-      });
-
-      <% @spots.each do |spot| %>
-          var makerJs = new google.maps.Marker({
-          map: map,
-          position: new google.maps.LatLng(
-            <%= spot.latitude %>, //latitude
-            <%= spot.longitude %>  //longitude
-            )
-      });
-      <% end %>
-    }
-
-    var marker;
-    function getClickLatLng(lat_lng, map) {
-      if(marker){
+  // クリック地点にピンを描画 　　
+  var marker;
+  function getClickLatLng(lat_lng, map) {
+    
+    //すでにピンが描画済みの場合、それを削除 
+    if(marker){
       marker.setMap(null);
-      }
-      // 座標を表示
-      $('#lat').val(lat_lng.lat());
-      $('#lng').val(lat_lng.lng());
-
-  console.log(lat_lng.lat());
- console.log(lat_lng.lng());
-
-      // マーカーを設置
-        marker = new google.maps.Marker({
-        position: lat_lng,
-        map: map
-      });
-
-      // 座標の中心をずらす
-      // http://syncer.jp/google-maps-javascript-api-matome/map/method/panTo/
-      map.panTo(lat_lng);
     }
+    
+    // 座標をフォームに表示
+    $('#lat').val(lat_lng.lat());
+    $('#lng').val(lat_lng.lng());
+  
+  　// マーカーを設置
+    marker = new google.maps.Marker({
+    position: lat_lng,
+    map: map
+    });
 
+    // 座標の中心をずらす
+    // Map.panTo()はMapクラスのメソッドです。地図の位置座標を絶対的に移動できます。
+    map.panTo(lat_lng);
+
+  }
+
+  // 逆ジオコーディング
+  var latlng;
+  var geocoder;
+  var address;
+  function reverse(lat_lng){
+    latlng = {lat: lat_lng.lat(), lng: lat_lng.lng()};
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({
+      latLng: latlng
+    }, 
+      function(results, status){
+        if (status == google.maps.GeocoderStatus.OK && results[0].geometry) {
+			    address = results[0].formatted_address;
+          $('#address_field').val(address);
+        }
+      }
+    )
+  }
   </script>
 
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBucemSsqWHgDVSWR5MJG9kEh2Zvl2yOWw&callback=initMap">
