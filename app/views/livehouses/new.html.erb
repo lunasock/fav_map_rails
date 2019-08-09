@@ -21,6 +21,7 @@
 
   <script>
   var map;
+  var makerJs;
   function initMap() {
 
     // マップの初期化
@@ -42,7 +43,7 @@
     
     // 登録済みのspotを表示
     <% @spots.each do |spot| %>
-      var makerJs = new google.maps.Marker({
+      makerJs = new google.maps.Marker({
         map: map,
         position: new google.maps.LatLng(
           <%= spot.latitude %>, //latitude
