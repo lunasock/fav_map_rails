@@ -31,7 +31,11 @@
   <script>
   // functionの中に入れちゃダメ
   var map;
-  var makerJs;
+  var makerRamen;
+  var makerBeer;
+  var makerCoffee;
+  var makerParking;
+  var makerPlace;
   var infoWindow;
   var coffee_image = "/images/coffee.png";
   var beer_image = "/images/beer.png";
@@ -46,7 +50,35 @@
       mapTypeControl: false,
       streetViewControl: false,
       gestureHandling: 'cooperative',
-    });
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      styles: [
+  {
+    "featureType": "poi.business",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.school",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  }
+]
+  });
 
     // クリックイベントを追加
     map.addListener('click', function(e) {
@@ -56,14 +88,74 @@
       reverse(e.latLng);
     });
 
-    // 登録済みのspotを表示
-    <% @spots.each do |spot| %>
-      makerJs = new google.maps.Marker({
+    // ラーメン屋
+    <% @ramens.each do |ramen| %>
+      makerRamen = new google.maps.Marker({
         map: map,
-        // icon: image,
+        icon: ramen_image,
         position: new google.maps.LatLng(
-          <%= spot.latitude %>, //latitude
-          <%= spot.longitude %>  //longitude
+          <%= ramen.latitude %>, //latitude
+          <%= ramen.longitude %>  //longitude
+        )
+      });
+    <% end %>
+
+　　 // 居酒屋
+    <% @beers.each do |beer| %>
+      makerBeer = new google.maps.Marker({
+        map: map,
+        icon: beer_image,
+        position: new google.maps.LatLng(
+          <%= beer.latitude %>, //latitude
+          <%= beer.longitude %>  //longitude
+        )
+      });
+    <% end %>
+
+    // 喫茶店
+    <% @coffees.each do |coffee| %>
+      makerCoffee = new google.maps.Marker({
+        map: map,
+        icon: coffee_image,
+        position: new google.maps.LatLng(
+          <%= coffee.latitude %>, //latitude
+          <%= coffee.longitude %>  //longitude
+        )
+      });
+    <% end %>
+
+    // 駐車場
+    <% @parkings.each do |parking| %>
+      makerParking = new google.maps.Marker({
+        map: map,
+        icon: parking_image,
+        position: new google.maps.LatLng(
+          <%= parking.latitude %>, //latitude
+          <%= parking.longitude %>  //longitude
+        )
+      });
+    <% end %>
+
+    // その他
+    <% @places.each do |place| %>
+      makerPlace = new google.maps.Marker({
+        map: map,
+        icon: place_image,
+        position: new google.maps.LatLng(
+          <%= place.latitude %>, //latitude
+          <%= place.longitude %>  //longitude
+        )
+      });
+    <% end %>
+
+    // ライブハウス
+    <% @livehouses.each do |livehouse| %>
+      makerLivehouse = new google.maps.Marker({
+        map: map,
+        icon: livehouse_image,
+        position: new google.maps.LatLng(
+          <%= livehouse.latitude %>, //latitude
+          <%= livehouse.longitude %>  //longitude
         )
       });
     <% end %>

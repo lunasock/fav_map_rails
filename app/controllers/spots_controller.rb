@@ -1,7 +1,7 @@
 class SpotsController < ApplicationController
   
   def create
-    @spot = Spot.new(latitude: params['latitude'], longitude: params['longitude'], spot_name: params['spot_name'])
+    @spot = Spot.new(latitude: params['latitude'], longitude: params['longitude'], spot_name: params['spot_name'], category: params['category'], address: params['address'])
     @spot.save
     redirect_to root_path
   end
@@ -15,6 +15,12 @@ class SpotsController < ApplicationController
   def index
     @array_spots= []
     @spots = Spot.all
+    @ramens = Spot.where(category: "ラーメン屋")
+    @beers = Spot.where(category: "居酒屋")
+    @coffees = Spot.where(category: 2)
+    @parkings = Spot.where(category: 3)
+    @places = Spot.where(category: 4)
+    @livehouses = Livehouse.all
     @spots.each do |spot|
       @array_spots << spot
     end
