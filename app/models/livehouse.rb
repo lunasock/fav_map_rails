@@ -8,5 +8,5 @@ class Livehouse < ApplicationRecord
           Item.all
         end
       end
-      
+
 end
