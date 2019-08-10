@@ -15,8 +15,8 @@ class SpotsController < ApplicationController
   def index
     @array_spots= []
     @spots = Spot.all
-    @ramens = Spot.where(category: "ラーメン屋")
-    @beers = Spot.where(category: "居酒屋")
+    @ramens = Spot.where(category: 0)
+    @beers = Spot.where(category: 1)
     @coffees = Spot.where(category: 2)
     @parkings = Spot.where(category: 3)
     @places = Spot.where(category: 4)
