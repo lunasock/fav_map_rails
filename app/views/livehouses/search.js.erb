@@ -21,12 +21,6 @@ var infoWindow;
     position: pos,
   });
 
-  infoWindow = new google.maps.InfoWindow({
-    content: '<div class="message">message</div>'
-  });
-  marker.addListener('click', function(){
-    infoWindow.open(map, marker);
-  });
 
   $('#lat').val(<%= @latlng[0] %>);
   $('#lng').val(<%= @latlng[1] %>);
