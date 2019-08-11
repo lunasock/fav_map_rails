@@ -1,18 +1,7 @@
-/* 
-index.html.erbのscript内に
-google mapのインスタンス変数である、
-mapという変数があることに留意
-*/
 var marker;
 var pos;
 var infoWindow;
 (function(){
-  map.addListener('click', function(e) {
-    if(marker){
-      marker.setMap(null);
-    }
-  });
-
   if(marker){
     marker.setMap(null);
   }
