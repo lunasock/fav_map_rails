@@ -2,10 +2,10 @@
 
 <script>
   var map;
-  var makerBeer;
-  var makerCoffee;
-  var makerParking;
-  var makerPlace;
+  var markerBeer;
+  var markerCoffee;
+  var markerParking;
+  var markerPlace;
   var coffee_image = "/images/coffee.png";
   var beer_image = "/images/beer2.png";
   var ramen_image = "/images/ramen.png";
@@ -73,12 +73,12 @@
     })();
     
     // ラーメン屋
-    // eachの中で変数を変更するため、indexを付与
     // each_with_indexを使うと、0,1,2~と付与される
-    var makerRamen = []
-    var infoWindow = []
+    // 変数に配列を格納
+    var markerRamen = []
+    var infoWindowRamen = []
     <% ramens.each_with_index do |ramen,index| %>
-        makerRamen[<%= index %>] = new google.maps.Marker({
+        markerRamen[<%= index %>] = new google.maps.Marker({
         map: map,
         icon: ramen_image,
         position: new google.maps.LatLng(
@@ -87,86 +87,285 @@
         )
         });
 
-        infoWindow[<%= index %>] = new google.maps.InfoWindow({
+        infoWindowRamen[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
         content: <%== "'#{ramen.spot_name}'" %>
         }); 
         
-        //情報ウインドウのオープンをマーカーのクリックイベントに登録
-        makerRamen[<%= index %>].addListener('click', function(){
-          infoWindow.forEach((value) => {
-          value.close()
+        markerRamen[<%= index %>].addListener('click', function(){
+          // 配列をまわし、全てのウィンドウ閉じる
+          infoWindowRamen.forEach((value) => {
+            value.close()
           });
-          infoWindow[<%= index %>].open(map, makerRamen[<%= index %>])
-          $('#spot-name').val(<%== "'#{ramen.spot_name}'" %>);
+          infoWindowBeer.forEach((value2) => {
+            value2.close()
+          });
+          infoWindowCoffee.forEach((value3) => {
+            value3.close()
+          });
+          infoWindowParking.forEach((value4) => {
+            value4.close()
+          });
+          infoWindowPlace.forEach((value5) => {
+            value5.close()
+          });
+          infoWindowLivehouse.forEach((value6) => {
+            value6.close()
+          });
+          // 全てのウィンドウを閉じてからopen
+          infoWindowRamen[<%= index %>].open(map, markerRamen[<%= index %>])
+          $('#table-spot-name').text(<%== "'#{ramen.spot_name}'" %>);
         })
-        
     <% end %>
 
-    // 居酒屋
-    <% beers.each do |beer| %>
-      makerBeer = new google.maps.Marker({
+    // 居酒屋屋
+    // each_with_indexを使うと、0,1,2~と付与される
+    // 変数に配列を格納
+    var markerBeer = []
+    var infoWindowBeer = []
+    <% beers.each_with_index do |beer,index| %>
+        markerBeer[<%= index %>] = new google.maps.Marker({
         map: map,
         icon: beer_image,
         position: new google.maps.LatLng(
           <%= beer.latitude %>, //latitude
           <%= beer.longitude %>  //longitude
         )
-      });
+        });
+
+        infoWindowBeer[<%= index %>] = new google.maps.InfoWindow({
+        // ウィンドウを表示させる
+        noSuppress:true,
+        content: <%== "'#{beer.spot_name}'" %>
+        }); 
+        
+        markerBeer[<%= index %>].addListener('click', function(){
+          // 配列をまわし、全てのウィンドウ閉じる
+          infoWindowRamen.forEach((value) => {
+            value.close()
+          });
+          infoWindowBeer.forEach((value2) => {
+            value2.close()
+          });
+          infoWindowCoffee.forEach((value3) => {
+            value3.close()
+          });
+          infoWindowParking.forEach((value4) => {
+            value4.close()
+          });
+          infoWindowPlace.forEach((value5) => {
+            value5.close()
+          });
+          infoWindowLivehouse.forEach((value6) => {
+            value6.close()
+          });
+          // 全てのウィンドウを閉じてからopen
+          infoWindowBeer[<%= index %>].open(map, markerBeer[<%= index %>])
+          $('#table-spot-name').text(<%== "'#{beer.spot_name}'" %>);
+        })
     <% end %>
 
     // 喫茶店
-    <% coffees.each do |coffee| %>
-      makerCoffee = new google.maps.Marker({
+    // each_with_indexを使うと、0,1,2~と付与される
+    // 変数に配列を格納
+    var markerCoffee = []
+    var infoWindowCoffee = []
+    <% coffees.each_with_index do |coffee,index| %>
+        markerCoffee[<%= index %>] = new google.maps.Marker({
         map: map,
         icon: coffee_image,
         position: new google.maps.LatLng(
           <%= coffee.latitude %>, //latitude
           <%= coffee.longitude %>  //longitude
         )
-      });
+        });
+
+        infoWindowCoffee[<%= index %>] = new google.maps.InfoWindow({
+        // ウィンドウを表示させる
+        noSuppress:true,
+        content: <%== "'#{coffee.spot_name}'" %>
+        }); 
+        
+        markerCoffee[<%= index %>].addListener('click', function(){
+          // 配列をまわし、全てのウィンドウ閉じる
+          infoWindowRamen.forEach((value) => {
+            value.close()
+          });
+          infoWindowBeer.forEach((value2) => {
+            value2.close()
+          });
+          infoWindowCoffee.forEach((value3) => {
+            value3.close()
+          });
+          infoWindowParking.forEach((value4) => {
+            value4.close()
+          });
+          infoWindowPlace.forEach((value5) => {
+            value5.close()
+          });
+          infoWindowLivehouse.forEach((value6) => {
+            value6.close()
+          });
+          // 全てのウィンドウを閉じてからopen
+          infoWindowCoffee[<%= index %>].open(map, markerCoffee[<%= index %>])
+          $('#table-spot-name').text(<%== "'#{coffee.spot_name}'" %>);
+        })
     <% end %>
 
     // 駐車場
-    <% parkings.each do |parking| %>
-      makerParking = new google.maps.Marker({
+    // each_with_indexを使うと、0,1,2~と付与される
+    // 変数に配列を格納
+    var markerParking = []
+    var infoWindowParking = []
+    <% parkings.each_with_index do |parking,index| %>
+        markerParking[<%= index %>] = new google.maps.Marker({
         map: map,
         icon: parking_image,
         position: new google.maps.LatLng(
           <%= parking.latitude %>, //latitude
           <%= parking.longitude %>  //longitude
         )
-      });
+        });
+
+        infoWindowParking[<%= index %>] = new google.maps.InfoWindow({
+        // ウィンドウを表示させる
+        noSuppress:true,
+        content: <%== "'#{parking.spot_name}'" %>
+        }); 
+        
+        markerParking[<%= index %>].addListener('click', function(){
+          // 配列をまわし、全てのウィンドウ閉じる
+          infoWindowRamen.forEach((value) => {
+            value.close()
+          });
+          infoWindowBeer.forEach((value2) => {
+            value2.close()
+          });
+          infoWindowCoffee.forEach((value3) => {
+            value3.close()
+          });
+          infoWindowParking.forEach((value4) => {
+            value4.close()
+          });
+          infoWindowPlace.forEach((value5) => {
+            value5.close()
+          });
+          infoWindowLivehouse.forEach((value6) => {
+            value6.close()
+          });
+          // 全てのウィンドウを閉じてからopen
+          infoWindowParking[<%= index %>].open(map, markerParking[<%= index %>])
+          $('#table-spot-name').text(<%== "'#{parking.spot_name}'" %>);
+        })
     <% end %>
 
     // その他
-    <% places.each do |place| %>
-      makerPlace = new google.maps.Marker({
+    // each_with_indexを使うと、0,1,2~と付与される
+    // 変数に配列を格納
+    var markerPlace = []
+    var infoWindowPlace = []
+    <% places.each_with_index do |place,index| %>
+        markerPlace[<%= index %>] = new google.maps.Marker({
         map: map,
         icon: place_image,
         position: new google.maps.LatLng(
           <%= place.latitude %>, //latitude
           <%= place.longitude %>  //longitude
         )
-      });
+        });
+
+        infoWindowPlace[<%= index %>] = new google.maps.InfoWindow({
+        // ウィンドウを表示させる
+        noSuppress:true,
+        content: <%== "'#{place.spot_name}'" %>
+        }); 
+        
+        markerPlace[<%= index %>].addListener('click', function(){
+          // 配列をまわし、全てのウィンドウ閉じる
+          infoWindowRamen.forEach((value) => {
+            value.close()
+          });
+          infoWindowBeer.forEach((value2) => {
+            value2.close()
+          });
+          infoWindowCoffee.forEach((value3) => {
+            value3.close()
+          });
+          infoWindowParking.forEach((value4) => {
+            value4.close()
+          });
+          infoWindowPlace.forEach((value5) => {
+            value5.close()
+          });
+          infoWindowLivehouse.forEach((value6) => {
+            value6.close()
+          });
+          // 全てのウィンドウを閉じてからopen
+          infoWindowPlace[<%= index %>].open(map, markerPlace[<%= index %>])
+          $('#table-spot-name').text(<%== "'#{place.spot_name}'" %>);
+        })
     <% end %>
 
     // ライブハウス
-    <% livehouses.each do |livehouse| %>
-      makerLivehouse = new google.maps.Marker({
+    // each_with_indexを使うと、0,1,2~と付与される
+    // 変数に配列を格納
+    var markerLivehouse = []
+    var infoWindowLivehouse = []
+    <% livehouses.each_with_index do |livehouse,index| %>
+        markerLivehouse[<%= index %>] = new google.maps.Marker({
         map: map,
         icon: livehouse_image,
         position: new google.maps.LatLng(
           <%= livehouse.latitude %>, //latitude
           <%= livehouse.longitude %>  //longitude
         )
-      });
+        });
+
+        infoWindowLivehouse[<%= index %>] = new google.maps.InfoWindow({
+        // ウィンドウを表示させる
+        noSuppress:true,
+        content: <%== "'#{livehouse.livehouse_name}'" %>
+        }); 
+        
+        markerLivehouse[<%= index %>].addListener('click', function(){
+          // 配列をまわし、全てのウィンドウ閉じる
+          infoWindowRamen.forEach((value) => {
+            value.close()
+          });
+          infoWindowBeer.forEach((value2) => {
+            value2.close()
+          });
+          infoWindowCoffee.forEach((value3) => {
+            value3.close()
+          });
+          infoWindowParking.forEach((value4) => {
+            value4.close()
+          });
+          infoWindowPlace.forEach((value5) => {
+            value5.close()
+          });
+          infoWindowLivehouse.forEach((value6) => {
+            value6.close()
+          });
+          // 全てのウィンドウを閉じてからopen
+          infoWindowLivehouse[<%= index %>].open(map, markerLivehouse[<%= index %>])
+          $('#table-spot-name').text(<%== "'#{livehouse.livehouse_name}'" %>);
+        })
     <% end %>
 
-    // クリック地点にピンを描画 　　
+    // クリック地点にピンを描画
+    var btn; 　　
     var marker;
     function getClickLatLng(lat_lng, map) {
+      
+      btn = document.getElementById('search-btn');
+      console.log(btn)
+      btn.addEventListener('click', function() {
+        if(marker){
+          marker.setMap(null);
+        }
+      });
       
       //すでにピンが描画済みの場合、それを削除 
       if(marker){

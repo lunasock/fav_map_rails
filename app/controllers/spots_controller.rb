@@ -48,10 +48,10 @@ class SpotsController < ApplicationController
 
   def livehouse_search
     @livehouses = Livehouse.all
-    livehouse = Livehouse.find_by(livehouse_name: params[:livehouse_name])
-    result = Geocoder.search(params[livehouse.address])
+    livehouse = Livehouse.find_by(id: params[:id])
     binding.pry
-    latlng = results.first.coordinates
+    result = Geocoder.search(params[livehouse.address])
+    @latlng = results.first.coordinates
     respond_to do |format|
       format.js
     end 
