@@ -6,6 +6,12 @@
     <%= f.submit '地図表示' %>
   <% end %>
 
+  <%# ライブハウス検索フォーム %>
+  <%= form_with url: livehouses_search_path, mothod: :get do |f| %>
+    <%= f.collection_select :livehouse_name, Livehouse.all, :livehouse_name, :livehouse_name, :prompt => "ライブハウスを選択" %>
+    <%= f.submit 'ライブハウスを表示' %>
+  <% end %>
+
   <%= render 'map', ramens: @ramens, beers: @beers, coffees: @coffees, parkings: @parkings, places: @places, livehouses: @livehouses %>
 
   <%= form_with url: spots_path, method: :post do |f| %>
@@ -27,5 +33,7 @@
     <%# <%= f.attachment_field :spot_image %>
     <%= f.submit '登録' %>
   <% end %>
+
+  <div id="spot-name"><!-- ここに結果を表示する --></div>
 
 </div>

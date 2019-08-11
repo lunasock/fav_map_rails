@@ -1,16 +1,13 @@
 <div id='map'></div>
 
 <script>
-  // functionの中に入れちゃダメ
   var map;
-  var makerRamen;
   var makerBeer;
   var makerCoffee;
   var makerParking;
   var makerPlace;
-  var infoWindow;
   var coffee_image = "/images/coffee.png";
-  var beer_image = "/images/beer.png";
+  var beer_image = "/images/beer2.png";
   var ramen_image = "/images/ramen.png";
   var parking_image = "/images/parking.png";
   var livehouse_image = "/images/livehouse.png";
@@ -59,20 +56,55 @@
       // 逆ジオコーディング
       reverse(e.latLng);
     });
-
+     
+    // デフォルトの情報ウィンドウを非表示に
+    // 特定のウィンドウを表示させるには noSuppress = true をオプションで指定
+    var set;
+    (function fixInfoWindow() {
+        set = google.maps.InfoWindow.prototype.set;
+        google.maps.InfoWindow.prototype.set = function(key, val) {
+            if (key === "map") {
+                if (! this.get("noSuppress")) {
+                    return;
+                }
+            }
+            set.apply(this, arguments);
+        }
+    })();
+    
     // ラーメン屋
-    <% ramens.each do |ramen| %>
-      makerRamen = new google.maps.Marker({
+    // eachの中で変数を変更するため、indexを付与
+    // each_with_indexを使うと、0,1,2~と付与される
+    var makerRamen = []
+    var infoWindow = []
+    <% ramens.each_with_index do |ramen,index| %>
+        makerRamen[<%= index %>] = new google.maps.Marker({
         map: map,
         icon: ramen_image,
         position: new google.maps.LatLng(
           <%= ramen.latitude %>, //latitude
           <%= ramen.longitude %>  //longitude
         )
-      });
+        });
+
+        infoWindow[<%= index %>] = new google.maps.InfoWindow({
+        // ウィンドウを表示させる
+        noSuppress:true,
+        content: <%== "'#{ramen.spot_name}'" %>
+        }); 
+        
+        //情報ウインドウのオープンをマーカーのクリックイベントに登録
+        makerRamen[<%= index %>].addListener('click', function(){
+          infoWindow.forEach((value) => {
+          value.close()
+          });
+          infoWindow[<%= index %>].open(map, makerRamen[<%= index %>])
+          $('#spot-name').val(<%== "'#{ramen.spot_name}'" %>);
+        })
+        
     <% end %>
 
-　　 // 居酒屋
+    // 居酒屋
     <% beers.each do |beer| %>
       makerBeer = new google.maps.Marker({
         map: map,
@@ -131,21 +163,6 @@
         )
       });
     <% end %>
-
-    // デフォルトの情報ウィンドウを非表示に
-    // 特定のウィンドウを表示させるには noSuppress = true をオプションで指定
-    var set;
-    (function fixInfoWindow() {
-        set = google.maps.InfoWindow.prototype.set;
-        google.maps.InfoWindow.prototype.set = function(key, val) {
-            if (key === "map") {
-                if (! this.get("noSuppress")) {
-                    return;
-                }
-            }
-            set.apply(this, arguments);
-        }
-    })();
 
     // クリック地点にピンを描画 　　
     var marker;
