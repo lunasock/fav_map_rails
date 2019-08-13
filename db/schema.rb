@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_033520) do
+ActiveRecord::Schema.define(version: 2019_08_13_081626) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
 
   create_table "livehouses", force: :cascade do |t|
     t.string "livehouse_name"
@@ -24,6 +36,15 @@ ActiveRecord::Schema.define(version: 2019_08_13_033520) do
     t.text "livehouse_body"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "spot_id"
+    t.text "review_body"
+    t.text "review_image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "spots", force: :cascade do |t|
     t.integer "user_id"
     t.string "spot_name"
@@ -35,6 +56,30 @@ ActiveRecord::Schema.define(version: 2019_08_13_033520) do
     t.text "spot_body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "user_name"
+    t.text "user_body"
+    t.text "icon_image_id"
+    t.text "backcover_image_id"
+    t.string "uid"
+    t.string "provider"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

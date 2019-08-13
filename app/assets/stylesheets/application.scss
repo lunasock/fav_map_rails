@@ -28,27 +28,43 @@
     clear: both;
   }
   
-  .wrapper {
+  // フッター固定
+  // https://webkikaku.co.jp/blog/htmlcss/footer-bottom/
+  .wrapper{
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
-    // 相対位置
-    position: relative;
-    // footerの高さ
-    padding-bottom: 120px;
-    // 全て含めてmin-height:100vhに
-    box-sizing: border-box;
     overflow: hidden;
   }
   
-  footer {
-    width: 100%;
+  footer{
+    margin-top: auto;
     text-align: center;
-    // 絶対位置
-    position: absolute;
-    // 下に固定
-    bottom: 0;
   }
+
+.main {
+  margin-bottom: -10px;
+}
 
 #map {
   height: 600px;
   width: 100%;
+}
+
+.nav-list {
+  list-style: none;
+}
+
+.navbar-custom {
+  color: black;
+  background-color: #ffc0cb;
+  width: 100%;
+}
+
+.navbar-brand p {
+  display: inline-block;
+}
+
+.footer-bottom {
+  background-color: #ffc0cb;
 }

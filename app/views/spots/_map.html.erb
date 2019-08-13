@@ -120,7 +120,8 @@
           $('#table-spot-body').text(<%== "'#{ramen.spot_body}'" %>);
           $('#table-spot-category').text(<%== "'#{ramen.category}'" %>);
           $('#table-spot-address').text(<%== "'#{ramen.address}'" %>);
-          
+          $('#table-spot-detail').val(<%= ramen.id %>);
+
         })
     <% end %>
 

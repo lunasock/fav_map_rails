@@ -32,6 +32,8 @@ class SpotsController < ApplicationController
   end
 
   def show
+    binding.pry
+    @spot = Spot.find(params[:id])
   end
 
   def search
