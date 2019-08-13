@@ -13,8 +13,8 @@
 
   <body>
     <div class="wrapper">
-        <!-- ヘッダー -->     
-        <header>
+      <!-- ヘッダー -->     
+      <header>
         <%# ハンバーガーメニュー %>
         <%# http://bootstrap3.cyberlab.info/components/navbar.html# %>
         <nav class="navbar navbar-default navbar-static-top navbar-custom">
@@ -60,33 +60,36 @@
       <!-- フッター -->
       <footer>
         <nav>
-          <div class="footer-top">
-            <div class="footer-top-left">
-              <p>BandBund</p>
-              <p>The map is made in me and you</p>
-              <%= link_to root_path do %>
-                <%= image_tag("/images/no_image.png") %></p>
-              <% end %>
-              <%= link_to root_path do %>
-                <%= image_tag("/images/no_image.png") %></p>
-              <% end %>
-            </div>
-            <div class="footer-top-right clearfix">
-              <ul class="nav navbar-nav nav-list">
-                <li class="nav-list-item"><%= link_to 'よくある質問', root_path %>
-                <li class="nav-list-item"><%= link_to 'BandBundについて', root_path %></li>
-                <li class="nav-list-item"><%= link_to '利用規約', root_path %></li>
-                <li class="nav-list-item"><%= link_to 'プライバシーポリシー', root_path %></li>
-                <li class="nav-list-item"><%= link_to '特定商取引法に基づく表記', root_path %></li>
-              </ul>
+          <div class="container">
+            <div class="row">
+              <div class="footer-top clearfix">
+                <div class="footer-top-left col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                  <p>BandBund</p>
+                  <p>The map is made in me and you</p>
+                  <%= link_to root_path do %>
+                    <%= image_tag("/images/no_image.png") %></p>
+                  <% end %>
+                  <%= link_to root_path do %>
+                    <%= image_tag("/images/no_image.png") %></p>
+                  <% end %>
+                </div>
+                <div class="footer-top-right col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                  <ul class="nav-list">
+                    <li class="nav-list-item"><%= link_to 'よくある質問', root_path %>
+                    <li class="nav-list-item"><%= link_to 'BandBundについて', root_path %></li>
+                    <li class="nav-list-item"><%= link_to '利用規約', root_path %></li>
+                    <li class="nav-list-item"><%= link_to 'プライバシーポリシー', root_path %></li>
+                    <li class="nav-list-item"><%= link_to '特定商取引法に基づく表記', root_path %></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
           <div class="footer-bottom">
-            <%= link_to root_path do %>
-              <%= image_tag("/images/no_image.png") %></p>
-            <% end %>
-            <p>© 2019 BandBund</p>
-          </div>
+            <div class="footer-text">
+              <p>© 2019 BandBund</p>
+            </div>
+          </div>  
         </nav>
       </footer>
     </div>
