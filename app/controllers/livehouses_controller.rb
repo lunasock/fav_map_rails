@@ -11,7 +11,7 @@ class LivehousesController < ApplicationController
   end
 
   def create
-    @livehouse = Livehouse.new(latitude: params['latitude'], longitude: params['longitude'], livehouse_name: params['livehouse_name'], address: params['address'])
+    @livehouse = Livehouse.new(latitude: params['latitude'], longitude: params['longitude'], livehouse_name: params['livehouse_name'], address: params['address'], category: params['category'])
     @livehouse.save
     redirect_to root_path
   end
