@@ -59,19 +59,27 @@
       <%= yield %> 
       <!-- フッター -->
       <footer>
+        <div class="under-line">
+        </div>
         <nav>
           <div class="container">
             <div class="row">
               <div class="footer-top clearfix">
                 <div class="footer-top-left col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
                   <p>BandBund</p>
-                  <p>The map is made in me and you</p>
-                  <%= link_to root_path do %>
-                    <%= image_tag("/images/no_image.png") %></p>
-                  <% end %>
-                  <%= link_to root_path do %>
-                    <%= image_tag("/images/no_image.png") %></p>
-                  <% end %>
+                  <p>The map is made in me and you.</p>
+                  <div class="icons">
+                    <div class="icon1">
+                      <%= link_to root_path do %>
+                        <%= image_tag("/images/no_image.png") %></p>
+                      <% end %>
+                    </div>
+                    <div class="icon2">
+                      <%= link_to root_path do %>
+                        <%= image_tag("/images/no_image.png") %></p>
+                      <% end %>
+                    </div>
+                  </div>
                 </div>
                 <div class="footer-top-right col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
                   <ul class="nav-list">

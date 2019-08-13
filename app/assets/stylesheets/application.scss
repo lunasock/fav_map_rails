@@ -62,8 +62,29 @@
   display: inline-block;
 }
 
+.under-line {
+  border-bottom: 1px solid #c0c0c0;
+  margin: 20px 0;
+}
+
 .footer-top {
   text-align: center;  
+}
+
+.footer-top-left {
+  margin-bottom: 10px;
+}
+
+.icon1 {
+  display: inline-block;
+}
+
+.icon2 {
+  display: inline-block;
+}
+
+.footer-top-right {
+  margin-bottom: 10px;
 }
 
 .footer-bottom {
