@@ -90,7 +90,7 @@
         infoWindowRamen[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: <%== "'#{ramen.spot_name}'" %>
+        content: '<%= link_to ramen.spot_name, spot_path(ramen) %>'
         }); 
         
         markerRamen[<%= index %>].addListener('click', function(){
@@ -143,7 +143,7 @@
         infoWindowBeer[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: <%== "'#{beer.spot_name}'" %>
+        content: '<%= link_to beer.spot_name, spot_path(beer) %>'
         }); 
         
         markerBeer[<%= index %>].addListener('click', function(){
@@ -193,7 +193,7 @@
         infoWindowCoffee[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: <%== "'#{coffee.spot_name}'" %>
+        content: '<%= link_to coffee.spot_name, spot_path(coffee) %>'
         }); 
         
         markerCoffee[<%= index %>].addListener('click', function(){
@@ -243,7 +243,7 @@
         infoWindowParking[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: <%== "'#{parking.spot_name}'" %>
+        content: '<%= link_to parking.spot_name, spot_path(parking) %>'
         }); 
         
         markerParking[<%= index %>].addListener('click', function(){
@@ -293,7 +293,7 @@
         infoWindowPlace[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: <%== "'#{place.spot_name}'" %>
+        content: '<%= link_to place.spot_name, spot_path(place) %>'
         }); 
         
         markerPlace[<%= index %>].addListener('click', function(){
@@ -343,7 +343,7 @@
         infoWindowLivehouse[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: <%== "'#{livehouse.livehouse_name}'" %>
+        content: '<%= link_to livehouse.livehouse_name, livehouse_path(livehouse) %>'
         }); 
         
         markerLivehouse[<%= index %>].addListener('click', function(){
