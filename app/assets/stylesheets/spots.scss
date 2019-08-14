@@ -1,3 +1,43 @@
 // Place all the styles related to the spots controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.spot-image {
+  position: relative;
+  height: 400px;
+}
+
+.spot-image p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform : translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.spot-detail {
+  position: relative;
+  height: 400px;
+}
+
+.spot-detail p {
+  position: absolute;
+  top: 50%;
+  -webkit-transform : translateY(-50%);
+  transform : translateY(-50%);
+}
+
+@media screen and (max-width:991px) {    
+  .spot-detail {
+    position: relative;
+    height: 400px;
+  }
+  
+  .spot-detail p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform : translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+  }
+}
