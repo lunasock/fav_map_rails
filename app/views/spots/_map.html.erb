@@ -77,6 +77,7 @@
     // 変数に配列を格納
     var markerRamen = []
     var infoWindowRamen = []
+    var contentStringRamen
     <% ramens.each_with_index do |ramen,index| %>
         markerRamen[<%= index %>] = new google.maps.Marker({
         map: map,
@@ -87,10 +88,13 @@
         )
         });
 
+        contentStringRamen = '<div class="infoWindow-text"><%= link_to ramen.spot_name, spot_path(ramen) %></div>' + '<%= link_to spot_path(ramen) do %><%= attachment_image_tag ramen, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+
+
         infoWindowRamen[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: '<%= link_to ramen.spot_name, spot_path(ramen) %>'
+        content: contentStringRamen
         }); 
         
         markerRamen[<%= index %>].addListener('click', function(){
@@ -129,6 +133,7 @@
     // 変数に配列を格納
     var markerBeer = []
     var infoWindowBeer = []
+    var contentStringBeer
     <% beers.each_with_index do |beer,index| %>
         markerBeer[<%= index %>] = new google.maps.Marker({
         map: map,
@@ -139,10 +144,12 @@
         )
         });
 
+        contentStringBeer = '<div class="infoWindow-text"><%= link_to beer.spot_name, spot_path(beer) %></div>' + '<%= link_to spot_path(beer) do %><%= attachment_image_tag beer, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+
         infoWindowBeer[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: '<%= link_to beer.spot_name, spot_path(beer) %>'
+        content: contentStringBeer
         }); 
         
         markerBeer[<%= index %>].addListener('click', function(){
@@ -179,6 +186,7 @@
     // 変数に配列を格納
     var markerCoffee = []
     var infoWindowCoffee = []
+    var contentStringCoffee;
     <% coffees.each_with_index do |coffee,index| %>
         markerCoffee[<%= index %>] = new google.maps.Marker({
         map: map,
@@ -189,10 +197,12 @@
         )
         });
 
+        contentStringCoffee = '<div class="infoWindow-text"><%= link_to coffee.spot_name, spot_path(coffee) %></div>' + '<%= link_to spot_path(coffee) do %><%= attachment_image_tag coffee, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+
         infoWindowCoffee[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: '<%= link_to coffee.spot_name, spot_path(coffee) %>'
+        content: contentStringCoffee
         }); 
         
         markerCoffee[<%= index %>].addListener('click', function(){
@@ -229,6 +239,7 @@
     // 変数に配列を格納
     var markerParking = []
     var infoWindowParking = []
+    var contentStringParking;
     <% parkings.each_with_index do |parking,index| %>
         markerParking[<%= index %>] = new google.maps.Marker({
         map: map,
@@ -239,10 +250,12 @@
         )
         });
 
+        contentStringParking = '<div class="infoWindow-text"><%= link_to parking.spot_name, spot_path(parking) %></div>' + '<%= link_to spot_path(parking) do %><%= attachment_image_tag parking, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+
         infoWindowParking[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: '<%= link_to parking.spot_name, spot_path(parking) %>'
+        content: contentStringParking
         }); 
         
         markerParking[<%= index %>].addListener('click', function(){
@@ -279,6 +292,7 @@
     // 変数に配列を格納
     var markerPlace = []
     var infoWindowPlace = []
+    var contentStringPlace;
     <% places.each_with_index do |place,index| %>
         markerPlace[<%= index %>] = new google.maps.Marker({
         map: map,
@@ -289,10 +303,12 @@
         )
         });
 
+        contentStringPlace = '<div class="infoWindow-text"><%= link_to place.spot_name, spot_path(place) %></div>' + '<%= link_to spot_path(place) do %><%= attachment_image_tag place, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+
         infoWindowPlace[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: '<%= link_to place.spot_name, spot_path(place) %>'
+        content: contentStringPlace
         }); 
         
         markerPlace[<%= index %>].addListener('click', function(){
@@ -329,6 +345,7 @@
     // 変数に配列を格納
     var markerLivehouse = []
     var infoWindowLivehouse = []
+    var contentStringLivehouse
     <% livehouses.each_with_index do |livehouse,index| %>
         markerLivehouse[<%= index %>] = new google.maps.Marker({
         map: map,
@@ -339,10 +356,12 @@
         )
         });
 
+        contentStringLivehouse = '<div class="infoWindow-text"><%= link_to livehouse.livehouse_name, spot_path(livehouse) %></div>' + '<%= link_to spot_path(livehouse) do %><%= attachment_image_tag livehouse, :livehouse_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+
         infoWindowLivehouse[<%= index %>] = new google.maps.InfoWindow({
         // ウィンドウを表示させる
         noSuppress:true,
-        content: '<%= link_to livehouse.livehouse_name, livehouse_path(livehouse) %>'
+        content: contentStringLivehouse
         }); 
         
         markerLivehouse[<%= index %>].addListener('click', function(){
