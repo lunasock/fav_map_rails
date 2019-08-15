@@ -36,6 +36,7 @@ class SpotsController < ApplicationController
   def show
     @spot = Spot.find(params[:id])
     @post = Post.new
+    @posts = @spot.posts
   end
 
   def search

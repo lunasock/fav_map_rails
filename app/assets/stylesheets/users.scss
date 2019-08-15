@@ -6,14 +6,17 @@
   margin-top: -20px;
 }
 
-// 画像を重ねる
-// http://portaltan.hatenablog.com/entry/2017/05/30/210451
-
 .icon_image {
   border-radius: 50%;
+}
+
+// 画像を重ねる
+// http://portaltan.hatenablog.com/entry/2017/05/30/210451
+.user-icon {
+  border-radius: 50%;
   position: absolute;
-  top: 165px;
-  left: 20px;
+  top: 330px;
+  left: 40px;
 }
 
 .under-line-mini {
@@ -21,7 +24,7 @@
   margin: 20px 0;
 }
 
-.user_name {
+.user-name {
   position: absolute;
   top: 340px;
   left: 180px;
