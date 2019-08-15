@@ -2,7 +2,6 @@ class SpotsController < ApplicationController
   
   def create
     @spot = Spot.new(spot_params)
-    # (latitude: params['latitude'], longitude: params['longitude'], spot_name: params['spot_name'], category: params['category'], address: params['address'], spot_image: params['spot_image'])
     @spot.user_id = current_user.id
     @spot.save
     redirect_to root_path
