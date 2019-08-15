@@ -1,0 +1,7 @@
+<%= form_for post, url:posts_create_path(id) do |f| %>
+  <h4>口コミ</h4>
+  <%= f.text_area :review_body %>
+  <h4>場所の画像</h4>
+  <%= f.attachment_field :review_image %>
+  <br><%= f.submit '登録' %>
+<% end %>

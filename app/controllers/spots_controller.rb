@@ -1,7 +1,9 @@
 class SpotsController < ApplicationController
   
   def create
-    @spot = Spot.new(latitude: params['latitude'], longitude: params['longitude'], spot_name: params['spot_name'], category: params['category'], address: params['address'])
+    @spot = Spot.new(spot_params)
+    # (latitude: params['latitude'], longitude: params['longitude'], spot_name: params['spot_name'], category: params['category'], address: params['address'], spot_image: params['spot_image'])
+    @spot.user_id = current_user.id
     @spot.save
     redirect_to root_path
   end
@@ -13,6 +15,7 @@ class SpotsController < ApplicationController
   end
 
   def index
+    @spot = Spot.new
     @array_spots= []
     @spots = Spot.all
     @ramens = Spot.where(category: 0)
@@ -33,6 +36,7 @@ class SpotsController < ApplicationController
 
   def show
     @spot = Spot.find(params[:id])
+    @post = Post.new
   end
 
   def search
@@ -54,6 +58,11 @@ class SpotsController < ApplicationController
     respond_to do |format|
       format.js
     end 
+  end
+
+  private
+  def spot_params
+    params.require(:spot).permit(:user_id, :spot_name, :category, :address, :latitude, :longitude, :spot_image, :spot_body)
   end
 
 end

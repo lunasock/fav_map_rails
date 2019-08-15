@@ -7,6 +7,14 @@
       <div class="spot-detail col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <p><%= @spot.spot_name %><br><%= @spot.category %><br><%= @spot.address %><br><%= @spot.spot_body %></p>
       </div>
-    </div>    
+    </div> 
+    <!-- 口コミ投稿フォーム -->
+    <div class="post-form">
+      <div class="under-line">
+      </div>
+      <%= render 'posts/new', post: @post, id: params[:id] %>
+      <div class="under-line">
+      </div>
+    </div>
   </div>
 </div>
