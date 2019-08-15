@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     @post.spot_id = params[:id]
     @post.save!
-    redirect_to root_path
+    redirect_to spot_path(@post.spot_id)
   end
 
   private

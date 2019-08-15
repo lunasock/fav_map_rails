@@ -1,2 +1,17 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="main">
+  <div class="container">
+    <div class="user-edit-form">
+      <%= form_for(@user) do |f| %>
+      <p>ユーザーネーム</p>
+      <%= f.text_field :user_name %>
+      <p>自己紹介</p>
+      <%= f.text_area :user_body %>
+      <p>アイコン</p>
+      <%= f.attachment_field :icon_image %>
+      <P>ヘッダー画像</P>
+      <%= f.attachment_field :backcover_image %>
+      <br><%= f.submit '更新' %>
+      <% end %>
+    </div>
+  </div>
+</div>
