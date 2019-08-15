@@ -2,10 +2,10 @@
   <div class="backcover-image">
     <%= attachment_image_tag @user, :backcover_image, :fill, 1300, 400, fallback: "/images/no_image.jpg" %>
   </div>
-  <div class="icon_image">
+  <div class="user-icon">
     <%= attachment_image_tag @user, :icon_image, :fill, 100, 100, fallback: "/images/no_image.jpg" %>
   </div>
-  <div class="user_name">
+  <div class="user-name">
     <%= @user.user_name %>
   </div>
   <div class="user-body">

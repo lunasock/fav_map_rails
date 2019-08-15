@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="spot-image col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <p><%= attachment_image_tag @spot, :spot_image, :fill, 400, 400, format: 'jpeg', fallback: "/images/no_image.jpg", size: '400x400' %></p>
+        <p><%= attachment_image_tag @spot, :spot_image, :fill, 400, 400, format: 'jpeg', fallback: "/images/no_image.jpg" %></p>
       </div>
       <div class="spot-detail col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <p><%= @spot.spot_name %><br><%= @spot.category %><br><%= @spot.address %><br><%= @spot.spot_body %></p>
@@ -15,6 +15,25 @@
       <%= render 'posts/new', post: @post, id: params[:id] %>
       <div class="under-line-mini">
       </div>
+    </div>
+    <!-- 口コミ一覧 -->
+    <div class="posts-all">
+      <% @posts.each do |post| %>
+        <div class="review-image">
+          <p><%= attachment_image_tag post, :review_image, :fill, 400, 400, format: 'jpeg', fallback: "/images/no_image.jpg" %></p>
+        </div>
+        <%= link_to user_path(post.user) do %>
+          <div class="review-user-icon">
+            <p><%= attachment_image_tag post.user, :icon_image, :fill, 50, 50, format: 'jpeg', fallback: "/images/no_image.jpg" %></p>
+          </div>
+          <div class="review-user">
+            <%= post.user.user_name %>
+          </div>
+        <% end %>
+        <div class="review-body">
+          <%= post.review_body %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
