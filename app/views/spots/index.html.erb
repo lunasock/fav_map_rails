@@ -17,22 +17,22 @@
 
     <div class="spot-feild">
       <div class="spot-form">
-        <%= form_with url: spots_path, method: :post do |f| %>
-            <h4>住所</h4>
-            <%= f.text_field :address, id: :address_field %>
-            <h4>緯度</h4>
-            <%= f.text_field :latitude, id: :lat %>
-            <h4>経度</h4>
-            <%= f.text_field :longitude, id: :lng %>
-            <h4>場所の名前</h4>
-            <%= f.text_field :spot_name %>
-            <h4>場所の説明</h4>
-            <%= f.text_field :spot_body %>
-            <h4>カテゴリー</h4>
-            <%= f.select(:category, {ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
-            <h4>場所の画像</h4>
-            <%# <%= f.attachment_field :spot_image %>
-            <%= f.submit '登録' %>
+        <%= form_for(@spot) do |f| %>
+          <h4>住所</h4>
+          <%= f.text_field :address, id: :address_field %>
+          <h4>緯度</h4>
+          <%= f.text_field :latitude, id: :lat %>
+          <h4>経度</h4>
+          <%= f.text_field :longitude, id: :lng %>
+          <h4>場所の名前</h4>
+          <%= f.text_field :spot_name %>
+          <h4>場所の説明</h4>
+          <%= f.text_field :spot_body %>
+          <h4>カテゴリー</h4>
+          <%= f.select(:category, {ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
+          <h4>場所の画像</h4>
+          <%= f.attachment_field :spot_image %>
+          <%= f.submit '登録' %>
         <% end %>
       </div>
 
