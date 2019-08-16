@@ -4,12 +4,6 @@
     <input id="address" type="textbox">
     <input type="button" id ="search-btn" value="検索" onclick="codeAddress()">
 
-    <!-- form_withはデフォルトでremote: true(リクエストがhtml形式ではなくjs形式になる) -->
-    <%= form_with url: map_search_path, method: :get do |f|%>
-      <%= f.text_field :address %>
-      <%= f.submit '地図表示' %>
-    <% end %>
-
     <%# ライブハウス検索フォーム %>
     <%= form_with url: livehouses_search_path, method: :get do |f| %>
       <%= f.collection_select :address, Livehouse.all, :address, :livehouse_name, :prompt => "ライブハウスを選択" %>
@@ -18,26 +12,24 @@
 
     <%= render 'map', ramens: @ramens, beers: @beers, coffees: @coffees, parkings: @parkings, places: @places, livehouses: @livehouses %>
 
-    <div class="spot-feild">
-      <div class="spot-form">
-        <%= form_for(@spot) do |f| %>
-          <h4>住所</h4>
-          <%= f.text_field :address, id: :address_field %>
-          <h4>緯度</h4>
-          <%= f.text_field :latitude, id: :lat %>
-          <h4>経度</h4>
-          <%= f.text_field :longitude, id: :lng %>
-          <h4>場所の名前</h4>
-          <%= f.text_field :spot_name %>
-          <h4>場所の説明</h4>
-          <%= f.text_field :spot_body %>
-          <h4>カテゴリー</h4>
-          <%= f.select(:category, {ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
-          <h4>場所の画像</h4>
-          <%= f.attachment_field :spot_image %>
-          <br><%= f.submit '登録' %>
-        <% end %>
-      </div>
+    <div class="spot-form">
+      <%= form_for(@spot) do |f| %>
+        <h4>住所</h4>
+        <%= f.text_field :address, id: :address_field %>
+        <h4>緯度</h4>
+        <%= f.text_field :latitude, id: :lat %>
+        <h4>経度</h4>
+        <%= f.text_field :longitude, id: :lng %>
+        <h4>場所の名前</h4>
+        <%= f.text_field :spot_name %>
+        <h4>場所の説明</h4>
+        <%= f.text_area :spot_body %>
+        <h4>カテゴリー</h4>
+        <%= f.select(:category, {ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
+        <h4>場所の画像</h4>
+        <%= f.attachment_field :spot_image %>
+        <%= f.submit '登録', class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 </div>
