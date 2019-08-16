@@ -1,8 +1,8 @@
 <div class="main">
   <div class="container">
     
-    <input id="address" type="textbox" value="Sydney, NSW">
-    <input type="button" id ="search-btn" value="Encode" onclick="codeAddress()">
+    <input id="address" type="textbox">
+    <input type="button" id ="search-btn" value="検索" onclick="codeAddress()">
 
     <!-- form_withはデフォルトでremote: true(リクエストがhtml形式ではなくjs形式になる) -->
     <%= form_with url: map_search_path, method: :get do |f|%>

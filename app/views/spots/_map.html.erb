@@ -474,6 +474,13 @@
   　　　　　　　　　　　　// map.setCenterで地図が移動
         map.setCenter(results[0].geometry.location);
 
+        $('#lat').val(results[0].geometry.location.lat);
+        $('#lng').val(results[0].geometry.location.lng);
+        // erbは<% %>と一緒に””も剥ぐ
+        // ＃{}で変数展開。文字列内に変数の値を置くときに使われる
+        // ==はエスケープ回避。rawでも一緒
+        $('#address_field').val(results[0].formatted_address);
+
   　　　　　　　　　　　　// google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
         marker = new google.maps.Marker({
             map: map,
