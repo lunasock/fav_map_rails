@@ -496,6 +496,7 @@
   }
 
   var marker = null;
+  var now = null;
   function getGeolocation(){
     if(marker != null){
       marker.setMap(null)
@@ -507,9 +508,14 @@
           map: map,
           position:new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude)
         })
+        now = pos;
       }
     )
   } 
+
+  function moveGeolocation(){
+    map.setCenter(new google.maps.LatLng(now.coords.latitude,now.coords.longitude));
+  }
 </script>
 
  <%# application.html.erbに記述すると、redirect時などに表示されなくなる %>
