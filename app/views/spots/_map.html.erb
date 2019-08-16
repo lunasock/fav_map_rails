@@ -13,6 +13,9 @@
   var livehouse_image = "/images/livehouse.png";
   var place_image = "/images/place.png";
   function initMap(){
+  
+    getGeolocation()
+    setInterval(getGeolocation, 2000)
 
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 35.6628611, lng: 139.6972762},
@@ -491,6 +494,22 @@
       }
     });
   }
+
+  var marker = null;
+  function getGeolocation(){
+    if(marker != null){
+      marker.setMap(null)
+    }
+    console.log(0);
+    navigator.geolocation.getCurrentPosition(
+      function (pos) { 
+        marker = new google.maps.Marker({
+          map: map,
+          position:new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude)
+        })
+      }
+    )
+  } 
 </script>
 
  <%# application.html.erbに記述すると、redirect時などに表示されなくなる %>
