@@ -2,7 +2,7 @@
   <div class="container">
     
     <input id="address" type="textbox">
-    <input type="button" id ="search-btn" value="検索" onclick="codeAddress()">
+    <input type="button" id ="search-btn" class="btn btn-primary btn-xs" value="検索" onclick="codeAddress()">
 
     <%# ライブハウス検索フォーム %>
     <%= form_with url: livehouses_search_path, method: :get do |f| %>
