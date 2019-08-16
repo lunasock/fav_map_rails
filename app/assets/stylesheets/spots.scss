@@ -31,6 +31,27 @@
   border-radius: 50%;
 }
 
+.spot-form {
+  text-align: center;
+  margin-top: 30px;
+}
+
+#spot_spot_image {
+  margin: 20px auto;
+}
+
+#address_field {
+  width: 430px;
+}
+
+#spot_spot_name {
+  width: 430px;
+}
+
+#spot_spot_body {
+  width:430px;
+}
+
 @media screen and (max-width:991px) {    
   .spot-detail {
     position: relative;
