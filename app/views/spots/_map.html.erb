@@ -13,6 +13,7 @@
   var livehouse_image = "/images/livehouse.png";
   var place_image = "/images/place.png";
   function initMap(){
+
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 35.6628611, lng: 139.6972762},
       zoom: 15,
@@ -21,33 +22,33 @@
       gestureHandling: 'cooperative',
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: [
-  {
-    "featureType": "poi.business",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.school",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  },
-  {
-    "featureType": "poi.school",
-    "elementType": "labels.text",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  }
-]
-  });
+        {
+          "featureType": "poi.business",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.school",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.school",
+          "elementType": "labels.text",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        }
+      ]
+    });
 
     // クリックイベントを追加
     map.addListener('click', function(e) {
@@ -443,7 +444,47 @@
       )
     }
   }
-  </script>
+
+  var inputAddress;
+  var geocoder;
+  var searchBtn;
+  function codeAddress(){
+
+    map.addListener('click', function() {
+      if(marker){
+        marker.setMap(null);
+      }
+    });
+
+    searchBtn = document.getElementById('search-btn');
+    searchBtn.addEventListener('click', function() {
+      if(marker){
+        marker.setMap(null);
+      }
+    });
+ 
+    geocoder = new google.maps.Geocoder()
+
+    // 入力を取得
+    inputAddress = document.getElementById('address').value;
+
+    // geocodingしたあとmapを移動
+    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+      if (status == 'OK') {
+  　　　　　　　　　　　　// map.setCenterで地図が移動
+        map.setCenter(results[0].geometry.location);
+
+  　　　　　　　　　　　　// google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
+        marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+</script>
 
  <%# application.html.erbに記述すると、redirect時などに表示されなくなる %>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBucemSsqWHgDVSWR5MJG9kEh2Zvl2yOWw&callback=initMap">
