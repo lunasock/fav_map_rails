@@ -1,6 +1,7 @@
 <div class="main">
-  <div class="backcover-image">
-    <%= attachment_image_tag @user, :backcover_image, :fill, 1300, 400, fallback: "/images/no_image.jpg" %>
+    
+  <div class="backcover-image" id="back" style="background-image:url(<%= attachment_url(@user, :backcover_image, :fill, 1300, 400, format:"jpeg") %>)")">
+     
   </div>
   <div class="user-icon">
     <%= attachment_image_tag @user, :icon_image, :fill, 100, 100, fallback: "/images/no_image.jpg" %>

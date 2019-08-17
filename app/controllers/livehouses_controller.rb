@@ -11,7 +11,7 @@ class LivehousesController < ApplicationController
   end
 
   def create
-    @livehouse = Livehouse.new(latitude: params['latitude'], longitude: params['longitude'], livehouse_name: params['livehouse_name'], address: params['address'], category: params['category'])
+    @livehouse = Livehouse.new(livehous_params)
     @livehouse.save
     redirect_to root_path
   end
@@ -41,6 +41,11 @@ class LivehousesController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  private
+  def livehouse_params
+    params.require(:livehouse).permit(:livehouse_name, :address, :latitude, :longitude, :category, :livehouse_image, :livehouse_body)
   end
 
 end
