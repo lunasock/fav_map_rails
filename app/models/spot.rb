@@ -5,7 +5,7 @@ class Spot < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :address_changed?  
 
-  enum category: { ラーメン屋: 0, 居酒屋: 1, 喫茶店: 2, 駐車場: 3, その他: 4 }
+  enum category: { ライブハウス: 0, ラーメン屋: 1, 居酒屋: 2, 喫茶店: 3, 駐車場: 4, その他: 5 }
 
   has_many :posts
   belongs_to :user

@@ -1,6 +1,9 @@
 <div class="main">
     
-  <div class="backcover-image" id="back" style="background-image:url(<%= attachment_url(@user, :backcover_image, :fill, 1300, 400, format:"jpeg") %>)")">
+  <div class="backcover-image" style="background-image:url(<%= attachment_url(@user, :backcover_image, :fill, 1300, 400, format:"jpeg") %>)")">
+    <div class="backcover-image-content">
+    </div>
+  </div>
      
   </div>
   <div class="user-icon">
@@ -26,10 +29,10 @@
             <div class="review-spot-name">
               <%= post.spot.spot_name %>
             </div>
+          <% end %>
             <div class="review-spot-category">
               <%= post.spot.category %>
             </div>
-          <% end %>
           <div class="review-body">
             <%= post.review_body %>
           </div>
