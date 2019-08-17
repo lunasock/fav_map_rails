@@ -6,7 +6,7 @@
 
     <%# ライブハウス検索フォーム %>
     <%= form_with url: livehouses_search_path, method: :get do |f| %>
-      <%= f.collection_select :address, Livehouse.all, :address, :livehouse_name, :prompt => "ライブハウスを選択" %>
+      <%= f.collection_select :address, @search, :address, :spot_name, :prompt => "ライブハウスを選択" %>
       <%= f.submit 'ライブハウスを表示' %>
     <% end %>
 
@@ -25,7 +25,7 @@
         <h4>場所の説明</h4>
         <%= f.text_area :spot_body %>
         <h4>カテゴリー</h4>
-        <%= f.select(:category, {ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
+        <%= f.select(:category, {ライブハウス: 'ライブハウス', ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
         <h4>場所の画像</h4>
         <%= f.attachment_field :spot_image %>
         <%= f.submit '登録', class: "btn btn-primary" %>

@@ -11,7 +11,7 @@ class LivehousesController < ApplicationController
   end
 
   def create
-    @livehouse = Livehouse.new(livehous_params)
+    @livehouse = Livehouse.new(livehouse_params)
     @livehouse.save
     redirect_to root_path
   end
@@ -23,6 +23,7 @@ class LivehousesController < ApplicationController
   end
 
   def show
+    @livehouse = Livehouse.find(params[:id])
   end
 
   def index

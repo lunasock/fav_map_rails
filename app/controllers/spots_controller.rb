@@ -4,7 +4,7 @@ class SpotsController < ApplicationController
     @spot = Spot.new(spot_params)
     @spot.user_id = current_user.id
     @spot.save
-    redirect_to root_path
+    redirect_to spot_path(@spot)
   end
 
   def edit
@@ -14,15 +14,16 @@ class SpotsController < ApplicationController
   end
 
   def index
+    @search = Spot.where(category: 0)
     @spot = Spot.new
     @array_spots= []
     @spots = Spot.all
-    @ramens = Spot.where(category: 0)
-    @beers = Spot.where(category: 1)
-    @coffees = Spot.where(category: 2)
-    @parkings = Spot.where(category: 3)
-    @places = Spot.where(category: 4)
-    @livehouses = Livehouse.all
+    @ramens = Spot.where(category: 1)
+    @beers = Spot.where(category: 2)
+    @coffees = Spot.where(category: 3)
+    @parkings = Spot.where(category: 4)
+    @places = Spot.where(category: 5)
+    @livehouses = Spot.where(category: 0)
     @spots.each do |spot|
       @array_spots << spot
     end
