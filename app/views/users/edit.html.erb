@@ -3,14 +3,14 @@
     <div class="user-edit-form">
       <%= form_for(@user) do |f| %>
       <p>ユーザーネーム</p>
-      <%= f.text_field :user_name %>
-      <p>自己紹介</p>
-      <%= f.text_area :user_body %>
-      <p>アイコン</p>
+      <%= f.text_field :user_name %><br>
+      <br><p>自己紹介</p>
+      <%= f.text_area :user_body %><br>
+      <br><p>アイコン</p>
       <%= f.attachment_field :icon_image %>
-      <P>ヘッダー画像</P>
+      <br><P>ヘッダー画像</P>
       <%= f.attachment_field :backcover_image %>
-      <br><%= f.submit '更新' %>
+      <br><%= f.submit '更新', class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>

@@ -5,6 +5,9 @@
 .backcover-image {
   margin-top: -20px;
   margin-bottom: 20px;
+  background-size: cover;
+  background-position: center; 
+  height: 400px;
 }
 
 .icon_image {
@@ -45,4 +48,25 @@
   position: absolute;
   top: 410px;
   left: 180px;
+}
+
+.user-edit-form {
+  text-align: center;
+  margin: 50px 0;
+}
+
+#user_user_name {
+  width: 430px;
+}
+
+#user_user_body {
+  width: 430px;
+}
+
+#user_icon_image {
+  margin: 0 auto;
+}
+
+#user_backcover_image {
+  margin: 0 auto;
 }
