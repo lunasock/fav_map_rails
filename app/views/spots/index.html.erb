@@ -7,7 +7,7 @@
     <%# ライブハウス検索フォーム %>
     <%= form_with url: map_search_path, method: :get do |f| %>
       <%= f.collection_select :id, @search, :id, :spot_name, :prompt => "ライブハウスを選択" %>
-      <%= f.submit 'ライブハウスを表示' %>
+      <%= f.submit 'ライブハウスを表示', id:"livehouse-search-btn", class:"btn btn-primary btn-xs" %>
     <% end %>
 
     <div id='map'></div>
@@ -135,6 +135,12 @@
       }); 
       
       markerLivehouse[<%= index %>].addListener('click', function(){
+
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+        
         // 配列をまわし、全てのウィンドウ閉じる
         infoWindowRamen.forEach((value) => {
           value.close()
@@ -187,6 +193,12 @@
       }); 
       
       markerRamen[<%= index %>].addListener('click', function(){
+
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+
         // 配列をまわし、全てのウィンドウ閉じる
         infoWindowRamen.forEach((value) => {
           value.close()
@@ -240,6 +252,12 @@
       }); 
       
       markerBeer[<%= index %>].addListener('click', function(){
+
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+
         // 配列をまわし、全てのウィンドウ閉じる
         infoWindowRamen.forEach((value) => {
           value.close()
@@ -292,7 +310,12 @@
       }); 
       
       markerCoffee[<%= index %>].addListener('click', function(){
-        // 配列をまわし、全てのウィンドウ閉じる
+        
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+
         infoWindowRamen.forEach((value) => {
           value.close()
         });
@@ -344,6 +367,12 @@
       }); 
       
       markerParking[<%= index %>].addListener('click', function(){
+
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+
         // 配列をまわし、全てのウィンドウ閉じる
         infoWindowRamen.forEach((value) => {
           value.close()
@@ -368,7 +397,6 @@
       })
     <% end %>
   }
-
 
   var markerPlace = [];
   var infoWindowPlace = [];
@@ -397,6 +425,12 @@
       }); 
       
       markerPlace[<%= index %>].addListener('click', function(){
+        
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+
         // 配列をまわし、全てのウィンドウ閉じる
         infoWindowRamen.forEach((value) => {
           value.close()
@@ -423,18 +457,47 @@
   }
 
   // クリック地点にピンを描画
-  var btn; 　　
+  var searchBtn;
+  var livehouseBtn;
   var marker;
   function getClickLatLng(lat_lng, map) {
     
-    btn = document.getElementById('search-btn');
-    btn.addEventListener('click', function() {
+    // 情報ウィンドウを閉じる
+    infoWindowRamen.forEach((value) => {
+        value.close()
+      });
+      infoWindowBeer.forEach((value2) => {
+        value2.close()
+      });
+      infoWindowCoffee.forEach((value3) => {
+        value3.close()
+      });
+      infoWindowParking.forEach((value4) => {
+        value4.close()
+      });
+      infoWindowPlace.forEach((value5) => {
+        value5.close()
+      });
+      infoWindowLivehouse.forEach((value6) => {
+        value6.close()
+      });
+    
+    // 検索ボタンの押下時にピンを削除
+    searchBtn = document.getElementById('search-btn');
+    searchBtn.addEventListener('click', function() {
       if(marker){
         marker.setMap(null);
       }
     });
-    
-    //すでにピンが描画済みの場合、それを削除 
+
+    livehouseBtn = document.getElementById("livehouse-search-btn")
+    livehouseBtn.addEventListener('click', function(){
+      if(marker){
+        marker.setMap(null);
+      }
+    });
+
+    //既にピンが描画済みの場合、それを削除 
     if(marker){
       marker.setMap(null);
     }
@@ -456,8 +519,28 @@
 
   // 住所検索
   function codeAddress(){
-  var inputAddress;
-  var geocoder;
+    var inputAddress;
+    var geocoder;
+
+    // 情報ウィンドウを閉じる
+    infoWindowRamen.forEach((value) => {
+      value.close()
+    });
+    infoWindowBeer.forEach((value2) => {
+      value2.close()
+    });
+    infoWindowCoffee.forEach((value3) => {
+      value3.close()
+    });
+    infoWindowParking.forEach((value4) => {
+      value4.close()
+    });
+    infoWindowPlace.forEach((value5) => {
+      value5.close()
+    });
+    infoWindowLivehouse.forEach((value6) => {
+      value6.close()
+    });
 
     geocoder = new google.maps.Geocoder()
 
