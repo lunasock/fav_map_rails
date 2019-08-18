@@ -104,7 +104,7 @@
     parking()
     place()
     getGeolocation()
-    setInterval(getGeolocation, 10000)
+    setInterval(getGeolocation, 60000)
        
   }
 
@@ -489,24 +489,29 @@
   }
 
   // 現在地取得
-  var circle;
-  var now = null;
-  function getGeolocation(){
+  var now;
+  var nowMarker;
+  var nowCircle;
   var now_image = "/images/now4.png";
-  var nowMarker = null;
-    if(nowMarker != null){
-      nowMarker.setMap(null)
-    }
-    console.log(0);
+  function getGeolocation(){
     navigator.geolocation.getCurrentPosition(
-      function (pos) { 
+      function (pos) {
+        if(nowMarker){
+          console.log(nowMarker);
+          nowMarker.setMap(null);
+          nowMarker = null
+        }
+        if(nowCircle){
+          nowCircle.setMap(null);
+          nowCircle = null
+        }
         now = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude)
         nowMarker = new google.maps.Marker({
           map: map,
           position: now,
           icon: now_image
         })
-        new google.maps.Circle({
+        nowCircle = new google.maps.Circle({
           map: map,
           center: now,
           radius: pos.coords.accuracy,
@@ -519,9 +524,7 @@
         now = pos;
       }
     )
-    
   } 
-
 
   // 現在地へ移動
   function moveGeolocation(){
@@ -546,7 +549,6 @@
       }
     )
   }
-
 
 </script>
 
