@@ -41,15 +41,7 @@ class SpotsController < ApplicationController
   end
 
   def search
-    @spots = Spot.all
-    results = Geocoder.search(params[:address])
-    # search結果の[0]の緯度経度を代入
-    @latlng = results.first.coordinates
-    # 検索フォームの値をそのまま代入
-    @address = params[:address]
-    respond_to do |format|
-      format.js
-    end
+    @spot = Spot.find(params[:id])
   end
 
   def livehouse_search
