@@ -1,9 +1,3 @@
-/* 
-index.html.erbのscript内に
-google mapのインスタンス変数である、
-mapという変数があることに留意
-*/
-
 (function(){
   
   map.setCenter(new google.maps.LatLng(<%= @spot.latitude %>, <%= @spot.longitude %>));
