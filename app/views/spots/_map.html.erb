@@ -15,7 +15,7 @@
   function initMap(){
   
     getGeolocation()
-    setInterval(getGeolocation, 500)
+    setInterval(getGeolocation, 10000)
 
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 35.6628611, lng: 139.6972762},
@@ -445,6 +445,7 @@
     }
   }
 
+  // 住所検索
   var inputAddress;
   var geocoder;
   var searchBtn;
@@ -492,17 +493,18 @@
     });
   }
 
+  // 現在地取得
   var now_image = "/images/now.png";
-  var marker = null;
+  var nowMarker = null;
   var now = null;
   function getGeolocation(){
-    if(marker != null){
-      marker.setMap(null)
+    if(nowMarker != null){
+      nowMarker.setMap(null)
     }
     console.log(0);
     navigator.geolocation.getCurrentPosition(
       function (pos) { 
-        marker = new google.maps.Marker({
+        nowMarker = new google.maps.Marker({
           map: map,
           position:new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude),
           icon: now_image
@@ -512,8 +514,14 @@
     )
   } 
 
+  // 現在地へ移動
   function moveGeolocation(){
     map.setCenter(new google.maps.LatLng(now.coords.latitude,now.coords.longitude));
+  }
+
+  // ライブハウスへ移動
+  function movelivehouse(){
+    map.setCenter()
   }
 </script>
 
