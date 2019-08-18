@@ -82,7 +82,7 @@
     // ライブハウス
     // each_with_indexを使うと、0,1,2~と付与される
     // 変数に配列を格納
-    <% livehouses.each_with_index do |livehouse,index| %>
+    <% @livehouses.each_with_index do |livehouse,index| %>
       markerLivehouse[<%= index %>] = new google.maps.Marker({
       map: map,
       icon: livehouse_image,
@@ -134,7 +134,7 @@
     // ラーメン屋
     // each_with_indexを使うと、0,1,2~と付与される
     // 変数に配列を格納
-    <% ramens.each_with_index do |ramen,index| %>
+    <% @ramens.each_with_index do |ramen,index| %>
       markerRamen[<%= index %>] = new google.maps.Marker({
       map: map,
       icon: ramen_image,
@@ -187,7 +187,7 @@
     // 居酒屋屋
     // each_with_indexを使うと、0,1,2~と付与される
     // 変数に配列を格納
-    <% beers.each_with_index do |beer,index| %>
+    <% @beers.each_with_index do |beer,index| %>
       markerBeer[<%= index %>] = new google.maps.Marker({
       map: map,
       icon: beer_image,
@@ -239,7 +239,7 @@
     // 喫茶店
     // each_with_indexを使うと、0,1,2~と付与される
     // 変数に配列を格納
-    <% coffees.each_with_index do |coffee,index| %>
+    <% @coffees.each_with_index do |coffee,index| %>
       markerCoffee[<%= index %>] = new google.maps.Marker({
       map: map,
       icon: coffee_image,
@@ -291,7 +291,7 @@
     // 駐車場
     // each_with_indexを使うと、0,1,2~と付与される
     // 変数に配列を格納
-    <% parkings.each_with_index do |parking,index| %>
+    <% @parkings.each_with_index do |parking,index| %>
       markerParking[<%= index %>] = new google.maps.Marker({
       map: map,
       icon: parking_image,
@@ -344,7 +344,7 @@
     // その他
     // each_with_indexを使うと、0,1,2~と付与される
     // 変数に配列を格納
-    <% places.each_with_index do |place,index| %>
+    <% @places.each_with_index do |place,index| %>
       markerPlace[<%= index %>] = new google.maps.Marker({
       map: map,
       icon: place_image,
@@ -467,7 +467,7 @@
       function (pos) { 
         nowMarker = new google.maps.Marker({
           map: map,
-          position:new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude),
+          position: new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude),
           icon: now_image
         })
         now = pos;

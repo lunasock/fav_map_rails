@@ -1,5 +1,74 @@
-(function(){
-  
-  map.setCenter(new google.maps.LatLng(<%= @spot.latitude %>, <%= @spot.longitude %>));
- 
+(function () {
+  var livehouseSearchPos;
+  var markerLivehouse2;
+  var infoWindowLivehouse2;
+
+  infoWindowRamen.forEach((value) => {
+    value.close()
+  });
+  infoWindowBeer.forEach((value2) => {
+    value2.close()
+  });
+  infoWindowCoffee.forEach((value3) => {
+    value3.close()
+  });
+  infoWindowParking.forEach((value4) => {
+    value4.close()
+  });
+  infoWindowPlace.forEach((value5) => {
+    value5.close()
+  });
+  infoWindowLivehouse.forEach((value6) => {
+    value6.close()
+  });
+
+    markerLivehouse2 = new google.maps.Marker({
+    map: map,
+    icon: livehouse_image,
+    position: new google.maps.LatLng(
+      <%= @spot.latitude %>, //latitude
+      <%= @spot.longitude %>  //longitude
+    )
+    });
+    markerLivehouse.push(markerLivehouse2);
+    
+    contentStringLivehouse = '<div class="infoWindow-text"><%= link_to @spot.spot_name, spot_path(@spot) %></div>' + '<%= link_to spot_path(@spot) do %><%= attachment_image_tag @spot, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+
+    infoWindowLivehouse2 = new google.maps.InfoWindow({
+    // ウィンドウを表示させる
+    noSuppress:true,
+    content: contentStringLivehouse
+    }); 
+    infoWindowLivehouse.push(infoWindowLivehouse2);
+    
+    markerLivehouse2.addListener('click', function(){
+      // 配列をまわし、全てのウィンドウ閉じる
+      infoWindowRamen.forEach((value) => {
+        value.close()
+      });
+      infoWindowBeer.forEach((value2) => {
+        value2.close()
+      });
+      infoWindowCoffee.forEach((value3) => {
+        value3.close()
+      });
+      infoWindowParking.forEach((value4) => {
+        value4.close()
+      });
+      infoWindowPlace.forEach((value5) => {
+        value5.close()
+      });
+      infoWindowLivehouse.forEach((value6) => {
+        value6.close()
+      });
+      // 全てのウィンドウを閉じてからopen
+      infoWindowLivehouse2.open(map, markerLivehouse2)
+    })
+
+  livehouseSearchPos = new google.maps.LatLng(<%= @spot.latitude %>, <%= @spot.longitude %>)
+
+  map.setCenter(livehouseSearchPos);
+     
+  infoWindowLivehouse2.open(map, markerLivehouse2)
+
 })()
