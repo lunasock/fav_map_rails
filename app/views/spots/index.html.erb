@@ -136,11 +136,15 @@
       
       markerLivehouse[<%= index %>].addListener('click', function(){
 
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null)
+
         // マーカーを削除
         if(marker){
         marker.setMap(null);
         }
-        
+
         // 配列をまわし、全てのウィンドウ閉じる
         infoWindowRamen.forEach((value) => {
           value.close()
@@ -193,6 +197,10 @@
       }); 
       
       markerRamen[<%= index %>].addListener('click', function(){
+
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null)
 
         // マーカーを削除
         if(marker){
@@ -253,6 +261,10 @@
       
       markerBeer[<%= index %>].addListener('click', function(){
 
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null)
+
         // マーカーを削除
         if(marker){
         marker.setMap(null);
@@ -310,6 +322,10 @@
       }); 
       
       markerCoffee[<%= index %>].addListener('click', function(){
+
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null)
         
         // マーカーを削除
         if(marker){
@@ -368,6 +384,10 @@
       
       markerParking[<%= index %>].addListener('click', function(){
 
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null)
+
         // マーカーを削除
         if(marker){
         marker.setMap(null);
@@ -425,6 +445,10 @@
       }); 
       
       markerPlace[<%= index %>].addListener('click', function(){
+
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null)
         
         // マーカーを削除
         if(marker){
@@ -495,6 +519,9 @@
       if(marker){
         marker.setMap(null);
       }
+      $('#lat').val(null);
+      $('#lng').val(null);
+      $('#address_field').val(null)
     });
 
     //既にピンが描画済みの場合、それを削除 
