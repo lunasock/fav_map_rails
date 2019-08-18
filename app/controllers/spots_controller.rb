@@ -24,14 +24,6 @@ class SpotsController < ApplicationController
     @parkings = Spot.where(category: 4)
     @places = Spot.where(category: 5)
     @livehouses = Spot.where(category: 0)
-    @spots.each do |spot|
-      @array_spots << spot
-    end
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @array_spots }
-    end
   end
 
   def show
@@ -42,15 +34,7 @@ class SpotsController < ApplicationController
 
   def search
     @spot = Spot.find(params[:id])
-  end
-
-  def livehouse_search
-    @livehouses = Livehouse.all
-    results = Geocoder.search(params[:address])
-    @latlng = results.first.coordinates
-    respond_to do |format|
-      format.js
-    end 
+    @livehouses = Spot.where(category: 0)
   end
 
   private
