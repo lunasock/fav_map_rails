@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="spot-image col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <p><%= attachment_image_tag @livehouse, :livehouse_image, :fill, 400, 400, format: 'jpeg', fallback: "/images/no_image.jpg" %></p>
+        <p><%= attachment_image_tag @livehouse, :livehouse_image, :fill, 400, 400, format: 'jpeg', fallback: "/images/no_image.jpg", size: '400x400'  %></p>
       </div>
       <div class="spot-detail col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <p><%= @livehouse.livehouse_name %><br><%= @livehouse.category %><br><%= @livehouse.address %><br><%= @livehouse.livehouse_body %></p>
@@ -21,11 +21,11 @@
       <% @posts.each do |post| %>
         <div class="posts-box col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6">
           <div class="review-image">
-            <%= attachment_image_tag post, :review_image, :fill, 300, 300, format: 'jpeg', fallback: "/images/no_image.jpg" %>
+            <%= attachment_image_tag post, :review_image, :fill, 300, 300, format: 'jpeg', fallback: "/images/no_image.jpg", size: '300x300' %>
           </div>
           <%= link_to user_path(post.user) do %>
             <div class="review-user-icon">
-              <%= attachment_image_tag post.user, :icon_image, :fill, 50, 50, format: 'jpeg', fallback: "/images/no_image.jpg" %>
+              <%= attachment_image_tag post.user, :icon_image, :fill, 50, 50, format: 'jpeg', fallback: "/images/no_image.jpg", size: '50x50' %>
             </div>
             <div class="review-user">
               <%= post.user.user_name %>
