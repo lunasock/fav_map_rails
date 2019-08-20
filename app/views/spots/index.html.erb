@@ -1,29 +1,32 @@
 <div class="main">
   <div class="container">
-    <input type="button" id ="move-geolocation" class="btn btn-primary btn-xs" value="現在地情報取得" onclick="moveGeolocation()">
-    <input id="address" type="textbox">
-    <input type="button" id ="search-btn" class="btn btn-primary btn-xs" value="検索" onclick="codeAddress()">
-
-    <%# ライブハウス検索フォーム %>
-    <%= form_with url: map_search_path, method: :get do |f| %>
-      <%= f.collection_select :id, @search, :id, :spot_name, :prompt => "ライブハウスを選択" %>
-      <%= f.submit 'ライブハウスを表示', id:"livehouse-search-btn", class:"btn btn-primary btn-xs" %>
-    <% end %>
-
+    <div class="forms">
+      <input type="button" id ="move-geolocation" class="btn btn-primary btn-xs" value="現在地情報取得" onclick="moveGeolocation()">
+      <input id="address" type="textbox" placeholder="住所を入力">
+      <input type="button" id ="search-btn" class="btn btn-primary btn-xs" value="検索" onclick="codeAddress()">
+      <%# ライブハウス検索フォーム %>
+      <div class="livehouse-search">
+        <%= form_with url: map_search_path, method: :get do |f| %>
+          <%= f.collection_select :id, @search, :id, :spot_name, :prompt => "ライブハウスを選択" %>
+          <%= f.submit 'ライブハウスを表示', id:"livehouse-search-btn", class:"btn btn-primary btn-xs" %>
+        <% end %>
+      </div>
+    </div>  
     <div id='map'></div>
-
     <div class="spot-form">
       <%= form_for(@spot) do |f| %>
         <h4>住所</h4>
-        <%= f.text_field :address, id: :address_field %>
-        <h4>緯度</h4>
-        <%= f.text_field :latitude, id: :lat %>
-        <h4>経度</h4>
-        <%= f.text_field :longitude, id: :lng %>
+        <div id="address-area"><br></div>
+        <!-- 住所 -->
+        <%= f.hidden_field :address, id: :address_field %>
+        <!-- 緯度 -->
+        <%= f.hidden_field :latitude, id: :lat %>
+        <!-- 経度 -->
+        <%= f.hidden_field :longitude, id: :lng %>
         <h4>場所の名前</h4>
         <%= f.text_field :spot_name %>
         <h4>場所の説明</h4>
-        <%= f.text_area :spot_body %>
+        <%= f.text_area :spot_body, size: "8x8" %>
         <h4>カテゴリー</h4>
         <%= f.select(:category, {ライブハウス: 'ライブハウス', ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
         <h4>場所の画像</h4>
@@ -138,7 +141,8 @@
 
         $('#lat').val(null);
         $('#lng').val(null);
-        $('#address_field').val(null)
+        $('#address_field').val(null);
+        $('#address-area').text("");
 
         // マーカーを削除
         if(marker){
@@ -200,7 +204,8 @@
 
         $('#lat').val(null);
         $('#lng').val(null);
-        $('#address_field').val(null)
+        $('#address_field').val(null);
+        $('#address-area').text("");
 
         // マーカーを削除
         if(marker){
@@ -263,7 +268,8 @@
 
         $('#lat').val(null);
         $('#lng').val(null);
-        $('#address_field').val(null)
+        $('#address_field').val(null);
+        $('#address-area').text("");
 
         // マーカーを削除
         if(marker){
@@ -325,7 +331,8 @@
 
         $('#lat').val(null);
         $('#lng').val(null);
-        $('#address_field').val(null)
+        $('#address_field').val(null);
+        $('#address-area').text("");
         
         // マーカーを削除
         if(marker){
@@ -386,7 +393,8 @@
 
         $('#lat').val(null);
         $('#lng').val(null);
-        $('#address_field').val(null)
+        $('#address_field').val(null);
+        $('#address-area').text("");
 
         // マーカーを削除
         if(marker){
@@ -449,6 +457,7 @@
         $('#lat').val(null);
         $('#lng').val(null);
         $('#address_field').val(null)
+        $('#address-area').text("");
         
         // マーカーを削除
         if(marker){
@@ -522,6 +531,7 @@
       $('#lat').val(null);
       $('#lng').val(null);
       $('#address_field').val(null)
+      $('#address-area').text("");
     });
 
     //既にピンが描画済みの場合、それを削除 
@@ -599,7 +609,7 @@
   }
 
   // 現在地取得
-  var now;
+  var now = null;
   var nowMarker;
   var nowCircle;
   var now_image = "/images/now4.png";
@@ -607,23 +617,30 @@
     navigator.geolocation.getCurrentPosition(
       function (pos) {
         if(nowMarker){
-          console.log(nowMarker);
+          console.log(0);
           nowMarker.setMap(null);
-          nowMarker = null
+          nowMarker = null;
         }
         if(nowCircle){
           nowCircle.setMap(null);
-          nowCircle = null
+          nowCircle = null;
         }
-        now = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude)
+        var n  = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude)
+        if(now == null){
+          now = pos;
+          moveGeolocation();
+        }
+        else{
+          now = pos;
+        }
         nowMarker = new google.maps.Marker({
           map: map,
-          position: now,
+          position: n,
           icon: now_image
         })
         nowCircle = new google.maps.Circle({
           map: map,
-          center: now,
+          center: n,
           radius: pos.coords.accuracy,
           strokeColor: '#0088ff',
           strokeOpacity: 0.1,
@@ -631,7 +648,6 @@
           fillColor: '#0088ff',
           fillOpacity: 0.1
         });
-        now = pos;
       }
     )
   } 
@@ -655,6 +671,7 @@
         if (status == google.maps.GeocoderStatus.OK && results[0].geometry) {
           address = results[0].formatted_address;
           $('#address_field').val(address);
+          $('#address-area').text(address);
         }
       }
     )
