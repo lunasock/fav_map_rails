@@ -48,6 +48,13 @@
   width: 100%;
 }
 
+.logo {
+  font-family: 'Anton', sans-serif;
+  color: black;
+  font-size: 40px;
+  margin-right: 10px;
+}
+
 .nav-list {
   list-style: none;
 }
@@ -75,12 +82,28 @@
   margin-bottom: 10px;
 }
 
+.fa-twitter {
+  color: #00bfff;
+  font-size: 50px;
+  margin:10px;
+}
+
+.fa-github {
+  color: black;
+  font-size: 50px;
+  margin:10px;
+}
+
 .icon1 {
   display: inline-block;
 }
 
 .icon2 {
   display: inline-block;
+}
+
+.footer-detail {
+  margin-bottom: 5px;
 }
 
 .footer-top-right {
