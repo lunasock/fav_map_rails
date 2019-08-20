@@ -27,7 +27,11 @@
     display: block;
     clear: both;
   }
-  
+
+  #color {
+    color: white;
+  }
+
   // フッター固定
   // https://webkikaku.co.jp/blog/htmlcss/footer-bottom/
   .wrapper{
@@ -50,19 +54,38 @@
 
 .logo {
   font-family: 'Anton', sans-serif;
-  color: black;
+  color: white;
   font-size: 40px;
   margin-right: 10px;
+}
+
+.navbar-header {
+  height: 80px;
+}
+
+.navbar-brand {
+  padding-top: 47px;
+}
+
+.header-nav {
+  padding-top:15px;
+}
+
+.navbar-toggle {
+  margin-top: 25px;
 }
 
 .nav-list {
   list-style: none;
 }
 
+.navbar-default {
+  text-decoration: none;
+}
+
 .navbar-custom {
-  color: black;
-  background-color: #ffc0cb;
-  width: 100%;
+  text-decoration: none;
+  background-color: black;
 }
 
 .navbar-brand p {
@@ -72,6 +95,10 @@
 .under-line {
   border-bottom: 1px solid #c0c0c0;
   margin: 20px 0;
+}
+
+.under-line2 {
+  border-bottom: 1px solid #c0c0c0;
 }
 
 .footer-top {
@@ -111,12 +138,14 @@
 }
 
 .footer-bottom {
-  background-color: #ffc0cb;
+  background-color: black;
+  height: 80px;
 }
 
 .footer-text {
+  color: white;
   text-align: center;
-  line-height: 50px;
+  line-height: 70px;
 }
 
 .infoWindow-text {
@@ -125,4 +154,10 @@
 
 #address {
   width: 300px;
+}
+
+@media screen and (max-width:768px) {   
+  .header-nav {
+    padding-top: 0px;
+  } 
 }
