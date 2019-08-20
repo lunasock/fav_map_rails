@@ -28,27 +28,31 @@
                 <span class="icon-bar"></span>
               </button>
               <div class="navbar-brand">
-                <%= link_to root_path do %>
-                <% end %>
                 <% if user_signed_in? %>
-                  <%= link_to root_path do %><p class="logo">BandBund</p><% end %>にようこそ <%= current_user.user_name %>様
+                  <%= link_to root_path do %>
+                    <p class="logo">BandBund</p>
+                  <% end %>
+                  <p id="color">にようこそ <%= current_user.user_name %>様</p>
                 <% else %>
-                  <%= link_to root_path do %><p class="logo">BandBund</p><% end %>にようこそ ゲスト様
+                  <%= link_to root_path do %>
+                    <p class="logo">BandBund</p>
+                  <% end %>
+                  <p id="color">にようこそ ゲスト様</p>
                 <% end %>
               </div>
             </div>
             <div class="collapse navbar-collapse navbar-right" id="navbarEexample">
-              <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav header-nav">
                 <% if admin_signed_in? %>
-                  <li class="nav-list-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+                  <li class="nav-list-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, id:"color"; %></li>
                 <% else %>
                   <% if user_signed_in? %>
-                    <li class="nav-list-item"><%= link_to 'マイページ', user_path(current_user) %>
-                    <li class="nav-list-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+                    <li class="nav-list-item"><%= link_to 'マイページ', user_path(current_user), id:"color"; %>
+                    <li class="nav-list-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, id:"color"; %></li>
                   <% else %>
-                    <li class="nav-list-item"><%= link_to 'BandBundについて', root_path %></li>
-                    <li class="nav-list-item"><%= link_to 'ログイン', new_user_session_path %></li>
-                    <li class="nav-list-item"><%= link_to '新規登録', new_user_registration_path %></li>
+                    <li class="nav-list-item"><%= link_to 'BandBundについて', root_path, id:"color"; %></li>
+                    <li class="nav-list-item"><%= link_to 'ログイン', new_user_session_path, id:"color"; %></li>
+                    <li class="nav-list-item"><%= link_to '新規登録', new_user_registration_path, id:"color"; %></li>
                   <% end %>
                 <% end %>
               </ul>
@@ -94,6 +98,8 @@
             </div>
           </div>
           <div class="footer-bottom">
+            <div class="under-line2">
+            </div>
             <div class="footer-text">
               <p>© 2019 BandBund</p>
             </div>
