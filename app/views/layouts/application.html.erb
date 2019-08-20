@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -30,9 +31,9 @@
                 <%= link_to root_path do %>
                 <% end %>
                 <% if user_signed_in? %>
-                  <p>に ようこそ 様</P>
+                  <%= link_to root_path do %><p class="logo">BandBund</p><% end %>にようこそ <%= current_user.user_name %>様
                 <% else %>
-                  <p>に ようこそ ゲスト様</p>
+                  <%= link_to root_path do %><p class="logo">BandBund</p><% end %>にようこそ ゲスト様
                 <% end %>
               </div>
             </div>
@@ -69,22 +70,24 @@
                   <p>The map is made in me and you.</p>
                   <div class="icons">
                     <div class="icon1">
-                      <%= link_to root_path do %>
+                      <%= link_to 'https://twitter.com/band_bund' do %>
+                        <i class="fab fa-twitter"></i>
                       <% end %>
                     </div>
                     <div class="icon2">
-                      <%= link_to root_path do %>
+                      <%= link_to 'https://github.com/KeisukeOmata/BandBund' do %>
+                        <i class="fab fa-github"></i>
                       <% end %>
                     </div>
                   </div>
                 </div>
                 <div class="footer-top-right col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
                   <ul class="nav-list">
-                    <li class="nav-list-item"><%= link_to 'よくある質問', root_path %>
-                    <li class="nav-list-item"><%= link_to 'BandBundについて', root_path %></li>
-                    <li class="nav-list-item"><%= link_to '利用規約', root_path %></li>
-                    <li class="nav-list-item"><%= link_to 'プライバシーポリシー', root_path %></li>
-                    <li class="nav-list-item"><%= link_to '特定商取引法に基づく表記', root_path %></li>
+                    <li class="nav-list-item footer-detail"><%= link_to 'よくある質問', root_path %>
+                    <li class="nav-list-item footer-detail"><%= link_to 'BandBundについて', root_path %></li>
+                    <li class="nav-list-item footer-detail"><%= link_to '利用規約', root_path %></li>
+                    <li class="nav-list-item footer-detail"><%= link_to 'プライバシーポリシー', root_path %></li>
+                    <li class="nav-list-item footer-detail"><%= link_to '特定商取引法に基づく表記', root_path %></li>
                   </ul>
                 </div>
               </div>
