@@ -72,3 +72,36 @@
   }
 }
 
+@media screen and (max-width:499px) {   
+  #address_field {
+    width: 290px;
+  }
+  
+  #spot_spot_name {
+    width: 290px;
+  }
+  
+  #spot_spot_body {
+    width: 290px;
+  }
+
+  .spot-image {
+    margin-top: -35px;
+    height: 350px;
+  }
+
+  .spot-image p img {
+    height: 300px;
+    width: 300px;
+  }
+
+  .spot-detail {
+    height: 100px;
+    margin-bottom: -20px;
+  }
+
+  #posts-box {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}

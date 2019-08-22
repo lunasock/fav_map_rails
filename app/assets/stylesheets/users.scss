@@ -79,3 +79,22 @@
 #user_backcover_image {
   margin: 0 auto;
 }
+
+@media screen and (max-width:499px) {   
+  #user_user_name {
+    width: 290px;
+  }
+  
+  #user_user_body {
+    width: 290px;
+  }
+
+  .user-name {
+    font-size: 20px;
+  }
+
+  .user-body {
+    font-size: 80%;
+  }
+
+}

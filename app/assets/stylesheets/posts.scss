@@ -26,11 +26,25 @@
   width: 430px;
 }
 
-@media screen and (max-width:624px) {    
-  
+@media screen and (max-width:624px) {     
   .review_image {
     width: 240px;
     height: 240px;
+  }
+}
+
+@media screen and (max-width:499px) {   
+  #post_review_body {
+    width: 290px;
+  }
+
+  .review-image img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .review-spot-category {
+    font-size: 75%;
   }
 
 }
