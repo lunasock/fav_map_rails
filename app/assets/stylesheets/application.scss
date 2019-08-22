@@ -32,20 +32,24 @@
     color: white;
   }
 
-  // フッター固定
-  // https://webkikaku.co.jp/blog/htmlcss/footer-bottom/
-  .wrapper{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow: hidden;
-  }
-  
-  footer{
-    margin-top: auto;
-    text-align: center;
-    margin-bottom: -10px;
-  }
+// フッター固定
+// https://webkikaku.co.jp/blog/htmlcss/footer-bottom/
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+footer{
+  margin-top: auto;
+  text-align: center;
+  margin-bottom: -10px;
+}
+
+#map-point {
+  position: relative;
+}
 
 #map {
   height: 600px;
@@ -93,17 +97,23 @@
 }
 
 #move-geolocation {
-  margin-right:10px;
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  z-index: 1;
 }
 
 .livehouse-search{
-  display: inline-block;
-  float: right;
-  margin-right:10px;
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  z-index: 1;
 }
 
 .forms {
   margin-bottom: 10px;
+  margin-right: 10px;
+  float: right;
 }
 
 .under-line {
@@ -168,11 +178,48 @@
 }
 
 #address {
-  width: 300px;
+  width: 230px;
+  margin-left: 10px;
 }
 
 @media screen and (max-width:768px) {   
   .header-nav {
     padding-top: 0px;
   } 
+}
+
+@media screen and (max-width:499px) {   
+  .logo {
+    font-size: 30px;
+    margin-right: 5px;
+    margin-left: -5px;
+  }
+  
+  .navbar-brand {
+    font-size: 15px;
+  }
+
+  a {
+    font-size: 70%;
+  }
+  
+  p {
+    font-size: 70%;
+  }
+
+  .fa-twitter {
+    font-size: 35px;
+  }
+
+  .fa-github {
+    font-size: 35px;
+  }
+
+  .under-line-mini {
+    margin: 40px 0px;
+  }
+
+  .under-line {
+    margin-top: 20px;
+  }
 }

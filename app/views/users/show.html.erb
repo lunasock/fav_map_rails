@@ -22,7 +22,7 @@
   <div class="container">
     <div class="row">
       <% @posts.each do |post| %>
-        <div class="posts-box col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6">
+        <div id="posts-box" class="posts-box col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6">
           <%= link_to spot_path(post.spot) do %>
             <div class="review-image">
               <%= attachment_image_tag post, :review_image, :fill, 300, 300, format: 'jpeg', fallback: "/images/no_image.jpg", size: '300x300' %>

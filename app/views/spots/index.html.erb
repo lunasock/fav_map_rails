@@ -1,5 +1,6 @@
 <div class="main">
   <div class="container">
+    <div id="map-point">
     <div class="forms">
       <input type="button" id ="move-geolocation" class="btn btn-primary btn-xs" value="現在地情報取得" onclick="moveGeolocation()">
       <input id="address" type="textbox" placeholder="住所を入力">
@@ -13,10 +14,12 @@
       </div>
     </div>  
     <div id='map'></div>
+    </div>
     <div class="spot-form">
       <%= form_for(@spot) do |f| %>
         <h4>住所</h4>
-        <div id="address-area"><br></div>
+        <div id="address-area"><br>
+        </div>
         <!-- 住所 -->
         <%= f.hidden_field :address, id: :address_field %>
         <!-- 緯度 -->
@@ -47,7 +50,7 @@
       zoom: 15,
       mapTypeControl: false,
       streetViewControl: false,
-      gestureHandling: 'cooperative',
+      fullscreenControl: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: [
         {
@@ -107,7 +110,7 @@
     parking()
     place()
     getGeolocation()
-    setInterval(getGeolocation, 60000)
+    setInterval(getGeolocation, 1000)
        
   }
 
@@ -636,11 +639,13 @@
         nowMarker = new google.maps.Marker({
           map: map,
           position: n,
+          clickable: false,
           icon: now_image
         })
         nowCircle = new google.maps.Circle({
           map: map,
           center: n,
+          clickable: false,
           radius: pos.coords.accuracy,
           strokeColor: '#0088ff',
           strokeOpacity: 0.1,
