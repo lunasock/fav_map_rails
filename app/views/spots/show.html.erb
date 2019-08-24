@@ -7,6 +7,8 @@
       <div class="spot-detail col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <p><%= @spot.spot_name %><br><%= @spot.category %><br><%= @spot.address %><br><%= @spot.spot_body %></p>
       </div>
+      <%= link_to '戻る', root_path, class:"btn btn-default" %>
+      <%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary" %> 
     </div> 
     <!-- 口コミ投稿フォーム -->
     <div class="post-form">
@@ -34,6 +36,7 @@
           <div class="review-body">
             <%= post.review_body %>
           </div>
+          <%= link_to '編集', edit_post_path(post) %>
         </div>
       <% end %>
     </div>
