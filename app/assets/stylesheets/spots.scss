@@ -40,12 +40,6 @@
 
 #spot_spot_image {
   margin: 20px auto;
-  text-align: center;
-}
-
-.spot-image-tag {
-  text-align: center;
-  margin: 20px auto;
 }
 
 #address_field {
@@ -108,5 +102,9 @@
   #posts-box {
     padding-right: 0px;
     padding-left: 0px;
+  }
+
+  #spot_spot_image {
+    margin: 20px 0 20px 70px;
   }
 }

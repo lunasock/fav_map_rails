@@ -33,7 +33,7 @@
         <h4>カテゴリー</h4>
         <%= f.select(:category, {ライブハウス: 'ライブハウス', ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
         <h4>場所の画像</h4>
-        <%= f.attachment_field :spot_image, class:"spot-image-tag" %>
+        <%= f.attachment_field :spot_image %>
         <%= f.submit '登録', class: "btn btn-primary" %>
       <% end %>
     </div>
