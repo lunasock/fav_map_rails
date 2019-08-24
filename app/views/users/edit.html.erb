@@ -12,6 +12,7 @@
       <%= f.attachment_field :backcover_image %>
       <br><%= f.submit '更新', class: "btn btn-primary" %>
       <% end %>
+      <%= link_to '退会', check_path(@user), class: "btn btn-danger" %>
     </div>
   </div>
 </div>
