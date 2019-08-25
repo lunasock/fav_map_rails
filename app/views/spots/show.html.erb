@@ -5,7 +5,17 @@
         <p><%= attachment_image_tag @spot, :spot_image, :fill, 400, 400, format: 'jpeg', fallback: "/images/no_image.jpg" %></p>
       </div>
       <div class="spot-detail col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <p><%= @spot.spot_name %><br><%= @spot.category %><br><%= @spot.address %><br><%= @spot.spot_body %><br><br><%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary" %></p>
+        <p>
+          <%= @spot.spot_name %><br>
+          <%= @spot.category %><br>
+          <%= @spot.address %><br>
+          <%= @spot.spot_body %><br><br>
+          <% if @spot.user.id == current_user.id %>
+            <%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary" %>
+          <% elsif admin_signed_in? %>
+            <%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary" %>
+          <% end %>
+        </p>
         <!-- <%= link_to '戻る', root_path, class:"btn btn-default" %> -->
       </div>
     </div> 
@@ -35,7 +45,11 @@
           <div class="review-body">
             <%= post.review_body %>
           </div>
-          <%= link_to '編集', edit_post_path(post), class:"btn btn-primary btn-xs" %>
+          <% if post.user.id == current_user.id %>
+            <%= link_to '編集', posts_edit_path(post), class:"btn btn-primary btn-xs" %>
+          <% elsif admin_signed_in? %>
+            <%= link_to '編集', posts_edit_path(post), class:"btn btn-primary btn-xs" %>
+          <% end %>
         </div>
       <% end %>
     </div>

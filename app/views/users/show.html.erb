@@ -13,9 +13,15 @@
       <div class="user-body">
         <%= @user.user_body %>
       </div>
-      <div class="user-edit">
-        <%= link_to 'ユーザー情報編集', edit_user_path(@user), class:"btn btn-primary btn-xs"  %>
-      </div>
+      <% if @user.id == current_user.id %>
+        <div class="user-edit">
+          <%= link_to 'ユーザー情報編集', edit_user_path(@user), class:"btn btn-primary btn-xs"  %>
+        </div>
+      <% elsif admin_signed_in? %>
+        <div class="user-edit">
+          <%= link_to 'ユーザー情報編集', edit_user_path(@user), class:"btn btn-primary btn-xs"  %>
+        </div>
+      <% end %>
     </div>
   </div>
 
