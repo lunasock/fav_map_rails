@@ -41,6 +41,12 @@ class SpotsController < ApplicationController
     @livehouses = Spot.where(category: 0)
   end
 
+  def destroy
+    @spot = Spot.find(params[:id])
+    @spot.destroy
+    redirect_to root_path
+  end
+  
   private
   def spot_params
     params.require(:spot).permit(:user_id, :spot_name, :category, :address, :latitude, :longitude, :spot_image, :spot_body)

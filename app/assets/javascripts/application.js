@@ -19,20 +19,3 @@
 //= require_tree .
 //= require bootstrap-sprockets
 
-
-// $(function(){
-//     $("#table-spot-detail").on('click', function(){
-//         $.ajax({
-//             url: "spots/show",
-//             type: "GET",
-//             data: { id: "value",
-//                     }
-//         });
-//         .done( (data) => {
-//             console.log(data);
-//         })
-//         .fail( (data) => {
-//             console.log(data);
-//         })
-//     });
-

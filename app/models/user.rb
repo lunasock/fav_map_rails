@@ -9,7 +9,7 @@ class User < ApplicationRecord
   attachment :backcover_image
   attachment :icon_image
 
-  has_many :spots
-  has_many :posts
+  has_many :spots, dependent: :delete_all
+  has_many :posts, dependent: :delete_all
 
 end
