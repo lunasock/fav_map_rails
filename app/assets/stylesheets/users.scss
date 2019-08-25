@@ -80,6 +80,15 @@
   margin: 0 auto;
 }
 
+// 退会画面
+.check-field {
+  text-align: center;
+}
+
+.check-message {
+  margin-bottom: 40px;
+}
+
 @media screen and (max-width:499px) {   
   #user_user_name {
     width: 290px;

@@ -13,7 +13,6 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap-sprockets";  
 @import "bootstrap";
 
 * {
@@ -45,6 +44,23 @@ footer{
   margin-top: auto;
   text-align: center;
   margin-bottom: -10px;
+}
+
+// ログイン、新規登録
+#user_email {
+  width: 200px;
+}
+
+#user_password_confirmation {
+  width: 200px;
+}
+
+#user_password {
+  width: 200px;
+}
+
+.devise-field {
+  text-align: center;
 }
 
 #map-point {

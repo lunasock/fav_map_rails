@@ -20,6 +20,12 @@ class PostsController < ApplicationController
     redirect_to spot_path(@post.spot_id)
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to spot_path(@post.spot_id)
+  end
+
   private
   def post_params
     params.require(:post).permit(:user_id, :spot_id, :review_body, :review_image)

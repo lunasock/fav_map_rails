@@ -5,10 +5,9 @@
         <p><%= attachment_image_tag @spot, :spot_image, :fill, 400, 400, format: 'jpeg', fallback: "/images/no_image.jpg" %></p>
       </div>
       <div class="spot-detail col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-        <p><%= @spot.spot_name %><br><%= @spot.category %><br><%= @spot.address %><br><%= @spot.spot_body %></p>
+        <p><%= @spot.spot_name %><br><%= @spot.category %><br><%= @spot.address %><br><%= @spot.spot_body %><br><br><%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary" %></p>
+        <!-- <%= link_to '戻る', root_path, class:"btn btn-default" %> -->
       </div>
-      <%= link_to '戻る', root_path, class:"btn btn-default" %>
-      <%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary" %> 
     </div> 
     <!-- 口コミ投稿フォーム -->
     <div class="post-form">
@@ -36,7 +35,7 @@
           <div class="review-body">
             <%= post.review_body %>
           </div>
-          <%= link_to '編集', edit_post_path(post) %>
+          <%= link_to '編集', edit_post_path(post), class:"btn btn-primary btn-xs" %>
         </div>
       <% end %>
     </div>

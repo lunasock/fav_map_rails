@@ -10,9 +10,10 @@
       <%= f.attachment_field :icon_image %>
       <br><P>ヘッダー画像</P>
       <%= f.attachment_field :backcover_image %>
+      <!-- <%= link_to '戻る', user_path(params[:id]), class: "btn btn-default" %> -->
       <br><%= f.submit '更新', class: "btn btn-primary" %>
       <% end %>
-      <%= link_to '退会', check_path(@user), class: "btn btn-danger" %>
+      <br><%= link_to '退会', check_path(@user), class: "btn btn-danger" %>
     </div>
   </div>
 </div>

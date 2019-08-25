@@ -7,7 +7,7 @@ class Spot < ApplicationRecord
 
   enum category: { ライブハウス: 0, ラーメン屋: 1, 居酒屋: 2, 喫茶店: 3, 駐車場: 4, その他: 5 }
 
-  has_many :posts
+  has_many :posts, dependent: :delete_all
   belongs_to :user
 
 end
