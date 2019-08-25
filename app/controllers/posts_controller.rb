@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  def index
-  end
-
+  
+  before_action :authenticate_user!
+  
   def edit
     @post = Post.find(params[:id])
   end
