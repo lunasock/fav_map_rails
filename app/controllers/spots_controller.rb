@@ -1,5 +1,8 @@
 class SpotsController < ApplicationController
   
+  # 未ログインでもindex,searchは可能
+  before_action :authenticate_user!, only: [:create, :edit, :update, :show, :destroy]
+  
   def create
     @spot = Spot.new(spot_params)
     @spot.user_id = current_user.id
@@ -33,7 +36,7 @@ class SpotsController < ApplicationController
   def show
     @spot = Spot.find(params[:id])
     @post = Post.new
-    @posts = @spot.posts
+    @posts = @spot.posts.page(params[:page]).reverse_order.per(30)
   end
 
   def search
