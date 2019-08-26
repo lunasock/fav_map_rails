@@ -13,8 +13,12 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user)
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+    else
+      flash.now[:alert] = "ユーザーネームは8文字、自己紹介は44文字までです"
+      render :edit
+    end
   end
 
   def check

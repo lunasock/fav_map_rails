@@ -12,4 +12,7 @@ class User < ApplicationRecord
   has_many :spots, dependent: :delete_all
   has_many :posts, dependent: :delete_all
 
+  validates :user_name, length: { maximum: 8 }
+  validates :user_body, length: { maximum: 44 }
+
 end

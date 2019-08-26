@@ -8,16 +8,27 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update(post_params)
-    redirect_to spot_path(@post.spot_id)
+    if @post.update(post_params)
+      redirect_to spot_path(@post.spot_id)
+    else
+      flash.now[:alert] = "口コミは100文字以内でお願いします"
+      render :edit
+    end
   end
 
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     @post.spot_id = params[:id]
-    @post.save!
-    redirect_to spot_path(@post.spot_id)
+    if @post.save
+      redirect_to spot_path(@post.spot_id)
+    else
+      @spot = Spot.find(params[:id])
+      @post = Post.new
+      @posts = @spot.posts.page(params[:page]).reverse_order.per(30)
+      flash.now[:alert] = "口コミは100文字以内でお願いします"
+      render 'spots/show'
+    end
   end
 
   def destroy

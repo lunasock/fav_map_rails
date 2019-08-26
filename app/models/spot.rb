@@ -10,4 +10,11 @@ class Spot < ApplicationRecord
   has_many :posts, dependent: :delete_all
   belongs_to :user
 
+  validates :spot_name, presence: true, length: { maximum: 16 }
+  validates :category, presence: true
+  validates :address, presence: true
+  validates :latitude, presence: true
+  validates :longitude, presence: true
+  validates :spot_body, length: { maximum: 100 }
+
 end
