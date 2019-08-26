@@ -136,14 +136,14 @@ footer{
 
 #move-geolocation {
   position: absolute;
-  top: 40px;
+  top: 80px;
   left: 10px;
   z-index: 1;
 }
 
 .livehouse-search{
   position: absolute;
-  top: 70px;
+  top: 50px;
   left: 10px;
   z-index: 1;
 }
@@ -280,4 +280,11 @@ footer{
     margin-bottom: 10px;
   }
   
+  #move-geolocation {
+    top :120px;
+  }
+
+  .livehouse-search {
+    top: 65px;
+  }
 }
