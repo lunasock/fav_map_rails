@@ -74,17 +74,4 @@ gem 'pry-byebug', group: :development
 
 gem 'kaminari','~> 1.1.1'
 
-gem 'geocoder'
-gem 'gmaps4rails'
-gem 'geokit'
-
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
-gem "omniauth-rails_csrf_protection"
-
-gem 'rubocop', '~> 0.74.0', require: false
-
 gem 'paranoia'
-
-gem 'dotenv-rails'
