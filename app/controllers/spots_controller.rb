@@ -6,8 +6,22 @@ class SpotsController < ApplicationController
   def create
     @spot = Spot.new(spot_params)
     @spot.user_id = current_user.id
-    @spot.save
-    redirect_to spot_path(@spot)
+    if @spot.save
+      redirect_to spot_path(@spot)
+    else
+      @search = Spot.where(category: 0)
+      @spot = Spot.new
+      @array_spots= []
+      @spots = Spot.all
+      @ramens = Spot.where(category: 1)
+      @beers = Spot.where(category: 2)
+      @coffees = Spot.where(category: 3)
+      @parkings = Spot.where(category: 4)
+      @places = Spot.where(category: 5)
+      @livehouses = Spot.where(category: 0)
+      flash.now[:alert] = "場所の名前が未入力、もしくは住所、カテゴリが未選択です"
+      render :index
+    end
   end
 
   def edit
@@ -16,8 +30,12 @@ class SpotsController < ApplicationController
 
   def update
     @spot = Spot.find(params[:id])
-    @spot.update(spot_params)
-    redirect_to spot_path(@spot)
+    if @spot.update(spot_params)
+      redirect_to spot_path(@spot)
+    else
+      flash.now[:alert] = "場所の名前が未入力です"
+      render :edit
+    end
   end
 
   def index

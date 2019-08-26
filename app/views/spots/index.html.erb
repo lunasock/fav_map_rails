@@ -1,3 +1,8 @@
+<% if flash[:alert] %>
+  <div class="alert alert-warning" role="alert">
+    <p><%= flash[:alert] %></p>
+  </div>
+<% end %>
 <div class="main">
   <div class="container">
     <div id="map-point">

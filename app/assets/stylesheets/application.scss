@@ -32,6 +32,10 @@
     color: white;
   }
 
+  .welcom {
+    font-size: 16px;
+  }
+
 // フッター固定
 // https://webkikaku.co.jp/blog/htmlcss/footer-bottom/
 .wrapper{
@@ -69,6 +73,16 @@ footer{
   text-align: center;
   display: block;
   margin-top: 40px;
+}
+
+// エラーメッセージ
+.alert-warning {
+  margin-top: -20px;
+}
+
+.btn-primary {
+  background-color: #292929;
+  border-color: #292929;
 }
 
 #map-point {
@@ -221,6 +235,8 @@ footer{
   
   .navbar-brand {
     font-size: 15px;
+    padding-top: 20px;
+    margin-top: -30px;
   }
 
   a {
@@ -229,6 +245,10 @@ footer{
   
   p {
     font-size: 70%;
+  }
+
+  .welcom {
+    font-size: 11px;
   }
 
   .fa-twitter {
