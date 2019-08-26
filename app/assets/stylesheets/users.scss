@@ -32,9 +32,15 @@
   left: 25px;
 }
 
-.under-line-mini {
+.under-line-mini1 {
   border-bottom: 1px solid #c0c0c0;
   margin: 70px 0;
+}
+
+.under-line-mini2 {
+  border-bottom: 1px solid #c0c0c0;
+  margin-top: 70px;
+  margin-bottom: 50px;
 }
 
 .user-name {
@@ -114,4 +120,7 @@
     margin: 0 0 10px 70px;
   }
 
+  .user-edit-btn {
+    margin-bottom: 20px;
+  }
 }

@@ -16,9 +16,9 @@
           <%= @spot.address %><br>
           <%= @spot.spot_body %><br><br>
           <% if @spot.user.id == current_user.id %>
-            <%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary" %>
+            <%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary user-edit-btn" %>
           <% elsif admin_signed_in? %>
-            <%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary" %>
+            <%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary user-edit-btn" %>
           <% end %>
         </p>
         <!-- <%= link_to '戻る', root_path, class:"btn btn-default" %> -->
@@ -26,10 +26,10 @@
     </div> 
     <!-- 口コミ投稿フォーム -->
     <div class="post-form">
-      <div class="under-line-mini">
+      <div class="under-line-mini1">
       </div>
       <%= render 'posts/new', post: @post, id: params[:id] %>
-      <div class="under-line-mini">
+      <div class="under-line-mini2">
       </div>
     </div>
     <!-- 口コミ一覧 -->
@@ -51,9 +51,9 @@
             <%= post.review_body %>
           </div>
           <% if post.user.id == current_user.id %>
-            <%= link_to '編集', posts_edit_path(post), class:"btn btn-primary btn-xs" %>
+            <%= link_to '編集', posts_edit_path(post), class:"btn btn-primary btn-xs post-edit-btn" %>
           <% elsif admin_signed_in? %>
-            <%= link_to '編集', posts_edit_path(post), class:"btn btn-primary btn-xs" %>
+            <%= link_to '編集', posts_edit_path(post), class:"btn btn-primary btn-xs post-edit-btn" %>
           <% end %>
         </div>
       <% end %>
