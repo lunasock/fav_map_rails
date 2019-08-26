@@ -7,7 +7,6 @@
   <div class="container">
     <div id="map-point">
     <div class="forms">
-      <input type="button" id ="move-geolocation" class="btn btn-primary btn-xs" value="現在地情報取得" onclick="moveGeolocation()">
       <input id="address" type="textbox" placeholder="住所を入力">
       <input type="button" id ="search-btn" class="btn btn-primary btn-xs" value="検索" onclick="codeAddress()">
       <%# ライブハウス検索フォーム %>
@@ -17,6 +16,7 @@
           <%= f.submit 'ライブハウスを表示', id:"livehouse-search-btn", class:"btn btn-primary btn-xs" %>
         <% end %>
       </div>
+      <input type="image" src="/images/geolocation3.png" onclick="moveGeolocation()" id ="move-geolocation" >
     </div>  
     <div id='map'></div>
     </div>
