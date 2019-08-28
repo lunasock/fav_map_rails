@@ -15,4 +15,6 @@ class User < ApplicationRecord
   validates :user_name, length: { maximum: 8 }
   validates :user_body, length: { maximum: 44 }
 
+  validates :accepted, presence: {message: 'を入力してください'}
+
 end

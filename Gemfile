@@ -80,3 +80,6 @@ gem 'pry-byebug', group: :development
 gem 'kaminari','~> 1.1.1'
 
 gem 'paranoia'
+
+gem 'devise-i18n'
+gem 'devise-i18n-views'
