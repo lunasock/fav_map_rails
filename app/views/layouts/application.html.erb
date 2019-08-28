@@ -50,7 +50,7 @@
                     <li class="nav-list-item"><%= link_to 'マイページ', user_path(current_user), id:"color"; %>
                     <li class="nav-list-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, id:"color"; %></li>
                   <% else %>
-                    <li class="nav-list-item"><%= link_to 'BandBundについて', root_path, id:"color"; %></li>
+                    <li class="nav-list-item"><%= link_to 'BandBundについて', about_path, id:"color"; %></li>
                     <li class="nav-list-item"><%= link_to 'ログイン', new_user_session_path, id:"color"; %></li>
                     <li class="nav-list-item"><%= link_to '新規登録', new_user_registration_path, id:"color"; %></li>
                   <% end %>
@@ -87,11 +87,11 @@
                 </div>
                 <div class="footer-top-right col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
                   <ul class="nav-list">
-                    <li class="nav-list-item footer-detail"><%= link_to 'よくある質問', root_path %>
-                    <li class="nav-list-item footer-detail"><%= link_to 'BandBundについて', root_path %></li>
-                    <li class="nav-list-item footer-detail"><%= link_to '利用規約', root_path %></li>
-                    <li class="nav-list-item footer-detail"><%= link_to 'プライバシーポリシー', root_path %></li>
-                    <li class="nav-list-item footer-detail"><%= link_to '特定商取引法に基づく表記', root_path %></li>
+                    <li class="nav-list-item footer-detail"><%= link_to 'よくある質問', question_path %>
+                    <li class="nav-list-item footer-detail"><%= link_to 'BandBundについて', about_path %></li>
+                    <li class="nav-list-item footer-detail"><%= link_to '利用規約', terms_path %></li>
+                    <li class="nav-list-item footer-detail"><%= link_to 'プライバシーポリシー', privacy_path %></li>
+                    <!-- <li class="nav-list-item footer-detail"><%= link_to '特定商取引法に基づく表記', root_path %></li> -->
                   </ul>
                 </div>
               </div>

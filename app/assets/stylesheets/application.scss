@@ -51,7 +51,20 @@ footer{
   margin-bottom: -10px;
 }
 
+// 利用規約、サービスポリシー
+.inside {
+  margin: 50px 0;
+}
+
 // ログイン、新規登録
+.field_with_errors {
+  display: inline-block;
+}
+
+.check-inside {
+  display: inline-block;
+}
+
 #user_email {
   width: 200px;
 }
@@ -67,6 +80,18 @@ footer{
 .devise-field {
   text-align: center;
 }
+
+// deviseのエラーメッセージ
+#error_explanation h2 {
+  font-size: 20px;
+}
+
+#error_explanation ul {
+  list-style: none;
+  fint-size: 80%;
+}
+
+
 
 // ページネーション
 .pagination {
@@ -198,6 +223,7 @@ footer{
 
 .footer-top-right {
   margin-bottom: 10px;
+  line-height: 25px;
 }
 
 .footer-bottom {

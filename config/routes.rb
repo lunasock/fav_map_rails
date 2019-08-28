@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   }
 
   root 'spots#index'
+  get '/about' => 'others#about', as: 'about'
+  get '/terms' => 'others#terms', as: 'terms'
+  get '/privacy' => 'others#privacy', as: 'privacy'
+  get '/question' => 'others#question', as: 'question'
   get '/search', to: 'spots#search', as: 'map_search'
   resources :spots, only: [:create, :edit, :update, :index, :show, :destroy]
   post 'spots/:id/posts' => 'posts#create', as: 'posts_create'
