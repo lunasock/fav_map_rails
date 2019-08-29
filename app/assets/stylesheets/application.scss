@@ -219,11 +219,12 @@ footer{
 
 .footer-detail {
   margin-bottom: 5px;
+  font-size: 70%
 }
 
 .footer-top-right {
   margin-bottom: 10px;
-  line-height: 25px;
+  line-height: 22px;
 }
 
 .footer-bottom {
@@ -264,10 +265,6 @@ footer{
     padding-top: 55px;
   }
 
-  a {
-    font-size: 70%;
-  }
-  
   p {
     font-size: 70%;
   }
@@ -307,7 +304,26 @@ footer{
   }
   
   #move-geolocation {
-    top :105px;
+    top: 100px;
   }
 
+  .check-inside {
+    font-size: 90%;
+  }
+
+  .nav-mobile {
+    font-size: 70%
+  }
+
+  .devise-field {
+    font-size: 70%;
+  }
+
+  .devise-field h2 {
+    font-size: 20px;
+  }
+
+  .btn {
+    font-size: 70%;
+  }
 }
