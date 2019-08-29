@@ -1,7 +1,6 @@
 # BandBund
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+BandBundはバンドマンの総力を結集し、ライブハウス近隣を可視化するマップアプリです。
 
 Things you may want to cover:
 
