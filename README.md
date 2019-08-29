@@ -8,7 +8,7 @@ BandBundはバンドマンの総力を結集し、ライブハウス近隣を可
 **画面右上の住所検索か、マップをタップするとピンが表示されます**
 <img width="1280" alt="pic1" src="https://user-images.githubusercontent.com/50476037/63927571-efdb4b00-ca88-11e9-8e76-c8d701ce6498.png">
 
-**場所の名前と説明を入力してカテゴリーを選択しましょう。**
+**場所の名前と説明を入力してカテゴリーを選択しましょう。**  
 **あとは写真を添付して登録を押すだけ！**
 <img width="1201" alt="pic2" src="https://user-images.githubusercontent.com/50476037/63928452-878d6900-ca8a-11e9-815f-d80960076ce3.png">
 
