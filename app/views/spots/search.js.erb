@@ -3,7 +3,7 @@
   var livehouseSearchPos;
   var markerLivehouse2;
   var infoWindowLivehouse2;
-
+  
   // 情報ウィンドウを閉じる
   infoWindowRamen.forEach((value) => {
     value.close()
@@ -43,7 +43,19 @@
     }); 
     infoWindowLivehouse.push(infoWindowLivehouse2);
     
-    markerLivehouse2.addListener('click', function(){
+　　markerLivehouse2.addListener('click', function () {
+      
+      // 入力フォームを初期化
+      $('#lat').val(null);
+      $('#lng').val(null);
+      $('#address_field').val(null);
+      $('#address-area').html("<br>");
+
+      // マーカーを削除
+      if(marker){
+      marker.setMap(null);
+      }  
+      
       // 配列をまわし、全てのウィンドウ閉じる
       infoWindowRamen.forEach((value) => {
         value.close()
