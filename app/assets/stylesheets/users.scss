@@ -62,7 +62,7 @@
 .user-edit {
   position: absolute;
   top: 370px;
-  left: 23px;
+  left: 22px;
 }
 
 .user-edit-form {
@@ -102,6 +102,10 @@
   
   #user_user_body {
     width: 290px;
+  }
+
+  .user-edit {
+    left: 28px;
   }
 
   .user-name {
