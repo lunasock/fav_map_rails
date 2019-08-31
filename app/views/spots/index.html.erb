@@ -32,8 +32,10 @@
         <!-- 経度 -->
         <%= f.hidden_field :longitude, id: :lng %>
         <h4>場所の名前</h4>
+        <h6>※16文字まで</h6>
         <%= f.text_field :spot_name %>
         <h4>場所の説明</h4>
+        <h6>※100文字まで</h6>
         <%= f.text_area :spot_body, size: "8x8" %>
         <h4>カテゴリー</h4>
         <%= f.select(:category, {ライブハウス: 'ライブハウス', ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
