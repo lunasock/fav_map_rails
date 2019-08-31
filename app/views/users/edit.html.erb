@@ -8,8 +8,10 @@
     <div class="user-edit-form">
       <%= form_for(@user) do |f| %>
       <p>ユーザーネーム</p>
+      <p>※8文字まで</p>
       <%= f.text_field :user_name %><br>
       <br><p>自己紹介</p>
+      <p>※40文字まで</p>
       <%= f.text_area :user_body, size: "8x8" %><br>
       <br><p>アイコン</p>
       <%= f.attachment_field :icon_image %>

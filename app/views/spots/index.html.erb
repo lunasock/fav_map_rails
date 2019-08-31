@@ -32,8 +32,10 @@
         <!-- 経度 -->
         <%= f.hidden_field :longitude, id: :lng %>
         <h4>場所の名前</h4>
+        <h6>※16文字まで</h6>
         <%= f.text_field :spot_name %>
         <h4>場所の説明</h4>
+        <h6>※100文字まで</h6>
         <%= f.text_area :spot_body, size: "8x8" %>
         <h4>カテゴリー</h4>
         <%= f.select(:category, {ライブハウス: 'ライブハウス', ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
@@ -47,6 +49,7 @@
 
 <script>
 
+  var count = 0;
   var map;
   function initMap(){
   
@@ -129,13 +132,41 @@
     // 変数に配列を格納
     <% @livehouses.each_with_index do |livehouse,index| %>
       markerLivehouse[<%= index %>] = new google.maps.Marker({
-      map: map,
-      icon: livehouse_image,
-      position: new google.maps.LatLng(
-        <%= livehouse.latitude %>, //latitude
-        <%= livehouse.longitude %>  //longitude
-      )
+        map: map,
+        icon: livehouse_image,
+        position: new google.maps.LatLng(
+          <%= livehouse.latitude %>, //latitude
+          <%= livehouse.longitude %>  //longitude
+        )
       });
+
+
+      $(this).click(function(){
+          count +=1;
+          if(count == 2){
+            // 配列をまわし、全てのウィンドウ閉じる
+            infoWindowRamen.forEach((value) => {
+              value.close()
+            });
+            infoWindowBeer.forEach((value2) => {
+              value2.close()
+            });
+            infoWindowCoffee.forEach((value3) => {
+              value3.close()
+            });
+            infoWindowParking.forEach((value4) => {
+              value4.close()
+            });
+            infoWindowPlace.forEach((value5) => {
+              value5.close()
+            });
+            infoWindowLivehouse.forEach((value6) => {
+              value6.close()
+            });
+          }
+        })
+
+
 
       contentStringLivehouse = '<div class="infoWindow-text"><%= link_to livehouse.spot_name, spot_path(livehouse) %></div>' + '<%= link_to spot_path(livehouse) do %><%= attachment_image_tag livehouse, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
 

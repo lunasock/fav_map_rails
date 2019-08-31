@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to user_path(@user)
     else
-      flash.now[:alert] = "ユーザーネームは8文字、自己紹介は44文字までです"
+      flash.now[:alert] = "ユーザーネームは8文字、自己紹介は40文字までです"
       render :edit
     end
   end

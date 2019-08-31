@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :delete_all
 
   validates :user_name, length: { maximum: 8 }
-  validates :user_body, length: { maximum: 44 }
+  validates :user_body, length: { maximum: 40 }
 
   validates :accepted, presence: {message: 'を入力してください'}
 
