@@ -1,88 +1,91 @@
 // ライブハウス検索
-(function () {
+(function(){
   var livehouseSearchPos;
   var markerLivehouse2;
   var infoWindowLivehouse2;
   
   // 情報ウィンドウを閉じる
   infoWindowRamen.forEach((value) => {
-    value.close()
+    value.close();
   });
   infoWindowBeer.forEach((value2) => {
-    value2.close()
+    value2.close();
   });
   infoWindowCoffee.forEach((value3) => {
-    value3.close()
+    value3.close();
   });
   infoWindowParking.forEach((value4) => {
-    value4.close()
+    value4.close();
   });
   infoWindowPlace.forEach((value5) => {
-    value5.close()
+    value5.close();
   });
   infoWindowLivehouse.forEach((value6) => {
-    value6.close()
+    value6.close();
   });
 
-    markerLivehouse2 = new google.maps.Marker({
+  markerLivehouse2 = new google.maps.Marker({
     map: map,
     icon: livehouse_image,
     position: new google.maps.LatLng(
-      <%= @spot.latitude %>, //latitude
-      <%= @spot.longitude %>  //longitude
+      <%= @spot.latitude %>, 
+      <%= @spot.longitude %>
     )
-    });
-    markerLivehouse.push(markerLivehouse2);
+  });
     
-    contentStringLivehouse = '<div class="infoWindow-text"><%= link_to @spot.spot_name, spot_path(@spot) %></div>' + '<%= link_to spot_path(@spot) do %><%= attachment_image_tag @spot, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+  // 新たに作成したライブハウスマーカーを配列に追加
+  markerLivehouse.push(markerLivehouse2);
+  
+  contentStringLivehouse = '<div class="infoWindow-text"><%= link_to @spot.spot_name, spot_path(@spot) %></div>' + '<%= link_to spot_path(@spot) do %><%= attachment_image_tag @spot, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>';
 
-    infoWindowLivehouse2 = new google.maps.InfoWindow({
-    // ウィンドウを表示させる
-    noSuppress:true,
-    content: contentStringLivehouse
-    }); 
-    infoWindowLivehouse.push(infoWindowLivehouse2);
+  infoWindowLivehouse2 = new google.maps.InfoWindow({
+  // ウィンドウを表示させる
+  noSuppress:true,
+  content: contentStringLivehouse
+  }); 
+
+  // 新たに作成したライブハウス情報ウィンドウを配列に追加
+  infoWindowLivehouse.push(infoWindowLivehouse2);
     
-　　markerLivehouse2.addListener('click', function () {
-      
-      // 入力フォームを初期化
-      $('#lat').val(null);
-      $('#lng').val(null);
-      $('#address_field').val(null);
-      $('#address-area').html("<br>");
+  markerLivehouse2.addListener('click', function () {
+    // 住所の入力フォームを初期化
+    $('#lat').val(null);
+    $('#lng').val(null);
+    $('#address_field').val(null);
+    $('#address-area').html("<br>");
 
-      // マーカーを削除
-      if(marker){
+    // マーカーを削除
+    if (marker) {
       marker.setMap(null);
-      }  
+    };
       
-      // 配列をまわし、全てのウィンドウ閉じる
-      infoWindowRamen.forEach((value) => {
-        value.close()
-      });
-      infoWindowBeer.forEach((value2) => {
-        value2.close()
-      });
-      infoWindowCoffee.forEach((value3) => {
-        value3.close()
-      });
-      infoWindowParking.forEach((value4) => {
-        value4.close()
-      });
-      infoWindowPlace.forEach((value5) => {
-        value5.close()
-      });
-      infoWindowLivehouse.forEach((value6) => {
-        value6.close()
-      });
-      // 全てのウィンドウを閉じてからopen
-      infoWindowLivehouse2.open(map, markerLivehouse2)
-    })
+    // 配列をまわし、全てのウィンドウ閉じる
+    infoWindowRamen.forEach((value) => {
+      value.close();
+    });
+    infoWindowBeer.forEach((value2) => {
+      value2.close();
+    });
+    infoWindowCoffee.forEach((value3) => {
+      value3.close();
+    });
+    infoWindowParking.forEach((value4) => {
+      value4.close();
+    });
+    infoWindowPlace.forEach((value5) => {
+      value5.close();
+    });
+    infoWindowLivehouse.forEach((value6) => {
+      value6.close();
+    });
+    // 全てのウィンドウを閉じてからopen
+    infoWindowLivehouse2.open(map, markerLivehouse2);
+  });
 
-  livehouseSearchPos = new google.maps.LatLng(<%= @spot.latitude %>, <%= @spot.longitude %>)
-
+  // マップの中央をライブハウスの緯度経度に合わせる
+  livehouseSearchPos = new google.maps.LatLng(<%= @spot.latitude %>, <%= @spot.longitude %>);
   map.setCenter(livehouseSearchPos);
      
-  infoWindowLivehouse2.open(map, markerLivehouse2)
+  infoWindowLivehouse2.open(map, markerLivehouse2);
 
-})()
+})();
