@@ -124,41 +124,12 @@
     getGeolocation();
     setInterval(getGeolocation, 500);   
   };
-var count = 0;
+
   var markerLivehouse = [];
   var infoWindowLivehouse = [];
   var contentStringLivehouse;
   var livehouse_image = "/images/livehouse.png";
   function livehouse(){
-
-
-
-    $(this).click(function(){
-        console.log(this)
-  count +=1;
-  if(count == 2){
-    // 配列をまわし、全てのウィンドウ閉じる
-    infoWindowRamen.forEach((value) => {
-      value.close()
-    });
-    infoWindowBeer.forEach((value2) => {
-      value2.close()
-    });
-    infoWindowCoffee.forEach((value3) => {
-      value3.close()
-    });
-    infoWindowParking.forEach((value4) => {
-      value4.close()
-    });
-    infoWindowPlace.forEach((value5) => {
-      value5.close()
-    });
-    infoWindowLivehouse.forEach((value6) => {
-      value6.close()
-    });
-    count = 0;
-  }
-})
     // ライブハウス
     // each_with_indexを使うと、0,1,2~と付与される
     // 変数に配列を格納
@@ -167,12 +138,12 @@ var count = 0;
       map: map,
       icon: livehouse_image,
       position: new google.maps.LatLng(
-        <%= livehouse.latitude %>, //latitude
-        <%= livehouse.longitude %>  //longitude
+        <%= livehouse.latitude %>,
+        <%= livehouse.longitude %>
       )
     });
 
-      contentStringLivehouse = '<div class="infoWindow-text"><%= link_to livehouse.spot_name, spot_path(livehouse) %></div>' + '<%= link_to spot_path(livehouse) do %><%= attachment_image_tag livehouse, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+      contentStringLivehouse = '<div class="infoWindow-text"><%= link_to livehouse.spot_name, spot_path(livehouse) %></div>' + '<%= link_to spot_path(livehouse) do %><%= attachment_image_tag livehouse, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>';
 
       infoWindowLivehouse[<%= index %>] = new google.maps.InfoWindow({
       // ウィンドウを表示させる
@@ -214,7 +185,6 @@ var count = 0;
         // 全てのウィンドウを閉じてからopen
         infoWindowLivehouse[<%= index %>].open(map, markerLivehouse[<%= index %>])
       })
-
     <% end %>
   }
   
