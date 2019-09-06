@@ -6,30 +6,33 @@
 <div class="main">
   <div class="container">
     <div id="map-point">
-    <div class="forms">
-      <input id="address" type="textbox" placeholder="住所を入力">
-      <input type="button" id ="search-btn" class="btn btn-primary btn-xs" value="検索" onclick="codeAddress()">
-      <%# ライブハウス検索フォーム %>
-      <div class="livehouse-search">
-        <%= form_with url: map_search_path, method: :get do |f| %>
-          <%= f.collection_select :id, @search, :id, :spot_name, :prompt => "ライブハウスを選択" %>
-          <%= f.submit 'ライブハウスを表示', id:"livehouse-search-btn", class:"btn btn-primary btn-xs" %>
-        <% end %>
-      </div>
-      <input type="image" src="/images/geolocation3.png" onclick="moveGeolocation()" id ="move-geolocation" >
-    </div>  
-    <div id='map'></div>
+      <div class="forms">
+        <!-- 住所検索フォーム -->
+        <input id="address" type="textbox" placeholder="住所を入力">
+        <input type="button" id ="search-btn" class="btn btn-primary btn-xs" value="検索" onclick="codeAddress()">
+        <!-- ライブハウス検索フォーム -->
+        <div class="livehouse-search">
+          <!-- search.js.erbを呼ぶ -->
+          <%= form_with url: map_search_path, method: :get do |f| %>
+            <%= f.collection_select :id, @search, :id, :spot_name, :prompt => "ライブハウスを選択" %>
+            <%= f.submit 'ライブハウスを表示', id:"livehouse-search-btn", class:"btn btn-primary btn-xs" %>
+          <% end %>
+        </div>
+        <!-- 現在地に移動するボタン -->
+        <input type="image" src="/images/geolocation3.png" onclick="moveGeolocation()" id ="move-geolocation" >
+      </div>  
+      <div id='map'></div>
     </div>
     <div class="spot-form">
       <%= form_for(@spot) do |f| %>
         <h4>住所</h4>
         <div id="address-area"><br>
         </div>
-        <!-- 住所 -->
+        <!-- 非表示の住所 -->
         <%= f.hidden_field :address, id: :address_field %>
-        <!-- 緯度 -->
+        <!-- 非表示の緯度 -->
         <%= f.hidden_field :latitude, id: :lat %>
-        <!-- 経度 -->
+        <!-- 非表示の経度 -->
         <%= f.hidden_field :longitude, id: :lng %>
         <h4>場所の名前</h4>
         <h6>※16文字まで</h6>
@@ -51,7 +54,6 @@
 
   var map;
   function initMap(){
-  
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 35.6628611, lng: 139.6972762},
       zoom: 16,
@@ -59,6 +61,7 @@
       streetViewControl: false,
       fullscreenControl: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
+      // JSONで地図をカスタマイズ
       styles: [
         {
           "featureType": "poi.business",
@@ -88,7 +91,7 @@
       ]
     });
 
-    // デフォルトの情報ウィンドウを非表示に
+    // GoogleMapデフォルトの情報ウィンドウを非表示に
     // 特定のウィンドウを表示させるには noSuppress = true をオプションで指定
     var set;
     (function fixInfoWindow() {
@@ -103,29 +106,59 @@
         }
     })();  
 
-    map.addListener('click', function(e) {
+    // eはイベントオブジェクト
+    // e.latLngでクリック地点の緯度経度
+    map.addListener('click', function(e){
       // クリック地点にピンを描画
       getClickLatLng(e.latLng, map);
       // 逆ジオコーディング
       reverse(e.latLng);
     });
 
-    ramen()
-    beer()
-    coffee()
-    livehouse()
-    parking()
-    place()
-    getGeolocation()
-    setInterval(getGeolocation, 500)
-       
-  }
-
+    ramen();
+    beer();
+    coffee();
+    livehouse();
+    parking();
+    place();
+    getGeolocation();
+    setInterval(getGeolocation, 500);   
+  };
+var count = 0;
   var markerLivehouse = [];
   var infoWindowLivehouse = [];
   var contentStringLivehouse;
   var livehouse_image = "/images/livehouse.png";
   function livehouse(){
+
+
+
+    $(this).click(function(){
+        console.log(this)
+  count +=1;
+  if(count == 2){
+    // 配列をまわし、全てのウィンドウ閉じる
+    infoWindowRamen.forEach((value) => {
+      value.close()
+    });
+    infoWindowBeer.forEach((value2) => {
+      value2.close()
+    });
+    infoWindowCoffee.forEach((value3) => {
+      value3.close()
+    });
+    infoWindowParking.forEach((value4) => {
+      value4.close()
+    });
+    infoWindowPlace.forEach((value5) => {
+      value5.close()
+    });
+    infoWindowLivehouse.forEach((value6) => {
+      value6.close()
+    });
+    count = 0;
+  }
+})
     // ライブハウス
     // each_with_indexを使うと、0,1,2~と付与される
     // 変数に配列を格納
@@ -137,7 +170,7 @@
         <%= livehouse.latitude %>, //latitude
         <%= livehouse.longitude %>  //longitude
       )
-      });
+    });
 
       contentStringLivehouse = '<div class="infoWindow-text"><%= link_to livehouse.spot_name, spot_path(livehouse) %></div>' + '<%= link_to spot_path(livehouse) do %><%= attachment_image_tag livehouse, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
 
@@ -181,6 +214,7 @@
         // 全てのウィンドウを閉じてからopen
         infoWindowLivehouse[<%= index %>].open(map, markerLivehouse[<%= index %>])
       })
+
     <% end %>
   }
   
