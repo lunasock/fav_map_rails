@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   
   before_action :authenticate_user!
+  before_action :correct_user, only: [:edit]
   
   def edit
     @post = Post.find(params[:id])
@@ -35,6 +36,14 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to spot_path(@post.spot_id)
+  end
+
+  def correct_user
+    post = Post.find(params[:id])
+    user = post.user
+    if current_user != user
+       redirect_to root_path
+    end
   end
 
   private
