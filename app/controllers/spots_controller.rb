@@ -2,6 +2,7 @@ class SpotsController < ApplicationController
   
   # 未ログインでもindex,searchは可能
   before_action :authenticate_user!, only: [:create, :edit, :update, :show, :destroy]
+  before_action :correct_user, only: [:edit]
   
   def create
     @spot = Spot.new(spot_params)
@@ -66,6 +67,14 @@ class SpotsController < ApplicationController
     @spot = Spot.find(params[:id])
     @spot.destroy
     redirect_to root_path
+  end
+
+  def correct_user
+    spot = Spot.find(params[:id])
+    user = spot.user
+    if current_user != user
+       redirect_to root_path
+    end
   end
   
   private
