@@ -131,23 +131,23 @@
     
     // 情報ウィンドウを閉じる
     infoWindowRamen.forEach((value) => {
-        value.close()
-      });
-      infoWindowBeer.forEach((value2) => {
-        value2.close()
-      });
-      infoWindowCoffee.forEach((value3) => {
-        value3.close()
-      });
-      infoWindowParking.forEach((value4) => {
-        value4.close()
-      });
-      infoWindowPlace.forEach((value5) => {
-        value5.close()
-      });
-      infoWindowLivehouse.forEach((value6) => {
-        value6.close()
-      });
+      value.close()
+    });
+    infoWindowBeer.forEach((value2) => {
+      value2.close()
+    });
+    infoWindowCoffee.forEach((value3) => {
+      value3.close()
+    });
+    infoWindowParking.forEach((value4) => {
+      value4.close()
+    });
+    infoWindowPlace.forEach((value5) => {
+      value5.close()
+    });
+    infoWindowLivehouse.forEach((value6) => {
+      value6.close()
+    });
     
     // 検索ボタンの押下時にピンを削除
     searchBtn = document.getElementById('search-btn');
@@ -157,6 +157,7 @@
       }
     });
 
+    // ライブハウス検索ボタン押下時にピンを削除し、住所の表示とhidden_fieldの緯度経度情報を削除
     livehouseBtn = document.getElementById("livehouse-search-btn")
     livehouseBtn.addEventListener('click', function(){
       if(marker){
@@ -249,7 +250,9 @@
   var nowCircle;
   var now_image = "/images/now5.png";
   function getGeolocation(){
+    // Geolocation API
     navigator.geolocation.getCurrentPosition(
+      // 取得した位置情報はposとして扱える
       function (pos) {
         if(nowMarker){
           console.log(0);
@@ -260,7 +263,7 @@
           nowCircle.setMap(null);
           nowCircle = null;
         }
-        var n  = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude)
+        var n  = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
         if(now == null){
           now = pos;
           moveGeolocation();
@@ -291,7 +294,7 @@
 
 // 現在地へ移動
 function moveGeolocation(){
-  map.setCenter(new google.maps.LatLng(now.coords.latitude,now.coords.longitude));
+  map.setCenter(new google.maps.LatLng(now.coords.latitude, now.coords.longitude));
 }
 
 // 逆ジオコーディング
