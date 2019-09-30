@@ -263,6 +263,7 @@
           nowCircle.setMap(null);
           nowCircle = null;
         }
+        // MarkerとCircleのpositionを指定できるように、取得した位置情報posの緯度経度をnに代入
         var n  = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
         if(now == null){
           now = pos;
@@ -293,6 +294,7 @@
   } 
 
 // 現在地へ移動
+// nowには取得した位置情報posが入っている
 function moveGeolocation(){
   map.setCenter(new google.maps.LatLng(now.coords.latitude, now.coords.longitude));
 }
