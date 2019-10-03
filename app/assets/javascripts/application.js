@@ -18,7 +18,7 @@
 //= require bootstrap-sprockets
 
   $(window).scroll(function(){
-    $('.fadein').each(function () {
+    $('.fadein').each(function(){
       // scrollTop()でスクロールした時の位置(スクロール量)を取得
       var scroll = $(window).scrollTop();
       // offset().topでHTML要素が配置されているY座標を取得
