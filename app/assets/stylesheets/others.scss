@@ -1,3 +1,17 @@
+.fadein {
+  opacity : 0;
+  // 50px下方から0pxまで移動
+  transform : translate(0, 50px);
+  // 時間的変化
+  transition:all 0.5s;
+}
+
+.scrollin {
+  opacity : 1;
+  // 50px下方から0pxまで移動
+  transform : translate(0, 0);
+}
+
 .question-main {
   font-size: 30px;
   margin-bottom: 30px;
