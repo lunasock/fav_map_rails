@@ -1,42 +1,62 @@
-#waves {
-  width: 100%;
+.waves {
+  margin-top: -20px;
   height: 300px;
+  border-radius: 5px;
+  box-shadow: 0 2px 30px rgba(black, .2);
   position: relative;
   overflow: hidden;
 }
 
 .wave {
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x;
+  opacity: .2;
   position: absolute;
-  bottom: 0;
-  width: 6400px;
-  height: 200px;
-  animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
-  transform: translate3d(0, 0, 0);
-  opacity: 0.2;
+  top: 3%;
+  left: 50%;
+  background: #0af;
+  width: 500px;
+  height: 500px;
+  margin-left: -250px;
+  margin-top: -250px;
+  // 要素の変形transformにおける原点
+  transform-origin: 50% 48%;
+  border-radius: 43%;
+  // linearで一定
+  animation: spin 3000ms infinite linear;
 }
 
-.wave:nth-of-type(2) {
-  animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;
-  opacity: 0.1;
+.wave.-two {
+  animation: spin 7000ms infinite linear;
+  opacity: .1;
+  background: yellow;
 }
 
-@keyframes wave {
-  0% {
-    margin-left: 0;
-  }
-  100% {
-    margin-left: -1600px;
-  }
+.wave.-three {
+  animation: spin 5000ms infinite linear;
 }
 
-@keyframes swell {
-  0%, 100% {
-    transform: translate3d(0,-25px,0);
-  }
-  50% {
-    transform: translate3d(0,5px,0);
-  }
+// アニメーション名を揃える。今回ならspin
+@keyframes spin {
+  // 要素を回転表示する
+  // fromはアニメーションの始まり、toはアニメーションの終わり
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+}
+
+.about-main {
+  font-size: 30px;
+  margin-top: 70px;
+  text-align: center;
+  z-index: 1;
+  position: relative;
+}
+
+.about-body {
+  font-size: 20px;
+  margin-top: 40px;
+  margin-bottom: 100px;
+  text-align: center;
+  z-index: 1;
+  position: relative;
 }
 
 // aboutページのアニメーション
@@ -62,20 +82,6 @@
 .about-inside {
   text-align: center;
   margin: 0 auto;
-  overflow: hidden;
-}
-
-.about-main {
-  font-size: 30px;
-  margin-top: 70px;
-  text-align: center;
-}
-
-.about-body {
-  font-size: 20px;
-  margin-top: 40px;
-  margin-bottom: 100px;
-  text-align: center;
 }
 
 .about-under-line {
