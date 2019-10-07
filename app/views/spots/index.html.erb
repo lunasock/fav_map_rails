@@ -97,18 +97,19 @@
 
     // GoogleMapデフォルトの情報ウィンドウを非表示に
     // 特定のウィンドウを表示させるには noSuppress = true をオプションで指定
-    var set;
-    (function fixInfoWindow() {
-        set = google.maps.InfoWindow.prototype.set;
-        google.maps.InfoWindow.prototype.set = function(key, val) {
-            if (key === "map") {
-                if (! this.get("noSuppress")) {
-                    return;
-                }
-            }
-            set.apply(this, arguments);
+    // 一度しか呼び出さないため即時関数
+    (function() {
+      var set;
+      set = google.maps.InfoWindow.prototype.set;
+      google.maps.InfoWindow.prototype.set = function(key, val) {
+        if (key === "map") {
+          if (! this.get("noSuppress")) {
+            return;
+          }
         }
-    })();  
+        set.apply(this, arguments);
+      }
+    })();
 
     // eはイベントオブジェクト
     // e.latLngでクリック地点の緯度経度
