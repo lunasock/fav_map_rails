@@ -38,6 +38,7 @@
 @keyframes spin {
   // 要素を回転表示する
   // fromはアニメーションの始まり、toはアニメーションの終わり
+  // 右回りの回転をさせるにはtransform: rotateで0degから360degを指定
   from { transform: rotate(0deg); }
   from { transform: rotate(360deg); }
 }

@@ -13,6 +13,7 @@
         <!-- ライブハウス検索フォーム -->
         <div class="livehouse-search">
           <!-- search.js.erbを呼ぶ -->
+          <!-- プルダウンで選択したライブハウスのidをコントローラーに渡す -->
           <%= form_with url: map_search_path, method: :get do |f| %>
             <%= f.collection_select :id, @search, :id, :spot_name, :prompt => "ライブハウスを選択" %>
             <%= f.submit 'ライブハウスを表示', id:"livehouse-search-btn", class:"btn btn-primary btn-xs" %>

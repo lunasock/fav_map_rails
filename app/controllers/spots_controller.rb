@@ -59,8 +59,8 @@ class SpotsController < ApplicationController
   end
 
   def search
+    # プルダウンで選択されたライブハウスのidから、該当のSpotをsearch.js.erbに渡す
     @spot = Spot.find(params[:id])
-    @livehouses = Spot.where(category: 0)
   end
 
   def destroy
