@@ -52,7 +52,7 @@
 </div>
 <script>
   // Mapクラス：マップを描画：new google.maps.Map
-  // Geocoderクラス：住所から緯度経度を取得：new google.maps.Geocoder
+  // Geocoderクラス：.geocodeで住所=>緯度経度, 緯度経度=>住所を取得：new google.maps.Geocoder
   // LatLngクラス：緯度経度のインスタンスを作成：new google.maps.LatLng
   // Makerクラス：マーカーを描画：new google.maps.Marker
   // Circleクラス：円を描画：new google.maps.Circle
@@ -114,6 +114,7 @@
 
     // eはイベントオブジェクト
     // e.latLngでクリック地点の緯度経度
+    // マップクリック時にgetClickLatLngで緯度経度の取得、reverseで緯度経度から住所を表示する
     map.addListener('click', function(e){
       // クリック地点にピンを描画
       getClickLatLng(e.latLng, map);
@@ -183,6 +184,7 @@
     }
     
     // 座標をフォームに表示
+    // 住所は逆ジオコーディングで表示
     $('#lat').val(lat_lng.lat());
     $('#lng').val(lat_lng.lng());
   
