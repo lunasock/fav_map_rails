@@ -5,6 +5,6 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :spot
 
-  validates :review_body, length: { maximum: 100 }
+  validates :review_body, presence: true, length: { maximum: 100 }
   
 end
