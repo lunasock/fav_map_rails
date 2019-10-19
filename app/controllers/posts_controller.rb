@@ -12,7 +12,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to spot_path(@post.spot_id)
     else
-      flash.now[:alert] = "口コミは100文字以内でお願いします"
+      flash.now[:alert] = "口コミは1文字〜100文字でお願いします"
       render :edit
     end
   end
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
       @spot = Spot.find(params[:id])
       @post = Post.new
       @posts = @spot.posts.page(params[:page]).reverse_order.per(30)
-      flash.now[:alert] = "口コミは100文字以内でお願いします"
+      flash.now[:alert] = "口コミは1文字〜100文字でお願いします"
       render 'spots/show'
     end
   end
