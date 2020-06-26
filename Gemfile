@@ -79,9 +79,9 @@ gem 'pry-byebug', group: :development
 
 gem 'kaminari','~> 1.1.1'
 
-# 論理削除
-gem 'paranoia'
-
 # deviseの日本語化
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+
+# 論理削除
+gem 'paranoia'
