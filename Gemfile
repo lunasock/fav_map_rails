@@ -77,11 +77,11 @@ gem 'jquery-rails'
 
 gem 'pry-byebug', group: :development
 
+gem 'kaminari','~> 1.1.1'
+
 # deviseの日本語化
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 
 # 論理削除
 gem 'paranoia'
-
-gem 'kaminari','~> 1.1.1'
