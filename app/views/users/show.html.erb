@@ -1,2 +1,49 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="main">    
+  <div class="backcover-image" style="background-image:url(<%= attachment_url(@user, :backcover_image, :fill, 1300, 400, format:"jpeg") %>)")">
+    <div class="backcover-image-content">
+    </div>
+    <div class="profile">
+      <div class="user-icon">
+        <%= attachment_image_tag @user, :icon_image, :fill, 100, 100, fallback: "/images/no_image.jpg", size: '100x100' %>
+      </div>
+      <div class="user-name">
+        <%= @user.user_name %>
+      </div>
+      <div class="user-body">
+        <%= @user.user_body %>
+      </div>
+      <% if @user.id == current_user.id %>
+        <div class="user-edit">
+          <%= link_to 'ユーザー情報編集', edit_user_path(@user), class:"btn btn-primary btn-xs"  %>
+        </div>
+      <% elsif admin_signed_in? %>
+        <div class="user-edit">
+          <%= link_to 'ユーザー情報編集', edit_user_path(@user), class:"btn btn-primary btn-xs"  %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div id="posts-box" class="posts-box col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6">
+          <%= link_to spot_path(post.spot) do %>
+            <div class="review-image">
+              <%= attachment_image_tag post, :review_image, :fill, 300, 300, format: 'jpeg', fallback: "/images/no_image.jpg", size: '300x300' %>
+            </div>
+            <div class="review-spot-name">
+              <%= post.spot.spot_name %>
+            </div>
+          <% end %>
+            <div class="review-spot-category">
+              <%= post.spot.category %>
+            </div>
+          <div class="review-body">
+            <%= post.review_body %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%= paginate @posts, class: "paginate" %>  
+  </div>
+</div>

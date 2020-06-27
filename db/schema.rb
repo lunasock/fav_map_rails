@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_081626) do
+ActiveRecord::Schema.define(version: 2019_08_28_151759) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,18 +29,6 @@ ActiveRecord::Schema.define(version: 2019_08_13_081626) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "livehouses", force: :cascade do |t|
-    t.string "livehouse_name"
-    t.string "address"
-    t.float "latitude"
-    t.float "longitude"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "category"
-    t.text "livehouse_image_id"
-    t.text "livehouse_body"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
     t.integer "spot_id"
@@ -55,8 +43,8 @@ ActiveRecord::Schema.define(version: 2019_08_13_081626) do
     t.string "spot_name"
     t.integer "category"
     t.string "address"
-    t.float "latitude"
-    t.float "longitude"
+    t.decimal "latitude", precision: 20, scale: 17
+    t.decimal "longitude", precision: 20, scale: 17
     t.text "spot_image_id"
     t.text "spot_body"
     t.datetime "created_at", null: false
@@ -83,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_08_13_081626) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "accepted", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

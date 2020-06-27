@@ -38,7 +38,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw] 
 end
 
 group :development do
@@ -56,6 +56,12 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem 'rspec-rails'
+  gem "factory_bot_rails"
+  gem 'rspec-parameterized'
+  gem 'faker'
+  gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -73,17 +79,9 @@ gem 'pry-byebug', group: :development
 
 gem 'kaminari','~> 1.1.1'
 
-gem 'geocoder'
-gem 'gmaps4rails'
-gem 'geokit'
-
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
-gem "omniauth-rails_csrf_protection"
-
-gem 'rubocop', '~> 0.74.0', require: false
-
+# 論理削除
 gem 'paranoia'
 
-gem 'dotenv-rails'
+# deviseの日本語化
+gem 'devise-i18n'
+gem 'devise-i18n-views'

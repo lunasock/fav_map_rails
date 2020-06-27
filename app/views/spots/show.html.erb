@@ -1,2 +1,63 @@
-<h1>Spots#show</h1>
-<p>Find me in app/views/spots/show.html.erb</p>
+<% if flash[:alert] %>
+  <div class="alert alert-warning" role="alert">
+    <p><%= flash[:alert] %></p>
+  </div>
+<% end %>
+<div class="main">
+  <div class="container">
+    <div class="row">
+      <div class="spot-image col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <p><%= attachment_image_tag @spot, :spot_image, :fill, 400, 400, format: 'jpeg', fallback: "/images/no_image.jpg" %></p>
+      </div>
+      <div class="spot-detail col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <p>
+          <%= @spot.spot_name %><br>
+          <%= @spot.category %><br>
+          <%= @spot.address %><br>
+          <%= @spot.spot_body %><br><br>
+          <% if @spot.user.id == current_user.id %>
+            <%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary user-edit-btn" %>
+          <% elsif admin_signed_in? %>
+            <%= link_to '編集', edit_spot_path(@spot), class:"btn btn-primary user-edit-btn" %>
+          <% end %>
+        </p>
+        <!-- <%= link_to '戻る', root_path, class:"btn btn-default" %> -->
+      </div>
+    </div> 
+    <!-- 口コミ投稿フォーム -->
+    <div class="post-form">
+      <div class="under-line-mini1">
+      </div>
+      <%= render 'posts/new', post: @post, id: params[:id] %>
+      <div class="under-line-mini2">
+      </div>
+    </div>
+    <!-- 口コミ一覧 -->
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div id="posts-box" class="posts-box col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-6">
+          <div class="review-image">
+            <%= attachment_image_tag post, :review_image, :fill, 300, 300, format: 'jpeg', fallback: "/images/no_image.jpg", size: '300x300' %>
+          </div>
+          <%= link_to user_path(post.user) do %>
+            <div class="review-user-icon">
+              <%= attachment_image_tag post.user, :icon_image, :fill, 50, 50, format: 'jpeg', fallback: "/images/no_image.jpg", size: '50x50' %>
+            </div>
+            <div class="review-user">
+              <%= post.user.user_name %>
+            </div>
+          <% end %>
+          <div class="review-body">
+            <%= post.review_body %>
+          </div>
+          <% if post.user.id == current_user.id %>
+            <%= link_to '編集', posts_edit_path(post), class:"btn btn-primary btn-xs post-edit-btn" %>
+          <% elsif admin_signed_in? %>
+            <%= link_to '編集', posts_edit_path(post), class:"btn btn-primary btn-xs post-edit-btn" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <%= paginate @posts, class: "paginate" %>  
+  </div>
+</div>

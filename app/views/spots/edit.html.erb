@@ -1,2 +1,23 @@
-<h1>Spots#edit</h1>
-<p>Find me in app/views/spots/edit.html.erb</p>
+<% if flash[:alert] %>
+  <div class="alert alert-warning" role="alert">
+    <p><%= flash[:alert] %></p>
+  </div>
+<% end %>
+<div class="main">
+  <div class="container">
+    <div class="edit-spot">
+      <%= form_for(@spot) do |f| %>
+        <h4>場所の名前</h4>
+        <%= f.text_field :spot_name %>
+        <h4>場所の説明</h4>
+        <%= f.text_area :spot_body, size: "8x8" %>
+        <h4>カテゴリー</h4>
+        <%= f.select(:category, {ライブハウス: 'ライブハウス', ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
+        <h4>場所の画像</h4>
+        <%= f.attachment_field :spot_image %>
+        <%= f.submit '登録', class: "btn btn-primary" %><br><br>
+        <%= link_to '削除', spot_path(@spot), method: :delete, "data-confirm" => "場所の投稿を本当に削除しますか？", class: "btn btn-danger" %>
+      <% end %>
+    </div>
+  </div>
+</div>

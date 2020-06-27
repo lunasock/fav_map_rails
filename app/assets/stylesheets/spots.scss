@@ -1,3 +1,125 @@
 // Place all the styles related to the spots controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.gm-style-iw {
+  text-align: center;
+}
+
+.spot-image {
+  position: relative;
+  height: 400px;
+  margin-top: 40px;
+}
+
+.spot-image p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform : translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.spot-detail {
+  position: relative;
+  height: 400px;
+  margin-top: 40px;
+}
+
+.spot-detail p {
+  position: absolute;
+  top: 50%;
+  -webkit-transform : translateY(-50%);
+  transform : translateY(-50%);
+}
+
+.icon_image {
+  border-radius: 50%;
+}
+
+.spot-form {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+#spot_spot_image {
+  margin: 20px auto;
+}
+
+#address_field {
+  width: 430px;
+}
+
+#spot_spot_name {
+  width: 430px;
+}
+
+#spot_spot_body {
+  width:430px;
+}
+
+#address-area {
+  height: 40px;
+}
+
+// 編集画面
+.edit-spot {
+  text-align: center;
+}
+
+@media screen and (max-width:991px) {    
+  .spot-detail {
+    position: relative;
+    height: 400px;
+    margin-top: 0px;
+  }
+  
+  .spot-detail p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform : translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    text-align: center;
+  }
+}
+
+@media screen and (max-width:499px) {   
+  #address_field {
+    width: 290px;
+  }
+  
+  #spot_spot_name {
+    width: 290px;
+  }
+  
+  #spot_spot_body {
+    width: 290px;
+  }
+
+  .spot-image {
+    margin-top: -15px;
+    height: 350px;
+  }
+
+  .spot-image p img {
+    height: 300px;
+    width: 300px;
+  }
+
+  .spot-detail {
+    height: 100px;
+    margin-bottom: 15px;
+    margin-top: 70px;
+  }
+
+  #posts-box {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  #spot_spot_image {
+    margin: 0 0 10px 70px;
+  }
+}

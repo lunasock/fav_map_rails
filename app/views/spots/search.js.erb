@@ -1,39 +1,92 @@
-/* 
-index.html.erbのscript内に
-google mapのインスタンス変数である、
-mapという変数があることに留意
-*/
-var marker;
-var pos;
-(function(){
-  map.addListener('click', function() {
-    if(marker){
-      marker.setMap(null);
-    }
-  });
-
-  if(marker){
-    marker.setMap(null);
-  }
-  // 位置情報をもつ変数posを用意
-  // @latlngにはaddressの緯度[0]経度[1]が代入されている
-  pos = new google.maps.LatLng(
-  <%= @latlng[0] %>, //latitude
-  <%= @latlng[1] %>  //longitude
-  );
+// ライブハウス検索
+// コントローラーから受け取った緯度経度に情報ウィンドウを再描画
+(function () {
+  var livehouseSearchPos;
+  var markerLivehouse2;
+  var infoWindowLivehouse2;
   
-  // Map.setCenter()はMapクラスのメソッドです。地図の位置座標をセットすると同時に、表示もその位置に変更されます。
-  map.setCenter(pos)
-    marker = new google.maps.Marker({
-    map: map,
-    position: pos,
+  // 情報ウィンドウを閉じる
+  infoWindowRamen.forEach((value) => {
+    value.close();
+  });
+  infoWindowBeer.forEach((value2) => {
+    value2.close();
+  });
+  infoWindowCoffee.forEach((value3) => {
+    value3.close();
+  });
+  infoWindowParking.forEach((value4) => {
+    value4.close();
+  });
+  infoWindowPlace.forEach((value5) => {
+    value5.close();
+  });
+  infoWindowLivehouse.forEach((value6) => {
+    value6.close();
   });
 
-  $('#lat').val(<%= @latlng[0] %>);
-  $('#lng').val(<%= @latlng[1] %>);
-  // erbは<% %>と一緒に””も剥ぐ
-  // ＃{}で変数展開。文字列内に変数の値を置くときに使われる
-  // ==はエスケープ回避。rawでも一緒
-  $('#address_field').val(<%== "'#{@address}'" %>);
+  markerLivehouse2 = new google.maps.Marker({
+    map: map,
+    icon: livehouse_image,
+    position: new google.maps.LatLng(
+      <%= @spot.latitude %>, 
+      <%= @spot.longitude %>
+    )
+  });
+    
+  // 新たに作成したライブハウスマーカーを配列に追加
+  markerLivehouse.push(markerLivehouse2);
+  
+  contentStringLivehouse = '<div class="infoWindow-text"><%= link_to @spot.spot_name, spot_path(@spot) %></div>' + '<%= link_to spot_path(@spot) do %><%= attachment_image_tag @spot, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>';
 
-})()
+  infoWindowLivehouse2 = new google.maps.InfoWindow({
+  // ウィンドウを表示させる
+  noSuppress:true,
+  content: contentStringLivehouse
+  }); 
+
+  // 新たに作成したライブハウス情報ウィンドウを配列に追加
+  infoWindowLivehouse.push(infoWindowLivehouse2);
+    
+  markerLivehouse2.addListener('click', function () {
+    // 住所の入力フォームを初期化
+    $('#lat').val(null);
+    $('#lng').val(null);
+    $('#address_field').val(null);
+    $('#address-area').html("<br>");
+
+    // マーカーを削除
+    if (marker) {
+      marker.setMap(null);
+    };
+      
+    // 配列をまわし、全てのウィンドウ閉じる
+    infoWindowRamen.forEach((value) => {
+      value.close();
+    });
+    infoWindowBeer.forEach((value2) => {
+      value2.close();
+    });
+    infoWindowCoffee.forEach((value3) => {
+      value3.close();
+    });
+    infoWindowParking.forEach((value4) => {
+      value4.close();
+    });
+    infoWindowPlace.forEach((value5) => {
+      value5.close();
+    });
+    infoWindowLivehouse.forEach((value6) => {
+      value6.close();
+    });
+    // 全てのウィンドウを閉じてからopen
+    infoWindowLivehouse2.open(map, markerLivehouse2);
+  });
+
+  // マップの中央をライブハウスの緯度経度に合わせる
+  livehouseSearchPos = new google.maps.LatLng(<%= @spot.latitude %>, <%= @spot.longitude %>);
+  map.setCenter(livehouseSearchPos);
+     
+  infoWindowLivehouse2.open(map, markerLivehouse2);
+
+}());

@@ -27,41 +27,301 @@
     display: block;
     clear: both;
   }
-  
-  // フッター固定
-  // https://webkikaku.co.jp/blog/htmlcss/footer-bottom/
-  .wrapper{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow: hidden;
+
+  #color {
+    color: white;
   }
-  
-  footer{
-    margin-top: auto;
-    text-align: center;
-    margin-bottom: -10px;
+
+  .welcom {
+    font-size: 16px;
   }
+
+// フッター固定
+// https://webkikaku.co.jp/blog/htmlcss/footer-bottom/
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+footer{
+  margin-top: auto;
+  text-align: center;
+  margin-bottom: -10px;
+}
+
+// 利用規約、サービスポリシー
+.inside {
+  margin: 50px 0;
+}
+
+// ログイン、新規登録
+.field_with_errors {
+  display: inline-block;
+}
+
+.check-inside {
+  display: inline-block;
+}
+
+#user_email {
+  width: 200px;
+}
+
+#user_password_confirmation {
+  width: 200px;
+}
+
+#user_password {
+  width: 200px;
+}
+
+.devise-field {
+  text-align: center;
+}
+
+// deviseのエラーメッセージ
+#error_explanation h2 {
+  font-size: 20px;
+}
+
+#error_explanation ul {
+  list-style: none;
+  font-size: 80%;
+}
+
+// ページネーション
+.pagination {
+  text-align: center;
+  display: block;
+  margin-top: 40px;
+}
+
+// エラーメッセージ
+.alert-warning {
+  margin-top: -20px;
+}
+
+.btn-primary {
+  background-color: #292929;
+  border-color: #292929;
+}
+
+#map-point {
+  position: relative;
+}
 
 #map {
   height: 600px;
   width: 100%;
 }
 
+.logo {
+  font-family: 'Anton', sans-serif;
+  color: white;
+  font-size: 40px;
+  margin-right: 10px;
+}
+
+.navbar-header {
+  height: 80px;
+}
+
+.navbar-brand {
+  padding-top: 47px;
+}
+
+.header-nav {
+  padding-top:15px;
+}
+
+.navbar-toggle {
+  margin-top: 25px;
+}
+
 .nav-list {
   list-style: none;
 }
 
+.navbar-default {
+  text-decoration: none;
+}
+
 .navbar-custom {
-  color: black;
-  background-color: #ffc0cb;
-  width: 100%;
+  text-decoration: none;
+  background-color: black;
 }
 
 .navbar-brand p {
   display: inline-block;
 }
 
+#move-geolocation {
+  position: absolute;
+  top: 80px;
+  left: 10px;
+  z-index: 1;
+}
+
+.livehouse-search{
+  position: absolute;
+  top: 45px;
+  left: 10px;
+  z-index: 1;
+}
+
+.forms {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  float: right;
+}
+
+.under-line {
+  border-bottom: 1px solid #c0c0c0;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.under-line2 {
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.footer-top {
+  text-align: center;  
+}
+
+.footer-top-left {
+  margin-bottom: 10px;
+}
+
+.fa-twitter {
+  color: #00bfff;
+  font-size: 50px;
+  margin:10px;
+}
+
+.fa-github {
+  color: black;
+  font-size: 50px;
+  margin:10px;
+}
+
+.icon1 {
+  display: inline-block;
+}
+
+.icon2 {
+  display: inline-block;
+}
+
+.footer-detail {
+  margin-bottom: 5px;
+}
+
+.footer-top-right {
+  margin-bottom: 10px;
+  line-height: 25px;
+}
+
 .footer-bottom {
-  background-color: #ffc0cb;
+  background-color: black;
+  height: 80px;
+}
+
+.footer-text {
+  color: white;
+  text-align: center;
+  line-height: 70px;
+}
+
+.infoWindow-text {
+  text-align: center;
+}
+
+#address {
+  width: 230px;
+  margin-left: 10px;
+}
+
+@media screen and (max-width:768px) {   
+  .header-nav {
+    padding-top: 0px;
+  } 
+}
+
+@media screen and (max-width:499px) {   
+  .logo {
+    font-size: 21px;
+    margin-right: 5px;
+    margin-left: -5px;
+  }
+  
+  .navbar-brand {
+    font-size: 15px;
+    padding-top: 55px;
+  }
+
+  p {
+    font-size: 70%;
+  }
+
+  .welcom {
+    font-size: 10px;
+  }
+
+  .fa-twitter {
+    font-size: 35px;
+  }
+
+  .fa-github {
+    font-size: 35px;
+  }
+
+  .under-line-mini1 {
+    margin-top: 75px;
+    margin-bottom: 45px;
+  }
+
+  .under-line-mini2 {
+    margin-top: 40px;
+    margin-bottom: 25px;
+  }
+
+  .under-line {
+    margin-top: 20px;
+  }
+
+  .infoWindow-text a {
+    font-size: 10px;
+  }
+
+  #id {
+    margin-bottom: 10px;
+  }
+
+  .check-inside {
+    font-size: 90%;
+  }
+
+  .nav-mobile {
+    font-size: 70%
+  }
+
+  .devise-field {
+    font-size: 70%;
+  }
+
+  .devise-field h2 {
+    font-size: 20px;
+  }
+
+  .btn {
+    font-size: 70%;
+  }
+
+ .footer-detail {
+   font-size: 70%;
+ }
+
 }

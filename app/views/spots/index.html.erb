@@ -1,50 +1,663 @@
+<% if flash[:alert] %>
+  <div class="alert alert-warning" role="alert">
+    <p><%= flash[:alert] %></p>
+  </div>
+<% end %>
 <div class="main">
   <div class="container">
-    
-    <!-- form_withはデフォルトでremote: true(リクエストがhtml形式ではなくjs形式になる) -->
-    <%= form_with url: map_search_path, method: :get do |f|%>
-      <%= f.text_field :address %>
-      <%= f.submit '地図表示', id: "search-btn" %>
-    <% end %>
-
-    <%# ライブハウス検索フォーム %>
-    <%= form_with url: livehouses_search_path, method: :get do |f| %>
-      <%= f.collection_select :address, Livehouse.all, :address, :livehouse_name, :prompt => "ライブハウスを選択" %>
-      <%= f.submit 'ライブハウスを表示' %>
-    <% end %>
-
-    <%= render 'map', ramens: @ramens, beers: @beers, coffees: @coffees, parkings: @parkings, places: @places, livehouses: @livehouses %>
-
-    <div class="spot-feild">
-      <div class="spot-form">
-        <%= form_with url: spots_path, method: :post do |f| %>
-            <h4>住所</h4>
-            <%= f.text_field :address, id: :address_field %>
-            <h4>緯度</h4>
-            <%= f.text_field :latitude, id: :lat %>
-            <h4>経度</h4>
-            <%= f.text_field :longitude, id: :lng %>
-            <h4>場所の名前</h4>
-            <%= f.text_field :spot_name %>
-            <h4>場所の説明</h4>
-            <%= f.text_field :spot_body %>
-            <h4>カテゴリー</h4>
-            <%= f.select(:category, {ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
-            <h4>場所の画像</h4>
-            <%# <%= f.attachment_field :spot_image %>
-            <%= f.submit '登録' %>
-        <% end %>
-      </div>
-
-      <div class="spot-detail">
-        <div id="table-spot-image">
+    <div id="map-point">
+      <div class="forms">
+        <!-- 住所検索フォーム -->
+        <input id="address" type="textbox" placeholder="住所を入力">
+        <input type="button" id ="search-btn" class="btn btn-primary btn-xs" value="検索" onclick="codeAddress()">
+        <!-- ライブハウス検索フォーム -->
+        <div class="livehouse-search">
+          <!-- search.js.erbを呼ぶ -->
+          <!-- プルダウンで選択したライブハウスのidをコントローラーに渡す -->
+          <%= form_with url: map_search_path, method: :get do |f| %>
+            <%= f.collection_select :id, @search, :id, :spot_name, :prompt => "ライブハウスを選択" %>
+            <%= f.submit 'ライブハウスを表示', id:"livehouse-search-btn", class:"btn btn-primary btn-xs" %>
+          <% end %>
         </div>
-        <div id="table-spot-name"></div>
-        <div id="table-spot-body"></div>
-        <div id="table-spot-category"></div>
-        <div id="table-spot-address"></div>
-        <%= link_to '詳細', spot_path(:id), id: "table-spot-detail" %>
+        <!-- 現在地に移動するボタン -->
+        <input type="image" src="/images/geolocation3.png" onclick="moveGeolocation()" id ="move-geolocation" >
+      </div>  
+      <div id='map'></div>
     </div>
-
+    <div class="spot-form">
+      <%= form_for(@spot) do |f| %>
+        <h4>住所</h4>
+        <div id="address-area"><br>
+        </div>
+        <!-- 非表示の住所 -->
+        <%= f.hidden_field :address, id: :address_field %>
+        <!-- 非表示の緯度 -->
+        <%= f.hidden_field :latitude, id: :lat %>
+        <!-- 非表示の経度 -->
+        <%= f.hidden_field :longitude, id: :lng %>
+        <h4>場所の名前</h4>
+        <h6>※16文字まで</h6>
+        <%= f.text_field :spot_name %>
+        <h4>場所の説明</h4>
+        <h6>※100文字まで</h6>
+        <%= f.text_area :spot_body, size: "8x8" %>
+        <h4>カテゴリー</h4>
+        <%= f.select(:category, {ライブハウス: 'ライブハウス', ラーメン屋: 'ラーメン屋', 居酒屋: '居酒屋', 喫茶店: '喫茶店', 駐車場: '駐車場', その他: 'その他'}, :prompt => "カテゴリーを選択") %>
+        <h4>場所の画像</h4>
+        <%= f.attachment_field :spot_image %>
+        <%= f.submit '登録', class: "btn btn-primary spot-btn" %>
+      <% end %>
+    </div>
   </div>
 </div>
+<script>
+  // Mapクラス：マップを描画：new google.maps.Map
+  // Geocoderクラス：.geocodeで住所=>緯度経度, 緯度経度=>住所を取得：new google.maps.Geocoder
+  // LatLngクラス：緯度経度のインスタンスを作成：new google.maps.LatLng
+  // Makerクラス：マーカーを描画：new google.maps.Marker
+  // Circleクラス：円を描画：new google.maps.Circle
+  // InfoWindowクラス：情報ウィンドウを描画：new google.maps.InfoWindow
+  var map;
+  function initMap(){
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 35.6628611, lng: 139.6972762},
+      zoom: 16,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: false,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      // JSONで地図をカスタマイズ
+      styles: [
+        {
+          "featureType": "poi.business",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.school",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "poi.school",
+          "elementType": "labels.text",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        }
+      ]
+    });
+    // GoogleMapデフォルトの情報ウィンドウを非表示に
+    // 特定のウィンドウを表示させるには noSuppress = true をオプションで指定
+    // 一度しか呼び出さないため即時関数
+    (function() {
+      var set;
+      set = google.maps.InfoWindow.prototype.set;
+      google.maps.InfoWindow.prototype.set = function(key, val) {
+        if (key === "map") {
+          if (! this.get("noSuppress")) {
+            return;
+          }
+        }
+        set.apply(this, arguments);
+      }
+    })();
+    // eはイベントオブジェクト
+    // e.latLngでクリック地点の緯度経度
+    // マップクリック時にgetClickLatLngで緯度経度の取得、reverseで緯度経度から住所を表示する
+    map.addListener('click', function(e){
+      // クリック地点にピンを描画
+      getClickLatLng(e.latLng, map);
+      // 逆ジオコーディング
+      reverse(e.latLng);
+    });
+    ramen();
+    beer();
+    coffee();
+    livehouse();
+    parking();
+    place();
+    getGeolocation();
+    setInterval(getGeolocation, 500);   
+  };
+  // クリック地点にピンを描画
+  var searchBtn;
+  var livehouseBtn;
+  var marker;
+  function getClickLatLng(lat_lng, map) {
+    
+    // 情報ウィンドウを閉じる
+    infoWindowRamen.forEach((value) => {
+      value.close()
+    });
+    infoWindowBeer.forEach((value2) => {
+      value2.close()
+    });
+    infoWindowCoffee.forEach((value3) => {
+      value3.close()
+    });
+    infoWindowParking.forEach((value4) => {
+      value4.close()
+    });
+    infoWindowPlace.forEach((value5) => {
+      value5.close()
+    });
+    infoWindowLivehouse.forEach((value6) => {
+      value6.close()
+    });
+    
+    // 検索ボタンの押下時にピンを削除
+    searchBtn = document.getElementById('search-btn');
+    searchBtn.addEventListener('click', function() {
+      if(marker){
+        marker.setMap(null);
+      }
+    });
+    // ライブハウス検索ボタン押下時にピンを削除し、住所の表示とhidden_fieldの緯度経度情報を削除
+    livehouseBtn = document.getElementById("livehouse-search-btn")
+    livehouseBtn.addEventListener('click', function(){
+      if(marker){
+        marker.setMap(null);
+      }
+      $('#lat').val(null);
+      $('#lng').val(null);
+      $('#address_field').val(null)
+      $('#address-area').html("<br>");
+    });
+    //既にピンが描画済みの場合、それを削除 
+    if(marker){
+      marker.setMap(null);
+    }
+    
+    // 座標をフォームに表示
+    // 住所は逆ジオコーディングで表示
+    $('#lat').val(lat_lng.lat());
+    $('#lng').val(lat_lng.lng());
+  
+  　// マーカーを設置
+    marker = new google.maps.Marker({
+    position: lat_lng,
+    map: map,
+    });
+    // 座標の中心をずらす
+    // Map.panTo()はMapクラスのメソッドです。地図の位置座標を絶対的に移動できます。
+    // map.panTo(lat_lng);
+  }
+  // 住所による検索
+  function codeAddress(){
+    var inputAddress;
+    var geocoder;
+    if(marker){
+        marker.setMap(null);
+      }
+    // 情報ウィンドウを閉じる
+    infoWindowRamen.forEach((value) => {
+      value.close()
+    });
+    infoWindowBeer.forEach((value2) => {
+      value2.close()
+    });
+    infoWindowCoffee.forEach((value3) => {
+      value3.close()
+    });
+    infoWindowParking.forEach((value4) => {
+      value4.close()
+    });
+    infoWindowPlace.forEach((value5) => {
+      value5.close()
+    });
+    infoWindowLivehouse.forEach((value6) => {
+      value6.close()
+    });
+    geocoder = new google.maps.Geocoder()
+    // 入力を取得
+    inputAddress = document.getElementById('address').value;
+    // geocodingしたあとmapを移動
+    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+      if (status == 'OK') {
+        // map.setCenterで地図が移動
+        map.setCenter(results[0].geometry.location);
+        $('#lat').val(results[0].geometry.location.lat);
+        $('#lng').val(results[0].geometry.location.lng);
+        $('#address_field').val(results[0].formatted_address);
+        $('#address-area').text(results[0].formatted_address);
+        // google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
+        marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+  // 現在地取得
+  var now = null;
+  var nowMarker;
+  var nowCircle;
+  var now_image = "/images/now5.png";
+  function getGeolocation(){
+    // Geolocation API
+    navigator.geolocation.getCurrentPosition(
+      // 取得した位置情報はposとして扱える
+      function (pos) {
+        if(nowMarker){
+          console.log(0);
+          nowMarker.setMap(null);
+          nowMarker = null;
+        }
+        if(nowCircle){
+          nowCircle.setMap(null);
+          nowCircle = null;
+        }
+        // MarkerとCircleのpositionを指定できるように、取得した位置情報posの緯度経度をnに代入
+        var n  = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
+        if(now == null){
+          now = pos;
+          moveGeolocation();
+        }
+        else{
+          now = pos;
+        }
+        nowMarker = new google.maps.Marker({
+          map: map,
+          position: n,
+          clickable: false,
+          icon: now_image
+        })
+        nowCircle = new google.maps.Circle({
+          map: map,
+          center: n,
+          clickable: false,
+          radius: pos.coords.accuracy,
+          strokeColor: '#0088ff',
+          strokeOpacity: 0.1,
+          strokeWeight: 1,
+          fillColor: '#0088ff',
+          fillOpacity: 0.1
+        });
+      }
+    )
+  } 
+// 現在地へ移動
+// nowには取得した位置情報posが入っている
+function moveGeolocation(){
+  map.setCenter(new google.maps.LatLng(now.coords.latitude, now.coords.longitude));
+}
+// 逆ジオコーディング
+// 緯度経度から住所を取得
+function reverse(lat_lng){
+  var latlng;
+  var geocoder;
+  var address;  
+    // 渡し方は{lat: latの値(数値), lng: lngの値(数値)}
+    latlng = {lat: lat_lng.lat(), lng: lat_lng.lng()};
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({
+      latLng: latlng
+    }, 
+      function(results, status){
+        if (status == google.maps.GeocoderStatus.OK && results[0].geometry) {
+          // .formatted_addressで住所を取得
+          address = results[0].formatted_address;
+          $('#address_field').val(address);
+          $('#address-area').text(address);
+        }
+      }
+    )
+  }
+  var markerLivehouse = [];
+  var infoWindowLivehouse = [];
+  var contentStringLivehouse;
+  var livehouse_image = "/images/livehouse.png";
+  function livehouse(){
+    // ライブハウス
+    // each_with_indexを使うと、0,1,2~と付与される
+    // 変数に配列を格納
+    <% @livehouses.each_with_index do |livehouse,index| %>
+      markerLivehouse[<%= index %>] = new google.maps.Marker({
+      map: map,
+      icon: livehouse_image,
+      position: new google.maps.LatLng(
+        <%= livehouse.latitude %>,
+        <%= livehouse.longitude %>
+      )
+    });
+      contentStringLivehouse = '<div class="infoWindow-text"><%= link_to livehouse.spot_name, spot_path(livehouse) %></div>' + '<%= link_to spot_path(livehouse) do %><%= attachment_image_tag livehouse, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>';
+      infoWindowLivehouse[<%= index %>] = new google.maps.InfoWindow({
+      // ウィンドウを表示させる
+      noSuppress:true,
+      content: contentStringLivehouse
+      }); 
+      
+      markerLivehouse[<%= index %>].addListener('click', function(){
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null);
+        $('#address-area').html("<br>");
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+        // 配列をまわし、全てのウィンドウ閉じる
+        infoWindowRamen.forEach((value) => {
+          value.close()
+        });
+        infoWindowBeer.forEach((value2) => {
+          value2.close()
+        });
+        infoWindowCoffee.forEach((value3) => {
+          value3.close()
+        });
+        infoWindowParking.forEach((value4) => {
+          value4.close()
+        });
+        infoWindowPlace.forEach((value5) => {
+          value5.close()
+        });
+        infoWindowLivehouse.forEach((value6) => {
+          value6.close()
+        });
+        // 全てのウィンドウを閉じてからopen
+        infoWindowLivehouse[<%= index %>].open(map, markerLivehouse[<%= index %>])
+      })
+    <% end %>
+  }
+  
+  var markerRamen = []
+  var infoWindowRamen = []
+  var contentStringRamen
+  var ramen_image = "/images/ramen.png";
+  function ramen(){
+    // ラーメン屋
+    // each_with_indexを使うと、0,1,2~と付与される
+    // 変数に配列を格納
+    <% @ramens.each_with_index do |ramen,index| %>
+      markerRamen[<%= index %>] = new google.maps.Marker({
+      map: map,
+      icon: ramen_image,
+      position: new google.maps.LatLng(
+        <%= ramen.latitude %>, //latitude
+        <%= ramen.longitude %>  //longitude
+      )
+      });
+      contentStringRamen = '<div class="infoWindow-text"><%= link_to ramen.spot_name, spot_path(ramen) %></div>' + '<%= link_to spot_path(ramen) do %><%= attachment_image_tag ramen, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+      infoWindowRamen[<%= index %>] = new google.maps.InfoWindow({
+      // ウィンドウを表示させる
+      noSuppress:true,
+      content: contentStringRamen
+      }); 
+      
+      markerRamen[<%= index %>].addListener('click', function(){
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null);
+        $('#address-area').html("<br>");
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+        // 配列をまわし、全てのウィンドウ閉じる
+        infoWindowRamen.forEach((value) => {
+          value.close()
+        });
+        infoWindowBeer.forEach((value2) => {
+          value2.close()
+        });
+        infoWindowCoffee.forEach((value3) => {
+          value3.close()
+        });
+        infoWindowParking.forEach((value4) => {
+          value4.close()
+        });
+        infoWindowPlace.forEach((value5) => {
+          value5.close()
+        });
+        infoWindowLivehouse.forEach((value6) => {
+          value6.close()
+        });
+        // 全てのウィンドウを閉じてからopen
+        infoWindowRamen[<%= index %>].open(map, markerRamen[<%= index %>])
+      })
+    <% end %>
+  }
+  var markerBeer = []
+  var infoWindowBeer = []
+  var contentStringBeer
+  var beer_image = "/images/beer2.png";
+  function beer(){
+    // 居酒屋屋
+    // each_with_indexを使うと、0,1,2~と付与される
+    // 変数に配列を格納
+    <% @beers.each_with_index do |beer,index| %>
+      markerBeer[<%= index %>] = new google.maps.Marker({
+      map: map,
+      icon: beer_image,
+      position: new google.maps.LatLng(
+        <%= beer.latitude %>, //latitude
+        <%= beer.longitude %>  //longitude
+      )
+      });
+      contentStringBeer = '<div class="infoWindow-text"><%= link_to beer.spot_name, spot_path(beer) %></div>' + '<%= link_to spot_path(beer) do %><%= attachment_image_tag beer, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+      infoWindowBeer[<%= index %>] = new google.maps.InfoWindow({
+      // ウィンドウを表示させる
+      noSuppress:true,
+      content: contentStringBeer
+      }); 
+      
+      markerBeer[<%= index %>].addListener('click', function(){
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null);
+        $('#address-area').html("<br>");
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+        // 配列をまわし、全てのウィンドウ閉じる
+        infoWindowRamen.forEach((value) => {
+          value.close()
+        });
+        infoWindowBeer.forEach((value2) => {
+          value2.close()
+        });
+        infoWindowCoffee.forEach((value3) => {
+          value3.close()
+        });
+        infoWindowParking.forEach((value4) => {
+          value4.close()
+        });
+        infoWindowPlace.forEach((value5) => {
+          value5.close()
+        });
+        infoWindowLivehouse.forEach((value6) => {
+          value6.close()
+        });
+        // 全てのウィンドウを閉じてからopen
+        infoWindowBeer[<%= index %>].open(map, markerBeer[<%= index %>])
+      })
+    <% end %>
+  }
+  var markerCoffee = []
+  var infoWindowCoffee = []
+  var contentStringCoffee;
+  var coffee_image = "/images/coffee.png";
+  function coffee(){
+    // 喫茶店
+    // each_with_indexを使うと、0,1,2~と付与される
+    // 変数に配列を格納
+    <% @coffees.each_with_index do |coffee,index| %>
+      markerCoffee[<%= index %>] = new google.maps.Marker({
+      map: map,
+      icon: coffee_image,
+      position: new google.maps.LatLng(
+        <%= coffee.latitude %>, //latitude
+        <%= coffee.longitude %>  //longitude
+      )
+      });
+      contentStringCoffee = '<div class="infoWindow-text"><%= link_to coffee.spot_name, spot_path(coffee) %></div>' + '<%= link_to spot_path(coffee) do %><%= attachment_image_tag coffee, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+      infoWindowCoffee[<%= index %>] = new google.maps.InfoWindow({
+      // ウィンドウを表示させる
+      noSuppress:true,
+      content: contentStringCoffee
+      }); 
+      
+      markerCoffee[<%= index %>].addListener('click', function(){
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null);
+        $('#address-area').html("<br>");
+        
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+        infoWindowRamen.forEach((value) => {
+          value.close()
+        });
+        infoWindowBeer.forEach((value2) => {
+          value2.close()
+        });
+        infoWindowCoffee.forEach((value3) => {
+          value3.close()
+        });
+        infoWindowParking.forEach((value4) => {
+          value4.close()
+        });
+        infoWindowPlace.forEach((value5) => {
+          value5.close()
+        });
+        infoWindowLivehouse.forEach((value6) => {
+          value6.close()
+        });
+        // 全てのウィンドウを閉じてからopen
+        infoWindowCoffee[<%= index %>].open(map, markerCoffee[<%= index %>])
+      })
+    <% end %>
+  }
+  var markerParking = [];
+  var infoWindowParking = [];
+  var contentStringParking;
+  var parking_image = "/images/parking.png";
+  function parking(){
+    // 駐車場
+    // each_with_indexを使うと、0,1,2~と付与される
+    // 変数に配列を格納
+    <% @parkings.each_with_index do |parking,index| %>
+      markerParking[<%= index %>] = new google.maps.Marker({
+      map: map,
+      icon: parking_image,
+      position: new google.maps.LatLng(
+        <%= parking.latitude %>, //latitude
+        <%= parking.longitude %>  //longitude
+      )
+      });
+      contentStringParking = '<div class="infoWindow-text"><%= link_to parking.spot_name, spot_path(parking) %></div>' + '<%= link_to spot_path(parking) do %><%= attachment_image_tag parking, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+      infoWindowParking[<%= index %>] = new google.maps.InfoWindow({
+      // ウィンドウを表示させる
+      noSuppress:true,
+      content: contentStringParking
+      }); 
+      
+      markerParking[<%= index %>].addListener('click', function(){
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null);
+        $('#address-area').html("<br>");
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+        // 配列をまわし、全てのウィンドウ閉じる
+        infoWindowRamen.forEach((value) => {
+          value.close()
+        });
+        infoWindowBeer.forEach((value2) => {
+          value2.close()
+        });
+        infoWindowCoffee.forEach((value3) => {
+          value3.close()
+        });
+        infoWindowParking.forEach((value4) => {
+          value4.close()
+        });
+        infoWindowPlace.forEach((value5) => {
+          value5.close()
+        });
+        infoWindowLivehouse.forEach((value6) => {
+          value6.close()
+        });
+        // 全てのウィンドウを閉じてからopen
+        infoWindowParking[<%= index %>].open(map, markerParking[<%= index %>])
+      })
+    <% end %>
+  }
+  var markerPlace = [];
+  var infoWindowPlace = [];
+  var contentStringPlace;
+  var place_image = "/images/place4.png";
+  function place(){
+    // その他
+    // each_with_indexを使うと、0,1,2~と付与される
+    // 変数に配列を格納
+    <% @places.each_with_index do |place,index| %>
+      markerPlace[<%= index %>] = new google.maps.Marker({
+      map: map,
+      icon: place_image,
+      position: new google.maps.LatLng(
+        <%= place.latitude %>, //latitude
+        <%= place.longitude %>  //longitude
+      )
+      });
+      contentStringPlace = '<div class="infoWindow-text"><%= link_to place.spot_name, spot_path(place) %></div>' + '<%= link_to spot_path(place) do %><%= attachment_image_tag place, :spot_image, :fill, 150, 150, format: 'jpeg', fallback: "/images/no_image.jpg", size: '150x150' %><% end %>'
+      infoWindowPlace[<%= index %>] = new google.maps.InfoWindow({
+      // ウィンドウを表示させる
+      noSuppress:true,
+      content: contentStringPlace
+      }); 
+      
+      markerPlace[<%= index %>].addListener('click', function(){
+        $('#lat').val(null);
+        $('#lng').val(null);
+        $('#address_field').val(null)
+        $('#address-area').html("<br>");
+        
+        // マーカーを削除
+        if(marker){
+        marker.setMap(null);
+        }
+        // 配列をまわし、全てのウィンドウ閉じる
+        infoWindowRamen.forEach((value) => {
+          value.close()
+        });
+        infoWindowBeer.forEach((value2) => {
+          value2.close()
+        });
+        infoWindowCoffee.forEach((value3) => {
+          value3.close()
+        });
+        infoWindowParking.forEach((value4) => {
+          value4.close()
+        });
+        infoWindowPlace.forEach((value5) => {
+          value5.close()
+        });
+        infoWindowLivehouse.forEach((value6) => {
+          value6.close()
+        });
+        // 全てのウィンドウを閉じてからopen
+        infoWindowPlace[<%= index %>].open(map, markerPlace[<%= index %>])
+      })
+    <% end %>
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap">
+</script>

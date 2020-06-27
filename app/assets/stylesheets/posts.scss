@@ -1,0 +1,60 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.posts-box {
+  text-align: center;
+}
+
+.review-image {
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.review-body{
+  margin-bottom: 10px;
+}
+
+.post-form {
+  text-align: center;
+}
+
+#post_review_image {
+  margin: 20px auto;
+}
+
+#post_review_body {
+  width: 430px;
+}
+
+// 編集画面
+.edit-post {
+  text-align: center;
+}
+
+@media screen and (max-width:624px) {     
+  .review_image {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+@media screen and (max-width:499px) {   
+  #post_review_body {
+    width: 290px;
+  }
+
+  .review-image img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .review-spot-category {
+    font-size: 75%;
+  }
+
+  #post_review_image {
+    margin: 0 0 10px 70px;
+  }
+
+}

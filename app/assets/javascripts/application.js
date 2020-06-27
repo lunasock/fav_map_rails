@@ -14,24 +14,20 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require underscore
-//= require gmaps/google
 //= require_tree .
 //= require bootstrap-sprockets
 
-
-// $(function(){
-//     $("#table-spot-detail").on('click', function(){
-//         $.ajax({
-//             url: "spots/show",
-//             type: "GET",
-//             data: { id: "value",
-//                     }
-//         });
-//         .done( (data) => {
-//             console.log(data);
-//         })
-//         .fail( (data) => {
-//             console.log(data);
-//         })
-//     });
+$(window).scroll(function(){
+  $('.fadein').each(function(){
+    // scrollTop()でスクロールした時の位置(スクロール量)を取得
+    var scroll = $(window).scrollTop();
+    // offset().topでHTML要素が配置されているY座標を取得
+    // thisはaboutのbox
+    var element = $(this).offset().top;
+    // $(window).height()でウィンドウの高さを値として取得
+    var windowHeight = $(window).height();
+    if (scroll > element - windowHeight + 100){
+      $(this).addClass('scrollin');
+    }
+  });
+});

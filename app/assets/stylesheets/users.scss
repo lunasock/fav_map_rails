@@ -1,3 +1,130 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.backcover-image {
+  margin-top: -20px;
+  margin-bottom: 40px;
+  background-size: cover;
+  background-position: center; 
+  height: 400px;
+  position: relative;
+}
+
+.backcover-image-content {
+  position: absolute;
+  bottom: 0px;
+  background-color: rgba( 0, 0, 0, 0.25);
+  width: 100%;
+  height: 130px;
+}
+
+.icon_image {
+  border-radius: 50%;
+}
+
+// 画像を重ねる
+// http://portaltan.hatenablog.com/entry/2017/05/30/210451
+.user-icon {
+  border-radius: 50%;
+  position: absolute;
+  top: 285px;
+  left: 25px;
+}
+
+.under-line-mini1 {
+  border-bottom: 1px solid #c0c0c0;
+  margin: 70px 0;
+}
+
+.under-line-mini2 {
+  border-bottom: 1px solid #c0c0c0;
+  margin-top: 70px;
+  margin-bottom: 50px;
+}
+
+.user-name {
+  position: absolute;
+  top: 290px;
+  left: 140px;
+  color: white;
+  font-size: x-large;
+}
+
+.user-body {
+  position: absolute;
+  top: 330px;
+  left: 140px;
+  color: white;
+  font-size: medium; 
+}
+
+.user-edit {
+  position: absolute;
+  top: 370px;
+  left: 22px;
+}
+
+.user-edit-form {
+  text-align: center;
+  margin: 50px 0;
+}
+
+#user_user_name {
+  width: 430px;
+}
+
+#user_user_body {
+  width: 430px;
+}
+
+#user_icon_image {
+  margin: 0 auto;
+}
+
+#user_backcover_image {
+  margin: 0 auto;
+}
+
+// 退会画面
+.check-field {
+  text-align: center;
+}
+
+.check-message {
+  margin-bottom: 40px;
+}
+
+@media screen and (max-width:499px) {   
+  #user_user_name {
+    width: 290px;
+  }
+  
+  #user_user_body {
+    width: 290px;
+  }
+
+  .user-edit {
+    left: 28px;
+  }
+
+  .user-name {
+    font-size: 20px;
+  }
+
+  .user-body {
+    font-size: 80%;
+  }
+
+  #user_icon_image {
+    margin: 0 0 10px 70px;
+  }
+  
+  #user_backcover_image {
+    margin: 0 0 10px 70px;
+  }
+
+  .user-edit-btn {
+    margin-bottom: 20px;
+  }
+}

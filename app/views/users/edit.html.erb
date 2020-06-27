@@ -1,2 +1,26 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<% if flash[:alert] %>
+  <div class="alert alert-warning" role="alert">
+    <p><%= flash[:alert] %></p>
+  </div>
+<% end %>
+<div class="main">
+  <div class="container">
+    <div class="user-edit-form">
+      <%= form_for(@user) do |f| %>
+      <p>ユーザーネーム</p>
+      <p>※8文字まで</p>
+      <%= f.text_field :user_name %><br>
+      <br><p>自己紹介</p>
+      <p>※40文字まで</p>
+      <%= f.text_area :user_body, size: "8x8" %><br>
+      <br><p>アイコン</p>
+      <%= f.attachment_field :icon_image %>
+      <br><P>ヘッダー画像</P>
+      <%= f.attachment_field :backcover_image %>
+      <!-- <%= link_to '戻る', user_path(params[:id]), class: "btn btn-default" %> -->
+      <br><%= f.submit '更新', class: "btn btn-primary" %>
+      <% end %>
+      <br><%= link_to '退会', check_path(@user), class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>

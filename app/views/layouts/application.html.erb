@@ -7,14 +7,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+    <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <div class="wrapper">
-        <!-- ヘッダー -->     
-        <header>
+      <!-- ヘッダー -->     
+      <header>
         <%# ハンバーガーメニュー %>
         <%# http://bootstrap3.cyberlab.info/components/navbar.html# %>
         <nav class="navbar navbar-default navbar-static-top navbar-custom">
@@ -27,28 +28,31 @@
                 <span class="icon-bar"></span>
               </button>
               <div class="navbar-brand">
-                <%= link_to root_path do %>
-                  <%= image_tag("/images/no_image.png") %></p>
-                <% end %>
                 <% if user_signed_in? %>
-                  <p>に ようこそ 様</P>
+                  <%= link_to root_path do %>
+                    <p class="logo">BandBund</p>
+                  <% end %>
+                  <p id="color" class="welcom">にようこそ <%= current_user.user_name %>様</p>
                 <% else %>
-                  <p>に ようこそ ゲスト様</p>
+                  <%= link_to root_path do %>
+                    <p class="logo">BandBund</p>
+                  <% end %>
+                  <p id="color" class="welcom">にようこそ ゲスト様</p>
                 <% end %>
               </div>
             </div>
             <div class="collapse navbar-collapse navbar-right" id="navbarEexample">
-              <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav header-nav">
                 <% if admin_signed_in? %>
-                  <li class="nav-list-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+                  <li class="nav-list-item nav-mobile"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, id:"color"; %></li>
                 <% else %>
                   <% if user_signed_in? %>
-                    <li class="nav-list-item"><%= link_to 'マイページ', user_path(current_user) %>
-                    <li class="nav-list-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+                    <li class="nav-list-item nav-mobile"><%= link_to 'マイページ', user_path(current_user), id:"color"; %>
+                    <li class="nav-list-item nav-mobile"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, id:"color"; %></li>
                   <% else %>
-                    <li class="nav-list-item"><%= link_to 'BandBundについて', root_path %></li>
-                    <li class="nav-list-item"><%= link_to 'ログイン', new_user_session_path %></li>
-                    <li class="nav-list-item"><%= link_to '新規登録', new_user_registration_path %></li>
+                    <li class="nav-list-item nav-mobile"><%= link_to 'BandBundについて', about_path, id:"color"; %></li>
+                    <li class="nav-list-item nav-mobile"><%= link_to 'ログイン', new_user_session_path, id:"color"; %></li>
+                    <li class="nav-list-item nav-mobile"><%= link_to '新規登録', new_user_registration_path, id:"color"; %></li>
                   <% end %>
                 <% end %>
               </ul>
@@ -59,34 +63,47 @@
       <%= yield %> 
       <!-- フッター -->
       <footer>
+        <div class="under-line">
+        </div>
         <nav>
-          <div class="footer-top">
-            <div class="footer-top-left">
-              <p>BandBund</p>
-              <p>The map is made in me and you</p>
-              <%= link_to root_path do %>
-                <%= image_tag("/images/no_image.png") %></p>
-              <% end %>
-              <%= link_to root_path do %>
-                <%= image_tag("/images/no_image.png") %></p>
-              <% end %>
-            </div>
-            <div class="footer-top-right clearfix">
-              <ul class="nav navbar-nav nav-list">
-                <li class="nav-list-item"><%= link_to 'よくある質問', root_path %>
-                <li class="nav-list-item"><%= link_to 'BandBundについて', root_path %></li>
-                <li class="nav-list-item"><%= link_to '利用規約', root_path %></li>
-                <li class="nav-list-item"><%= link_to 'プライバシーポリシー', root_path %></li>
-                <li class="nav-list-item"><%= link_to '特定商取引法に基づく表記', root_path %></li>
-              </ul>
+          <div class="container">
+            <div class="row">
+              <div class="footer-top clearfix">
+                <div class="footer-top-left col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                  <p>BandBund</p>
+                  <p>The map is made in me and you.</p>
+                  <div class="icons">
+                    <div class="icon1">
+                      <%= link_to 'https://twitter.com/band_bund' do %>
+                        <i class="fab fa-twitter"></i>
+                      <% end %>
+                    </div>
+                    <div class="icon2">
+                      <%= link_to 'https://github.com/KeisukeOmata/BandBund' do %>
+                        <i class="fab fa-github"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-top-right col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                  <ul class="nav-list">
+                    <li class="nav-list-item footer-detail"><%= link_to 'よくある質問', question_path %>
+                    <li class="nav-list-item footer-detail"><%= link_to 'BandBundについて', about_path %></li>
+                    <li class="nav-list-item footer-detail"><%= link_to '利用規約', terms_path %></li>
+                    <li class="nav-list-item footer-detail"><%= link_to 'プライバシーポリシー', privacy_path %></li>
+                    <!-- <li class="nav-list-item footer-detail"><%= link_to '特定商取引法に基づく表記', root_path %></li> -->
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
           <div class="footer-bottom">
-            <%= link_to root_path do %>
-              <%= image_tag("/images/no_image.png") %></p>
-            <% end %>
-            <p>© 2019 BandBund</p>
-          </div>
+            <div class="under-line2">
+            </div>
+            <div class="footer-text">
+              <p>© 2019 BandBund</p>
+            </div>
+          </div>  
         </nav>
       </footer>
     </div>
