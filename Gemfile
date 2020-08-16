@@ -84,4 +84,12 @@ gem 'devise-i18n-views'
 # 論理削除
 gem 'paranoia'
 
+# ページネイション
 gem 'kaminari','~> 1.1.1'
+
+# omniauth
+gem 'omniauth','~> 1.9.1'
+# githubログイン
+gem 'omniauth-github','~> 1.4.0'
+# csrf対策
+gem 'omniauth-rails_csrf_protection','~> 0.1.2'
