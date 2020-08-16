@@ -66,7 +66,9 @@ ActiveRecord::Schema.define(version: 2019_08_28_151759) do
     t.text "user_body"
     t.text "icon_image_id"
     t.text "backcover_image_id"
+    # プロバイダ毎に発行されるユーザー識別用の文字列
     t.string "uid"
+    # OmniAuthで使用するプロバイダ名
     t.string "provider"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
