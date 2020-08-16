@@ -11,7 +11,8 @@
       <%= f.text_area :review_body, size: "8x8" %>
       <h4>場所の画像</h4>
       <%= f.attachment_field :review_image %>
-      <%= f.submit '登録', class: "btn btn-primary" %><br><br>
+        <!-- 二重送信できないようにする -->
+      <%= f.submit '登録', data: { disable_with: '登録中' }, class: "btn btn-primary" %><br><br>
       <%= link_to '削除', post_path(@post), method: :delete, "data-confirm" => "口コミを本当に削除しますか？", class: "btn btn-danger" %>
     <% end %>
     </div>
