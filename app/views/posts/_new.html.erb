@@ -1,8 +1,10 @@
+<!-- パーシャル -->
 <%= form_for post, url:posts_create_path(id) do |f| %>
   <h4>口コミ</h4>
   <h6>※100文字まで</h6>
   <%= f.text_area :review_body, size: "8x8" %>
   <h4>場所の画像</h4>
   <%= f.attachment_field :review_image %>
-  <%= f.submit '登録', class: "btn btn-primary" %>
+  <!-- 二重送信できないようにする -->
+  <%= f.submit '送信', data: { disable_with: '送信中' }, class: "btn btn-primary" %>
 <% end %>
