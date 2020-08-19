@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_151759) do
+ActiveRecord::Schema.define(version: 2020_08_19_233428) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 2019_08_28_151759) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "github_users", force: :cascade do |t|
+    t.string "user_id", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "provider", "uid"], name: "index_github_users_on_user_id_and_provider_and_uid", unique: true
   end
 
   create_table "posts", force: :cascade do |t|
@@ -66,9 +75,7 @@ ActiveRecord::Schema.define(version: 2019_08_28_151759) do
     t.text "user_body"
     t.text "icon_image_id"
     t.text "backcover_image_id"
-    # プロバイダ毎に発行されるユーザー識別用の文字列
     t.string "uid"
-    # OmniAuthで使用するプロバイダ名
     t.string "provider"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
