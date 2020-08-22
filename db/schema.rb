@@ -30,12 +30,13 @@ ActiveRecord::Schema.define(version: 2020_08_19_233428) do
   end
 
   create_table "github_users", force: :cascade do |t|
-    t.string "user_id", null: false
+    t.integer "user_id", null: false
     t.string "provider", null: false
     t.string "uid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "provider", "uid"], name: "index_github_users_on_user_id_and_provider_and_uid", unique: true
+    t.index ["provider", "uid"], name: "index_github_users_on_provider_and_uid", unique: true
+    t.index ["user_id"], name: "index_github_users_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|

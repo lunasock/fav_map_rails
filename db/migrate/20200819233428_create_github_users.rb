@@ -1,8 +1,8 @@
 class CreateGithubUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :github_users do |t|
-      # not nill制約
-      t.string :user_id, null: false
+      # 外部キー制約
+      t.references :user, foreign_key: true, null: false
       t.string :provider, null: false
       t.string :uid, null: false
 
@@ -10,6 +10,10 @@ class CreateGithubUsers < ActiveRecord::Migration[5.2]
     end
 
     # インデックスを貼る
-    add_index :github_users, %i[user_id provider uid], unique: true
+    # データ量が多く、少量のレコードを検索するとき
+    # Where句の条件として頻繁に利用するとき
+    # 頻繁に挿入、更新されたり、0 or 1、nullがあるカラムには貼らない
+    # user_idには外部キー制約の記載でindexが貼られる
+    add_index :github_users, %i[provider uid], unique: true
   end
 end
