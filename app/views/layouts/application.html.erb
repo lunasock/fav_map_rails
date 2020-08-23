@@ -90,7 +90,9 @@
                     <li class="nav-list-item footer-detail"><%= link_to 'よくある質問', question_path %>
                     <li class="nav-list-item footer-detail"><%= link_to 'BandBundについて', about_path %></li>
                     <li class="nav-list-item footer-detail"><%= link_to '利用規約', terms_path %></li>
-                    <li class="nav-list-item footer-detail"><%= link_to 'プライバシーポリシー', privacy_path %></li>
+                    <!-- CSRF対策のためmethod: :postを指定(postでないとルーティングエラー) -->
+                    <li class="nav-list-item footer-detail"><%= link_to 'githubログイン', "/auth/github", method: :post %></li>
+                    <!-- <li class="nav-list-item footer-detail"><%= link_to 'プライバシーポリシー', privacy_path %></li> -->
                     <!-- <li class="nav-list-item footer-detail"><%= link_to '特定商取引法に基づく表記', root_path %></li> -->
                   </ul>
                 </div>
