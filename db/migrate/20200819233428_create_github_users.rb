@@ -1,8 +1,9 @@
 class CreateGithubUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :github_users do |t|
-      # 外部キー制約
-      t.references :user, foreign_key: true, null: false
+      # 外部キー制約をつける場合
+      # t.references :user, foreign_key: true, null: false
+      t.integer :user_id
       t.string :provider, null: false
       t.string :uid, null: false
 

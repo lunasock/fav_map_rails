@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   }
 
   root 'spots#index'
+  # Githubログインのコールバック
+  get "/auth/:provider/callback" => "github_users#create"
+  # ログアウト
+  delete "/logout" => "github_users#destroy"
   get '/about' => 'others#about', as: 'about'
   get '/terms' => 'others#terms', as: 'terms'
   get '/privacy' => 'others#privacy', as: 'privacy'
