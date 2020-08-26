@@ -46,4 +46,14 @@ class Spot < ApplicationRecord
   # => Hoge.costly.named("hoge")で呼び出せる
   # nilを返す場合はクラスメソッドで定義する
 
+  # バリデーションを自作する
+  # validates :start_at_should_be_before_end_at
+  # def start_at_should_be_before_end_at
+  #   return unless start_at && end_at
+
+  #   if start_at >= end_at
+  #     errors.add(:start_at, "は終了時間よりも前に設定してください")
+  #   end
+  # end
+
 end
