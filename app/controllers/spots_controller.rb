@@ -73,13 +73,15 @@ class SpotsController < ApplicationController
     spot = Spot.find(params[:id])
     user = spot.user
     if current_user != user
-       redirect_to root_path
+      redirect_to root_path
     end
   end
   
   private
   def spot_params
-    params.require(:spot).permit(:user_id, :spot_name, :category, :address, :latitude, :longitude, :spot_image, :spot_body)
+    params.require(:spot).permit(
+      :user_id, :spot_name, :category, :address, :latitude, :longitude, :spot_image, :spot_body
+    )
   end
 
 end

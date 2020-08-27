@@ -42,12 +42,14 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     user = post.user
     if current_user != user
-       redirect_to root_path
+      redirect_to root_path
     end
   end
 
   private
   def post_params
-    params.require(:post).permit(:user_id, :spot_id, :review_body, :review_image)
+    params.require(:post).permit(
+      :user_id, :spot_id, :review_body, :review_image
+    )
   end
 end
