@@ -1,4 +1,7 @@
 class GithubUsersController < ApplicationController
+  # アプリケーションコントローラーで定義したbefore_actionのメソッドを、createアクションのみスキップ
+  # skip_before_action :authenticate, only: :create
+  
   # ログイン
   def create
     # GithubUserモデルでfind_or_create_from_auth_hash!メソッドを定義
