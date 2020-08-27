@@ -16,6 +16,9 @@ class Spot < ApplicationRecord
   # 中間テーブルはそれぞれのテーブルのidだけを持つ
   has_many :posts, dependent: :delete_all
   belongs_to :user
+  # 明示的な名前にもできる
+  # 外部キーをデフォルト以外にする場合
+  # has_many :created_posts, class_name: "Post", foreign_key: "hoge_id"
 
   # presence: trueでNot Null
   validates :spot_name, presence: true, length: { maximum: 16 }

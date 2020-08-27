@@ -35,13 +35,15 @@ class UsersController < ApplicationController
   def correct_user
     user = User.find(params[:id])
     if current_user != user
-       redirect_to root_path
+      redirect_to root_path
     end
   end
 
   private
   def user_params
-    params.require(:user).permit(:user_name, :user_body, :icon_image, :backcover_image, :accepted)
+    params.require(:user).permit(
+      :user_name, :user_body, :icon_image, :backcover_image, :accepted
+    )
   end
 
- end
+end
