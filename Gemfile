@@ -85,6 +85,7 @@ gem 'devise-i18n-views'
 gem 'paranoia'
 
 # ページネイション
+# rails g kaminari:views bootstrap4でkaminariのテンプレートを作成
 gem 'kaminari','~> 1.1.1'
 
 # omniauth
