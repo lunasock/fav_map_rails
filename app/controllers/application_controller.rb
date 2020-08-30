@@ -45,4 +45,22 @@ class ApplicationController < ActionController::Base
   #   redirect_to root_path, alert: "ログインが必要です"
   # end
 
+  # Exceptionは全ての例外の祖先となるクラス
+  # rescue_fromは後のものから判定するのでExceptionは1番上に記述
+  rescue_from Exception, with: :error500
+  # RecordNotFound、RoutingErrorの場合
+  rescue_from ActiveRecord::RecordNotFound, ActionController::RoutingError, with: :error404
+
+  def error404(e)
+    # error404のビューに飛ばす
+    render "error404", status: 404, formats: [:html]
+  end
+
+  def error500(e)
+    # ログにエラーの種類とバックトレースを出力
+    logger.error [e, *e.backtrace].join("\n")
+    # error500のビューに飛ばす
+    render "error500", status: 500, formats: [:html]
+  end
+
 end
