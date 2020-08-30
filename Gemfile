@@ -86,7 +86,7 @@ gem 'paranoia'
 
 # ページネイション
 # rails g kaminari:views bootstrap4でkaminariのテンプレートを作成
-gem 'kaminari','~> 1.1.1'
+gem 'kaminari','~> 1.2.1'
 
 # omniauth
 gem 'omniauth','~> 1.9.1'
