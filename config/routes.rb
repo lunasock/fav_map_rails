@@ -29,5 +29,9 @@ Rails.application.routes.draw do
   resources :posts, only: [:show, :update, :destroy]
   get 'users/:id/check' => 'users#check', as:'check'
   resources :users
+  # # ルーティングをネストするとusers/id/spots/idが可能になる
+  # resources :users do
+  #   resources :spots
+  # end
 
 end
