@@ -34,4 +34,7 @@ Rails.application.routes.draw do
   #   resources :spots
   # end
 
+  # URLがマッチしない場合、root画面に飛ばす
+  match "*path" => "spots#index", via: :all
+
 end
