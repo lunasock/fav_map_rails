@@ -13,7 +13,8 @@ class Spot < ApplicationRecord
 
   # 1対1 => has_one
   # 多対多 => has_many :hoges, through: :中間テーブル
-  # 中間テーブルはそれぞれのテーブルのidだけを持つ
+
+  # dependent: :delete_allで、親のレコードが削除されたとき子のレコードも全て削除
   has_many :posts, dependent: :delete_all
   belongs_to :user
   # 明示的な名前にもできる
