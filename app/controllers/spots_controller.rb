@@ -50,6 +50,9 @@ class SpotsController < ApplicationController
     @parkings = Spot.where(category: 4)
     @places = Spot.where(category: 5)
     @livehouses = Spot.where(category: 0)
+    # # ユーザーとスポットを関連させた場合
+    # @user = User.find(params[:id])
+    # @spots = @user.spots.includes(:user)
   end
 
   def show
