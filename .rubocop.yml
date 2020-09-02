@@ -1,0 +1,24 @@
+# bundle exec rubocop --auto-gen-configによって追加
+# rubocop_todo.ymlを読み込む
+inherit_from: .rubocop_todo.yml
+
+# bundle exec rubocop
+# bundle exec rubocop --auto-gen-config
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  DisableByDefault: true
+
+# 英語でコメントが書かれているかのチェックを無効にする
+Style/AsciiComments:
+  Enabled: false
+
+# LintとSecurityだけを有効にする
+Lint:
+  Enabled: true
+
+Security:
+  Enabled: true
