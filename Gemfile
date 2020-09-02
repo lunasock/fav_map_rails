@@ -39,6 +39,13 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw] 
+  # .rubocop.ymlはルートフォルダに置く
+  # .git/hooks/pre-commitに以下記載でコミット前にrubocopを走らせる
+  # #!/bin/sh
+  # bundle exec rubocop
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :development do
