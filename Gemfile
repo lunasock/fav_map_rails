@@ -55,6 +55,10 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # 脆弱性を解析
+  # bundle exec brakeman
+  # -Aで全ての項目を検索、-wlで軽微な問題まで検索
+  gem 'brakeman'
 end
 
 group :test do
