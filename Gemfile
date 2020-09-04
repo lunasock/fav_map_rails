@@ -112,3 +112,8 @@ gem 'omniauth-rails_csrf_protection','~> 0.1.2'
 # Railsの辞書データを日本語化
 # モデルやカラムの名前などの辞書データは手動でconfig/locales/ja.ymlに記載
 gem 'rails-i18n'
+
+# カバレッジ測定
+# spec_helper.rbにrequireを追記
+# 並列テスト不可
+gem 'simplecov', require: false, group: :test
