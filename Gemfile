@@ -62,6 +62,10 @@ group :development do
   # sでスキップ
   # uで無視リストから除外
   gem 'brakeman'
+  # パフォーマンス測定
+  # 導入時にrails g rack_profiler:install
+  # 本番環境に近いDBにしておく
+  gem 'rack-mini-profiler', require: false
 end
 
 group :test do

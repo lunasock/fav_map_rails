@@ -248,6 +248,8 @@ GEM
     puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.2.3)
+    rack-mini-profiler (2.0.4)
+      rack (>= 1.2.0)
     rack-protection (2.0.8.1)
       rack
     rack-test (1.1.0)
@@ -450,6 +452,7 @@ DEPENDENCIES
   paranoia
   pry-byebug
   puma (~> 4.3.5)
+  rack-mini-profiler
   rails (~> 6.0.3)
   rails-controller-testing
   rails-i18n
