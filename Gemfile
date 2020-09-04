@@ -56,8 +56,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # 脆弱性を解析
-  # bundle exec brakeman
+  # bundle exec brakeman -IA
   # -Aで全ての項目を検索、-wlで軽微な問題まで検索
+  # iで無視リストに追加
+  # sでスキップ
+  # uで無視リストから除外
   gem 'brakeman'
 end
 
