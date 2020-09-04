@@ -1,0 +1,242 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "02299d397024057665404a18ea25f8b287110e0f574e7bc53e05b460b16171bd",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Spot#find`",
+      "file": "app/controllers/spots_controller.rb",
+      "line": 66,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Spot.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SpotsController",
+        "method": "search"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "147b353a1f290836f90aef2fdf897e36d3f4756ceb4db98782e2b293ec14cdba",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Spot#find`",
+      "file": "app/controllers/posts_controller.rb",
+      "line": 27,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Spot.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "PostsController",
+        "method": "create"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "166c9cb4674870933c8f8274c7d28baed405c2f0bf5fcaf98eb109fa43346604",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Post#find`",
+      "file": "app/controllers/posts_controller.rb",
+      "line": 7,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Post.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "PostsController",
+        "method": "edit"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "2cf98c4d7fade11d3315c98a65cc0e4418ca7fe17f28a5f86900b32a49568e9a",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Spot#find`",
+      "file": "app/controllers/spots_controller.rb",
+      "line": 70,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Spot.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SpotsController",
+        "method": "destroy"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "374d1823f191257ae7741e8d4d508d93308b58c1700ff2d2bc828c1ea112da78",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Spot#find`",
+      "file": "app/controllers/spots_controller.rb",
+      "line": 76,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Spot.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SpotsController",
+        "method": "correct_user"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Missing Encryption",
+      "warning_code": 109,
+      "fingerprint": "6a26086cd2400fbbfb831b2f8d7291e320bcc2b36984d2abc359e41b3b63212b",
+      "check_name": "ForceSSL",
+      "message": "The application does not force use of HTTPS: `config.force_ssl` is not enabled",
+      "file": "config/environments/production.rb",
+      "line": 1,
+      "link": "https://brakemanscanner.org/docs/warning_types/missing_encryption/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "High",
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "8a935a7ae1fc06b6c9c405350bf8007df7747567dab2bf7b08d08805141427c0",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Spot#find`",
+      "file": "app/controllers/spots_controller.rb",
+      "line": 59,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Spot.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SpotsController",
+        "method": "show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "a7f2cb8f633a4689a55a1466075cc217f905dda0424921265ac00fb58b7441ff",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Post#find`",
+      "file": "app/controllers/posts_controller.rb",
+      "line": 11,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Post.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "PostsController",
+        "method": "update"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "b45e05b0af555a0a7381d086dd42ed433b2296494c7e191c4b795bb165b345e6",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Spot#find`",
+      "file": "app/controllers/spots_controller.rb",
+      "line": 29,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Spot.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SpotsController",
+        "method": "edit"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "c72205ca0eeb9e7f01c3e0ae498a8ee34beee702348cfe33e29839b1b0b82b9b",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Spot#find`",
+      "file": "app/controllers/spots_controller.rb",
+      "line": 33,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Spot.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SpotsController",
+        "method": "update"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "d58638b6f8f389c379c6392205df0adfad1b7f72e52ea778e1d7725a02dbca06",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Post#find`",
+      "file": "app/controllers/posts_controller.rb",
+      "line": 42,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Post.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "PostsController",
+        "method": "correct_user"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Unscoped Find",
+      "warning_code": 82,
+      "fingerprint": "fc5e8e904a3c10ab7b99c47c909e1877d7cb22bd123ff69f8dd641e787abdacc",
+      "check_name": "UnscopedFind",
+      "message": "Unscoped call to `Post#find`",
+      "file": "app/controllers/posts_controller.rb",
+      "line": 36,
+      "link": "https://brakemanscanner.org/docs/warning_types/unscoped_find/",
+      "code": "Post.find(params[:id])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "PostsController",
+        "method": "destroy"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "note": ""
+    }
+  ],
+  "updated": "2020-09-04 23:22:46 +0000",
+  "brakeman_version": "4.9.0"
+}
