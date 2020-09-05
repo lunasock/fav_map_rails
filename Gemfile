@@ -62,9 +62,10 @@ group :development do
   # sでスキップ
   # uで無視リストから除外
   gem 'brakeman'
-  # パフォーマンス測定
+  # ローカルで使えるパフォーマンス測定
   # 導入時にrails g rack_profiler:install
   # 本番環境に近いDBにしておく
+  # WebサービスとしてSkylight(https://www.skylight.io/)もある
   gem 'rack-mini-profiler', require: false
 end
 
@@ -120,4 +121,5 @@ gem 'rails-i18n'
 # カバレッジ測定
 # spec_helper.rbにrequireを追記
 # 並列テスト不可
+# WebサービスとしてCoveralls(https://coveralls.io)もある
 gem 'simplecov', require: false, group: :test
