@@ -123,3 +123,9 @@ gem 'rails-i18n'
 # 並列テスト不可
 # WebサービスとしてCoveralls(https://coveralls.io)もある
 gem 'simplecov', require: false, group: :test
+
+# エラートラッキング
+# rails g rollbar
+# 環境変数にトークンを設定
+# raise RuntimeErrorなどで擬似的にエラーを起こせる
+gem 'rollbar'
