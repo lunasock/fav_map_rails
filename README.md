@@ -1,6 +1,20 @@
-# BandBund
+# fav_map_rails
 
-BandBundはバンドマンの総力を結集し、ライブハウス近隣を可視化するマップアプリです。
+<!-- # Short Description -->
+
+fav map
+
+<!-- # Badges -->
+
+[![Github issues](https://img.shields.io/github/issues/KeisukeOmata/fav_map_rails)](https://github.com/KeisukeOmata/fav_map_rails/issues)
+[![Github forks](https://img.shields.io/github/forks/KeisukeOmata/fav_map_rails)](https://github.com/KeisukeOmata/fav_map_rails/network/members)
+[![Github stars](https://img.shields.io/github/stars/KeisukeOmata/fav_map_rails)](https://github.com/KeisukeOmata/fav_map_rails/stargazers)
+[![Github top language](https://img.shields.io/github/languages/top/KeisukeOmata/fav_map_rails)](https://github.com/KeisukeOmata/fav_map_rails/)
+[![Github license](https://img.shields.io/github/license/KeisukeOmata/fav_map_rails)](https://github.com/KeisukeOmata/fav_map_rails/)
+
+# デモ
+
+fav mapはお気に入りの場所を可視化するマップアプリです。
 <img width="1239" alt="スクリーンショット 2019-08-29 18 23 49" src="https://user-images.githubusercontent.com/50476037/63928256-3b422900-ca8a-11e9-8bd2-f172da6741bb.png">
 
 画面右上の住所検索か、マップをタップするとピンが表示されます。
@@ -14,3 +28,24 @@ BandBundはバンドマンの総力を結集し、ライブハウス近隣を可
 
 お気に入りの場所にはぜひ口コミを投稿してください。
 <img width="1239" alt="pic4" src="https://user-images.githubusercontent.com/50476037/63928585-c3c0c980-ca8a-11e9-8914-595be2aac1ac.png">
+
+# インストール
+
+Ruby 2.7.1  
+Ruby on Rails 6.0.3
+
+git clone git@github.com:KeisukeOmata/fav_map_rails.git
+<br>
+cd fav_map_rails
+<br>
+bundle install
+
+Google Maps APIを利用しています。
+<br>
+環境変数'GOOGLE_MAP_API_KEY'にご自身のAPI キーの設定をお願いします。
+
+# 作者
+
+- [KeisukeOmata](https://github.com/KeisukeOmata)
+
+<!-- CREATED_BY_LEADYOU_README_GENERATOR -->
