@@ -42,7 +42,7 @@ class Spot < ApplicationRecord
   # end
 
   # スコープを設定する
-  # contはカラム名
+  # costはカラム名
   # scope :costly, -> { where("cost > ?", 1000) }
   # => Hoge.costlyで呼び出せる
   # nameはカラム名
