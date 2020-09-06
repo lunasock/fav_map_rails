@@ -3,6 +3,8 @@ class SpotsController < ApplicationController
   # 未ログインでもindex,searchは可能
   before_action :authenticate_user!, only: [:create, :edit, :update, :show, :destroy]
   before_action :correct_user, only: [:edit]
+  # @spot = Spot.find(params[:id])
+  before_action :set_spot, only: [:edit, :update, :show, :destroy]
   
   def create
     @spot = Spot.new(spot_params)
@@ -26,11 +28,9 @@ class SpotsController < ApplicationController
   end
 
   def edit
-    @spot = Spot.find(params[:id])
   end
 
   def update
-    @spot = Spot.find(params[:id])
     if @spot.update(spot_params)
       redirect_to spot_path(@spot)
     else
@@ -56,7 +56,6 @@ class SpotsController < ApplicationController
   end
 
   def show
-    @spot = Spot.find(params[:id])
     @post = Post.new
     @posts = @spot.posts.page(params[:page]).reverse_order.per(30)
   end
@@ -67,7 +66,6 @@ class SpotsController < ApplicationController
   end
 
   def destroy
-    @spot = Spot.find(params[:id])
     @spot.destroy
     redirect_to root_path
   end
@@ -81,6 +79,12 @@ class SpotsController < ApplicationController
   end
   
   private
+
+  # 重複した処理は纏める
+  def set_spot
+    @spot = Spot.find(params[:id])
+  end
+
   def spot_params
     params.require(:spot).permit(
       :user_id, :spot_name, :category, :address, :latitude, :longitude, :spot_image, :spot_body
