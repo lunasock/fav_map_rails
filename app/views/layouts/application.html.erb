@@ -9,8 +9,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- rails 6.0から -->
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- app/javascript/packs配下に追加する毎に必要 -->
+    <!-- javascript_pack_tag 'hello', 'data-turbolinks-track': 'reload' -->
+    <!-- rails 5.2まで -->
+    <!-- javascript_include_tag 'application', 'data-turbolinks-track': 'reload' -->
   </head>
 
   <body>

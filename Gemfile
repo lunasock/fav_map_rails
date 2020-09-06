@@ -129,3 +129,7 @@ gem 'simplecov', require: false, group: :test
 # 環境変数にトークンを設定
 # raise RuntimeErrorなどで擬似的にエラーを起こせる
 gem 'rollbar'
+
+# rails6.0からjsのコンパイラーはwebpackerに
+# bundle install => rails webpacker:install
+gem 'webpacker'
