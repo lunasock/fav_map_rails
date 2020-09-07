@@ -9,7 +9,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- 画像 -->
+    <!-- 画像を表示 -->
+    <!-- image_pack_tag("media/images/sample.png") -->
+    <!-- ファイルパスを取得 -->
+    <!-- image_tag(asset_pack_path("media/images/sample.png")) -->
+    <!-- css -->
+    <!-- cssをWebpackerで管理する -->
+    <%= stylesheet_pack_tag "application" %>
+    <!-- stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' -->
+    <!-- js -->
     <!-- rails 6.0から -->
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <!-- app/javascript/packs配下に追加する毎に必要 -->
