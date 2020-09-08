@@ -19,11 +19,14 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 // cssをWebpackerで管理する
-// app/javascript/stylesheets/application.css を作成
-require("stylesheets/application")
+// app/javascript/stylesheets/application.scss を作成
+require("../stylesheets/application.scss")
 // 画像をWebpackerで管理する
 // app/javascript/media/images を作成
 require.context("../media/images", true)
+// bootstrap
+require("jquery");
+require("bootstrap");
 
 // コンパイルは rails webpacker:compile
 // js用のサーバーを動かしておく bin/webpack-dev-server

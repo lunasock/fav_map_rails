@@ -16,15 +16,16 @@
     <!-- image_tag(asset_pack_path("media/images/sample.png")) -->
     <!-- css -->
     <!-- cssをWebpackerで管理する -->
-    <%= stylesheet_pack_tag "application" %>
-    <!-- stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' -->
+    <!-- stylesheet_pack_tag "application", media: "all", "data-turbolinks-track": "reload" -->
+    <!-- cssをSprocketsで管理する -->
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <!-- js -->
     <!-- rails 6.0から -->
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' -->
     <!-- app/javascript/packs配下に追加する毎に必要 -->
     <!-- javascript_pack_tag 'hello', 'data-turbolinks-track': 'reload' -->
     <!-- rails 5.2まで -->
-    <!-- javascript_include_tag 'application', 'data-turbolinks-track': 'reload' -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
