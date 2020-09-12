@@ -38,7 +38,7 @@ git clone git@github.com:KeisukeOmata/fav_map_rails.git
 <br>
 cd fav_map_rails
 <br>
-bundle install
+bin/bundle install
 <br>
 bin/rails db:migrate
 <br>
