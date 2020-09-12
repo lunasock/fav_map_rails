@@ -39,6 +39,10 @@ git clone git@github.com:KeisukeOmata/fav_map_rails.git
 cd fav_map_rails
 <br>
 bundle install
+<br>
+bin/rails db:migrate
+<br>
+bin/rails s -b 0.0.0.0
 
 Google Maps APIを利用しています。
 <br>
