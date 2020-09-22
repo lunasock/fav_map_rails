@@ -1,6 +1,3 @@
-<!-- 現在時刻を変数で持つ -->
-<!-- Time.nowは現在時刻、Time.zone.nowは「config/application.rb」で設定したタイムゾーンを参照する -->
-<% now = Time.zone.now %>
 <% if flash[:alert] %>
   <div class="alert alert-warning" role="alert">
     <p><%= flash[:alert] %></p>
