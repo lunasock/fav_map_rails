@@ -17,6 +17,10 @@ module BandBund
     # DBもJSTにする場合
     # かつアプリケーションサーバのタイムゾーンをJSTにする
     # config.active_record.default_time_zone = :local
+    # viewの記載
+    # <!-- 現在時刻を変数で持つ -->
+    # <!-- Time.nowは現在時刻、Time.zone.nowは「config/application.rb」で設定したタイムゾーンを参照する -->
+    # <% now = Time.zone.now %
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
