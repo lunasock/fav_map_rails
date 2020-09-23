@@ -1,5 +1,19 @@
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  # bulletの設定
+  config.after_initialize do
+    # Bulletを有効化
+    Bullet.enable = true
+    # アラートを表示する
+    Bullet.alert = true
+    # Bulletログファイル(Rails.root/log/bullet.log)を出力する
+    Bullet.bullet_logger = true
+    # コンソールに出力する
+    Bullet.console = true
+    # Railsのログに出力する
+    Bullet.rails_logger = true
+    # ページの左下に結果を表示
+    Bullet.add_footer = true
+  end
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -59,4 +73,5 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
 end
