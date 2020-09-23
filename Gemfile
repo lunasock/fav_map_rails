@@ -55,6 +55,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
   # 脆弱性を解析
   # bundle exec brakeman -IA
   # -Aで全ての項目を検索、-wlで軽微な問題まで検索
@@ -62,11 +63,18 @@ group :development do
   # sでスキップ
   # uで無視リストから除外
   gem 'brakeman'
+
   # ローカルで使えるパフォーマンス測定
   # 導入時にrails g rack_profiler:install
   # 本番環境に近いDBにしておく
   # WebサービスとしてSkylight(https://www.skylight.io/)もある
   gem 'rack-mini-profiler', require: false
+
+  # N+1問題を察知
+  # config/environments/development.rb に設定を記載
+  # bundle exec rails g bullet:install
+  gem 'bullet'
+
 end
 
 group :test do
