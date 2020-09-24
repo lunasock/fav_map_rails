@@ -1,6 +1,7 @@
 # Node.jsダウンロード用ビルドステージ
 FROM ruby:2.7.1 AS nodejs
 
+# 作業用（working）ディレクトリを指定
 WORKDIR /tmp
 
 # Node.jsのダウンロード
@@ -22,6 +23,7 @@ ENV PATH /root/.yarn/bin:/root/.config/yarn/global/node_modules/.bin:$PATH
 # ruby2.7以上でエラーにならないよう、bundlerを最新までアップデート
 RUN gem install bundler
 
+# 作業用（working）ディレクトリを指定
 WORKDIR /app
 
 RUN bundle config set path vendor/bundle
