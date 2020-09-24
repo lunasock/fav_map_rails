@@ -34,11 +34,25 @@ services:
     # 先に起動したいサービス名
     depends_on:
       - mysql
+      - nginx
     # 以下のディレクトリを、ホストOS(PC)上で定義したボリュームにマウント
     volumes:
       - .:/app
       - fav_map_bundle:/app/vendor/bundle
       - fav_map_node_modules:/app/node_modules
+      - fav_map_public:/app/public
+      - fav_map_socket:/app/sockets
+    # command: ["bundle", "exec", "puma", "-b", "unix:///app/sockets/puma.sock"]
+
+  nginx:
+    image: nginx:1.17
+    ports:
+      - "8080:80"
+    command: [nginx]
+    volumes: 
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - fav_map_public:/app/public
+      - fav_map_socket:/app/sockets
 
 # ホストOS(PC)上にボリュームを定義
 volumes:
@@ -47,4 +61,8 @@ volumes:
   fav_map_bundle:
     driver: local
   fav_map_node_modules:
+    driver: local
+  fav_map_public:
+    driver: local
+  fav_map_socket:
     driver: local
