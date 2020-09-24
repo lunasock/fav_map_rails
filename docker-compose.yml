@@ -1,32 +1,46 @@
 version: "3.7"
+
+# コンテナ数
 services:
+  # コンテナ名
   mysql:
+    # PullするDockerイメージ
     image: mysql/mysql-server:5.7
     command: ["--bind-address=0.0.0.0"]
+    # 環境変数
     environment:
       MYSQL_ROOT_PASSWORD: password
+    # localhost3360番ポートあての通信を、コンテナ3360番ポートに転送
     ports:
       - "3306:3306"
+    # 以下のディレクトリを、ホストOS(PC)上で定義したボリュームにマウント
     volumes:
       - mysql-data:/var/lib/mysql
 
+  # コンテナ名
   app:
+    # Dockerfileの場所
     build:
       context: .
       dockerfile: Dockerfile
+    # 環境変数
     environment:
       MYSQL_USERNAME: app
       MYSQL_PASSWORD: password
       MYSQL_HOST: mysql
+    # localhost3000番ポートあての通信を、コンテナ3000番ポートに転送
     ports:
       - "3000:3000"
+    # 先に起動したいサービス名
     depends_on:
       - mysql
+    # 以下のディレクトリを、ホストOS(PC)上で定義したボリュームにマウント
     volumes:
       - .:/app
       - fav_map_bundle:/app/vendor/bundle
       - fav_map_node_modules:/app/node_modules
 
+# ホストOS(PC)上にボリュームを定義
 volumes:
   mysql-data:
     driver: local
