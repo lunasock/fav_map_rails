@@ -141,3 +141,5 @@ gem 'rollbar'
 # rails6.0からjsのコンパイラーはwebpackerに
 # bundle install => rails webpacker:install
 gem 'webpacker'
+
+gem 'mysql2', '>= 0.4.4'
