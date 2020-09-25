@@ -14,10 +14,12 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+// rails5系からのアップデートの場合、先にyarn add turbolinks、yarn add rails/ujsが必要
+// その後 bin/rails assets:precompile
 require("@rails/ujs").start()
 require("turbolinks").start()
-require("@rails/activestorage").start()
-require("channels")
+// require("@rails/activestorage").start()
+// require("channels")
 // cssをWebpackerで管理する
 // app/javascript/stylesheets/application.scss を作成
 require("../stylesheets/application.scss")
