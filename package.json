@@ -2,11 +2,14 @@
   "name": "BandBund",
   "private": true,
   "dependencies": {
+    "@rails/ujs": "^6.0.3-3",
     "@rails/webpacker": "5.2.1",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
-    "rails-erb-loader": "^5.5.2"
+    "rails-erb-loader": "^5.5.2",
+    "turbolinks": "^5.2.0",
+    "ujs": "^0.34.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
