@@ -1,19 +1,22 @@
 version: "3.7"
 
-# コンテナ数
 services:
-  # コンテナ名
+  
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    command: [redis-server]
+    volumes:
+      - ./data/redis:/data
+
   mysql:
-    # PullするDockerイメージ
     image: mysql/mysql-server:5.7
     command: ["--bind-address=0.0.0.0"]
-    # 環境変数
     environment:
       MYSQL_ROOT_PASSWORD: password
-    # localhost3360番ポートあての通信を、コンテナ3360番ポートに転送
     ports:
       - "3306:3306"
-    # 以下のディレクトリを、ホストOS(PC)上で定義したボリュームにマウント
     volumes:
       - mysql-data:/var/lib/mysql
 
@@ -35,6 +38,7 @@ services:
     depends_on:
       - mysql
       - nginx
+      - redis
     # 以下のディレクトリを、ホストOS(PC)上で定義したボリュームにマウント
     volumes:
       - .:/app
