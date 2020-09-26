@@ -1,4 +1,6 @@
 class Spot < ApplicationRecord
+  # 検索にKuromojiを利用
+  searchkick language: "japanese"
 
   attachment :spot_image
 
@@ -59,5 +61,15 @@ class Spot < ApplicationRecord
   #     errors.add(:start_at, "は終了時間よりも前に設定してください")
   #   end
   # end
+
+  # メソッドの戻り値がelasticsearchのインデックスに追加される
+  # bin/rails r Spot.reindex
+  def search_data
+    {
+      spot_name: spot_name,
+      address: address,
+      spot_body: spot_body
+    }
+  end
 
 end
