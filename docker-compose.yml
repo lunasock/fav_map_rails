@@ -79,6 +79,8 @@ services:
       - .:/app
       - fav_map_bundle:/app/vendor/bundle
       - fav_map_node_modules:/app/node_modules
+      - fav_map_public:/app/public
+      - fav_map_socket:/app/sockets
     # command: ["bundle", "exec", "puma", "-b", "unix:///app/sockets/puma.sock"]
 
   nginx:
