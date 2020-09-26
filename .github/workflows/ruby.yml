@@ -1,11 +1,6 @@
 name: Rails Tests
 # プッシュとプルリクエストをトリガーにする
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+on: [push, pull_request]
 jobs:
   build:
     # 実行環境のOS
@@ -49,5 +44,3 @@ jobs:
       bin/rails db:create
       bin/rails db:migrate
       bin/yarn install
-# bin/rails test
-# bin/rails test:system
