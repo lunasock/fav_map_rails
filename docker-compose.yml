@@ -8,7 +8,7 @@ services:
       - "6379:6379"
     command: [redis-server]
     volumes:
-      - ./data/redis:/data
+      - redis-data:/data
 
   mysql:
     image: mysql/mysql-server:5.7
@@ -69,4 +69,6 @@ volumes:
   fav_map_public:
     driver: local
   fav_map_socket:
+    driver: local
+  redis-data:
     driver: local
