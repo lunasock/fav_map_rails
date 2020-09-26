@@ -32,6 +32,7 @@ jobs:
     # elasticsearch
     - name: Configure sysctl limits
       run: |
+        apt update && apt install sudo
         sudo swapoff -a
         sudo sysctl -w vm.swappiness=1
         sudo sysctl -w fs.file-max=262144
