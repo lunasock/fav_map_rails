@@ -5,9 +5,9 @@ FROM ruby:2.7.1 AS nodejs
 WORKDIR /tmp
 
 # Node.jsのダウンロード
-RUN curl -LO https://nodejs.org/dist/v12.14.1/node-v12.14.1-linux-x64.tar.xz
-RUN tar xvf node-v12.14.1-linux-x64.tar.xz
-RUN mv node-v12.14.1-linux-x64 node
+RUN curl -LO https://nodejs.org/dist/v12.18.4/node-v12.18.4-linux-x64.tar.xz
+RUN tar xvf node-v12.18.4-linux-x64.tar.xz
+RUN mv node-v12.18.4-linux-x64 node
 
 # railsのインストール
 FROM ruby:2.7.1
