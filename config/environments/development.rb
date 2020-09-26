@@ -23,7 +23,6 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  # Show full error reports.
   # falseで開発環境でも本番と同様のエラーページを表示
   config.consider_all_requests_local = false
 

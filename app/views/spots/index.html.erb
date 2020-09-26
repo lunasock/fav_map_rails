@@ -53,6 +53,14 @@
         <!-- 二重送信できないようにする -->
         <%= f.submit '登録', data: { disable_with: '登録中' }, class: "btn btn-primary spot-btn" %>
       <% end %>
+      <br>
+      <!-- elasticsearch -->
+        <!-- form_with(model: @elasticsearch, url: {controller: 'elasticsearch', action: 'index' }, method: :post) do |f| -->
+          <!-- f.text_field :keyword, :placeholder => "投稿を検索" -->
+          <br><br>
+          <!-- f.submit '検索', data: { disable_with: '検索中' }, class: "btn btn-primary spot-btn" -->
+        <!-- end -->
+      <!-- elasticsearch -->
     </div>
   </div>
 </div>
