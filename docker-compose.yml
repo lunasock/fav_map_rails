@@ -1,7 +1,5 @@
 version: "3.7"
-
 services:
-  
   redis:
     image: redis
     ports:
@@ -20,6 +18,17 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  webpack-dev-server:
+    build:
+      context: .
+      dockerfile: Dockerfile-webpack-dev-server
+    environment:
+      WEBPACKER_DEV_SERVER_HOST: 0.0.0.0
+    ports:
+      - 3035:3035
+    volumes:
+      - webpack-dev-server-data:/myapp/public/packs
+
   # コンテナ名
   app:
     # Dockerfileの場所
@@ -31,6 +40,7 @@ services:
       MYSQL_USERNAME: app
       MYSQL_PASSWORD: password
       MYSQL_HOST: mysql
+      WEBPACKER_DEV_SERVER_HOST: webpack-dev-server
     # localhost3000番ポートあての通信を、コンテナ3000番ポートに転送
     ports:
       - "3000:3000"
@@ -39,6 +49,7 @@ services:
       - mysql
       - nginx
       - redis
+      - webpack-dev-server
     # 以下のディレクトリを、ホストOS(PC)上で定義したボリュームにマウント
     volumes:
       - .:/app
@@ -71,4 +82,6 @@ volumes:
   fav_map_socket:
     driver: local
   redis-data:
+    driver: local
+  webpack-dev-server-data:
     driver: local
