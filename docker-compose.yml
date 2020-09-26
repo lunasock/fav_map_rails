@@ -1,5 +1,28 @@
 version: "3.7"
 services:
+  elasticsearch:
+    build: es
+    # 指定したポートが外部に公開されるので、誰でもアクセスできる
+    ports:
+      - "9200:9200"
+    # ホストのみにポートを公開
+    expose:
+      - 9300
+    # elasticsearch.ymlに必要な設定
+    environment:
+      network.host: 0.0.0.0
+      discovery.type: single-node
+    # システム要件
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+
   redis:
     image: redis
     ports:
@@ -50,13 +73,12 @@ services:
       - nginx
       - redis
       - webpack-dev-server
+      - elasticsearch
     # 以下のディレクトリを、ホストOS(PC)上で定義したボリュームにマウント
     volumes:
       - .:/app
       - fav_map_bundle:/app/vendor/bundle
       - fav_map_node_modules:/app/node_modules
-      - fav_map_public:/app/public
-      - fav_map_socket:/app/sockets
     # command: ["bundle", "exec", "puma", "-b", "unix:///app/sockets/puma.sock"]
 
   nginx:
@@ -84,4 +106,6 @@ volumes:
   redis-data:
     driver: local
   webpack-dev-server-data:
+    driver: local
+  elasticsearch-data:
     driver: local
