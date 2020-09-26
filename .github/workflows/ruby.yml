@@ -22,10 +22,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby 2.7.1
-      uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
-      with:
-        ruby-version: 2.7.1
+    - name: Setup YARN and NodeJS
+      run: |
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+        curl -sL https://deb.nodesource.com/setup_13.x | bash -
+        apt-get install -y yarn nodejs
 
     # elasticsearch
     - name: Configure sysctl limits
@@ -47,6 +49,7 @@ jobs:
         RAILS_ENV: test
       run: |
         bundle install --jobs 4 --retry 3
+        bundle exec rails yarn:install db:setup assets:precompile
         bin/rails db:create
         bin/rails db:migrate
         bin/yarn install
