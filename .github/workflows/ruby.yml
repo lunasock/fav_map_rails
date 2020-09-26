@@ -5,24 +5,28 @@ jobs:
   build:
     # 実行環境のOS
     runs-on: ubuntu-latest
+
     services:
       # mysql
       mysql:
         image: mysql:5.7
         env:
           MYSQL_ROOT_PASSWORD: password
+
     container:
       # rails
       image: ruby:2.7.1
       env:
         MYSQL_HOST: mysql
         MYSQL_ROOT_PASSWORD: password
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.7.1
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7.1
+
     # elasticsearch
     - name: Configure sysctl limits
       run: |
@@ -30,17 +34,19 @@ jobs:
         sudo sysctl -w vm.swappiness=1
         sudo sysctl -w fs.file-max=262144
         sudo sysctl -w vm.max_map_count=262144
+
     - name: Run Elasticsearch
       uses: KeisukeOmata/github-actions-with-elasticsearch-plugin
       with:
         stack-version: 7.6.0
         plugins: |
           analysis-kuromoji
+
     - name: Build and test
-    env:
-      RAILS_ENV: test
-    run: |
-      bundle install --jobs 4 --retry 3
-      bin/rails db:create
-      bin/rails db:migrate
-      bin/yarn install
+      env:
+        RAILS_ENV: test
+      run: |
+        bundle install --jobs 4 --retry 3
+        bin/rails db:create
+        bin/rails db:migrate
+        bin/yarn install
