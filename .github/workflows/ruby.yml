@@ -29,21 +29,20 @@ jobs:
         curl -sL https://deb.nodesource.com/setup_13.x | bash -
         apt-get install -y yarn nodejs
 
-    # elasticsearch
-    - name: Configure sysctl limits
-      run: |
-        apt-get install sudo
-        sudo swapoff -a
-        sudo sysctl -w vm.swappiness=1
-        sudo sysctl -w fs.file-max=262144
-        sudo sysctl -w vm.max_map_count=262144
+    # # elasticsearch
+    # - name: Configure sysctl limits
+    #   run: |
+    #     sudo swapoff -a
+    #     sudo sysctl -w vm.swappiness=1
+    #     sudo sysctl -w fs.file-max=262144
+    #     sudo sysctl -w vm.max_map_count=262144
 
-    - name: Run Elasticsearch
-      uses: KeisukeOmata/github-actions-with-elasticsearch-plugin@master
-      with:
-        stack-version: 7.6.0
-        plugins: |
-          analysis-kuromoji
+    # - name: Run Elasticsearch
+    #   uses: KeisukeOmata/github-actions-with-elasticsearch-plugin@master
+    #   with:
+    #     stack-version: 7.6.0
+    #     plugins: |
+    #       analysis-kuromoji
 
     - name: Build and test
       env:
