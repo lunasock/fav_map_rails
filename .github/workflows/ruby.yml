@@ -17,6 +17,18 @@ jobs:
         RAILS_ENV: test
 
     steps:
+      # Gemのキャッシュ
+      - uses: actions/checkout@v1
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: bundle-${{ hashFiles('**/Gemfile.lock') }}
+      # yarnライブラリのキャッシュ
+      - uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+      
       # elasticsearch
       - name: Configure sysctl limits
         run: |
@@ -30,18 +42,6 @@ jobs:
           stack-version: 7.6.0
           plugins: |
             analysis-kuromoji
-
-      # Gemのキャッシュ
-      - uses: actions/checkout@v1
-      - uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: bundle-${{ hashFiles('**/Gemfile.lock') }}
-      # yarnライブラリのキャッシュ
-      - uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Set up yarn and node
         run: |
