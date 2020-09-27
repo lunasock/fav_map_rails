@@ -31,6 +31,7 @@ jobs:
 
       # elasticsearch
       - name: Configure sysctl limits
+      - uses: actions/checkout@v2
         run: |
           sudo swapoff -a
           sudo sysctl -w vm.swappiness=1
