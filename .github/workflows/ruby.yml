@@ -1,55 +1,39 @@
 name: Rails Tests
-# プッシュとプルリクエストをトリガーにする
 on: [push, pull_request]
 jobs:
   build:
-    # 実行環境のOS
     runs-on: ubuntu-latest
-
     services:
       # mysql
       mysql:
         image: mysql:5.7
         env:
           MYSQL_ROOT_PASSWORD: password
-
-    container:
-      # rails
-      image: ruby:2.7.1
-      env:
-        MYSQL_HOST: mysql
-        MYSQL_ROOT_PASSWORD: password
-
     steps:
     - uses: actions/checkout@v2
-    - name: Setup YARN and NodeJS
+    - name: Set up Ruby 2.7.1
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.1
+    - name: Configure sysctl limits
       run: |
-        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-        echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-        curl -sL https://deb.nodesource.com/setup_13.x | bash -
-        apt-get install -y yarn nodejs
-
-    # # elasticsearch
-    # - name: Configure sysctl limits
-    #   run: |
-    #     sudo swapoff -a
-    #     sudo sysctl -w vm.swappiness=1
-    #     sudo sysctl -w fs.file-max=262144
-    #     sudo sysctl -w vm.max_map_count=262144
-
-    # - name: Run Elasticsearch
-    #   uses: KeisukeOmata/github-actions-with-elasticsearch-plugin@master
-    #   with:
-    #     stack-version: 7.6.0
-    #     plugins: |
-    #       analysis-kuromoji
-
+        sudo swapoff -a
+        sudo sysctl -w vm.swappiness=1
+        sudo sysctl -w fs.file-max=262144
+        sudo sysctl -w vm.max_map_count=262144
+    - name: Run Elasticsearch
+      uses: perfect-ruby-on-rails/elasticsearch-with-plugins-action@v1
+      with:
+        stack-version: 7.6.0
+        plugins: |
+          analysis-kuromoji
     - name: Build and test
       env:
         RAILS_ENV: test
       run: |
         bundle install --jobs 4 --retry 3
-# bin/rails db:create
-# bin/rails db:migrate
-# bin/rails assets:precompile
-# bin/yarn install
+        bin/rails db:create
+        bin/rails db:migrate
+        bin/yarn install
+#        bin/rails test
+#        bin/rails test:system
