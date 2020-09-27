@@ -18,7 +18,7 @@ jobs:
 
     steps:
       # Gemのキャッシュ
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/cache@v1
         with:
           path: vendor/bundle
@@ -35,7 +35,6 @@ jobs:
           echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
           curl -sL https://deb.nodesource.com/setup_12.x | bash -
           apt install -y yarn nodejs
-
       # chromeのインストール
       - name: Install chrome
         run: |
@@ -43,12 +42,10 @@ jobs:
           echo 'deb http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
           apt update -y
           apt install -y google-chrome-stable
-
       - name: bundle install
         run: |
           gem install bundler
           bundle install --path vendor/bundle --quiet --jobs 4 --retry 3
-
       - name: yarn install
         run: yarn install
 
