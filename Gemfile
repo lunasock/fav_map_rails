@@ -82,7 +82,8 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+  # gem 'chromedriver-helper'
+  gem 'webdrivers', '~> 3.0'
   gem 'rspec-rails'
   gem "factory_bot_rails"
   gem 'rspec-parameterized'
@@ -127,8 +128,8 @@ gem 'omniauth-rails_csrf_protection','~> 0.1.2'
 gem 'rails-i18n'
 
 # カバレッジ測定
-# spec_helper.rbにrequireを追記
-# 並列テスト不可
+# spec_helper.rbにrequire 'simplecov'を追記
+# 並列テストの設定はオフにする必要がある
 # WebサービスとしてCoveralls(https://coveralls.io)もある
 gem 'simplecov', require: false, group: :test
 
