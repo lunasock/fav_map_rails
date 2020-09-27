@@ -1,4 +1,7 @@
 class Elasticsearch
+  # アクティブモデル
+  # データベースと紐付かないモデル
+  # 各モデルで重複した処理を切り出す
   include ActiveModel::Model
   include ActiveModel::Attributes
 
