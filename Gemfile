@@ -148,4 +148,4 @@ gem 'mysql2', '>= 0.4.4'
 # elasticsearchで利用
 # モデルに設定を追加する
 # bin/rails r モデル名.reindex
-gem 'searchkick', '~> 4.3.0'
+gem 'searchkick', '~> 4.4.1'
