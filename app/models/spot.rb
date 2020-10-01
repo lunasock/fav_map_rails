@@ -1,6 +1,9 @@
+require 'elasticsearch/model'
+
 class Spot < ApplicationRecord
   # 検索にKuromojiを利用
   searchkick language: "japanese"
+  include Elasticsearch::Model
 
   attachment :spot_image
 

@@ -1,27 +1,48 @@
 version: "3.7"
 services:
-  elasticsearch:
-    build: es
-    # 指定したポートが外部に公開されるので、誰でもアクセスできる
-    ports:
-      - "9200:9200"
-    # ホストのみにポートを公開
-    expose:
-      - 9300
-    # elasticsearch.ymlに必要な設定
+  # elastic:
+  #   build: es
+  #   # 指定したポートが外部に公開されるので、誰でもアクセスできる
+  #   ports:
+  #     - "9200:9200"
+  #   # ホストのみにポートを公開
+  #   expose:
+  #     - 9300
+  #   # elasticsearch.ymlに必要な設定
+  #   environment:
+  #     network.host: 0.0.0.0
+  #     discovery.type: single-node
+  #   # システム要件
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #     nofile:
+  #       soft: 65536
+  #       hard: 65536
+  #   volumes:
+  #     - elasticsearch-data:/usr/share/elasticsearch/data
+
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
     environment:
-      network.host: 0.0.0.0
+      TAKE_FILE_OWNERSHIP: "true"
+      network.host: "0.0.0.0"
       discovery.type: single-node
-    # システム要件
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-      nofile:
-        soft: 65536
-        hard: 65536
+      http.port: "9200"
+      transport.host: "0.0.0.0"
+      transport.tcp.port: "9300"
+      xpack.ml.enabled: "false"
+      network_mode: "host"
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    ulimits:
+      nofile:
+        soft: "65536"
+        hard: "65536"
 
   redis:
     image: redis
@@ -64,6 +85,8 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_HOST: mysql
       WEBPACKER_DEV_SERVER_HOST: webpack-dev-server
+      ELASTIC_HOST: "elastic"
+      ELASTIC_PORT: "9200"
     # localhost3000番ポートあての通信を、コンテナ3000番ポートに転送
     ports:
       - "3000:3000"
@@ -73,7 +96,9 @@ services:
       - nginx
       - redis
       - webpack-dev-server
-      - elasticsearch
+      - elastic
+    links:
+      - elastic
     # 以下のディレクトリを、ホストOS(PC)上で定義したボリュームにマウント
     volumes:
       - .:/app
