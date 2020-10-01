@@ -76,7 +76,7 @@ GEM
       adamantium (~> 0.2)
       equalizer (~> 0.0.11)
     ast (2.4.1)
-    autoprefixer-rails (10.0.0.2)
+    autoprefixer-rails (10.0.1.0)
       execjs
     bcrypt (3.1.16)
     bindex (0.8.1)
@@ -132,6 +132,11 @@ GEM
       elasticsearch-transport (= 7.9.0)
     elasticsearch-api (7.9.0)
       multi_json
+    elasticsearch-model (7.1.1)
+      activesupport (> 3)
+      elasticsearch (> 1)
+      hashie
+    elasticsearch-rails (7.1.1)
     elasticsearch-transport (7.9.0)
       faraday (~> 1)
       multi_json
@@ -303,7 +308,7 @@ GEM
     refile-mini_magick (0.2.0)
       mini_magick (~> 4.0)
       refile (~> 0.5)
-    regexp_parser (1.8.0)
+    regexp_parser (1.8.1)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -318,7 +323,7 @@ GEM
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
       rspec-mocks (~> 3.9.0)
-    rspec-core (3.9.2)
+    rspec-core (3.9.3)
       rspec-support (~> 3.9.3)
     rspec-expectations (3.9.2)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -350,7 +355,7 @@ GEM
       rubocop-ast (>= 0.5.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-ast (0.6.0)
+    rubocop-ast (0.7.1)
       parser (>= 2.7.1.5)
     rubocop-performance (1.8.1)
       rubocop (>= 0.87.0)
@@ -465,6 +470,8 @@ DEPENDENCIES
   devise
   devise-i18n
   devise-i18n-views
+  elasticsearch-model
+  elasticsearch-rails
   factory_bot_rails
   faker
   jbuilder (~> 2.5)
