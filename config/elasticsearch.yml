@@ -1,5 +1,5 @@
 development: &default
-  host: 'elastic'
+  host: 'http://elastic:9200/'
 test:
   <<: *default
 production:
